@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const homeScreenStyles = StyleSheet.create({
+const screenStyles = StyleSheet.create({
   container: {
     flex: 1, 
     flexDirection: "column",
@@ -9,4 +9,4 @@ const homeScreenStyles = StyleSheet.create({
   }
 });
 
-export default homeScreenStyles;
+export default screenStyles;

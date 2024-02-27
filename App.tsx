@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
+import { StatusBar, useColorScheme, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -8,10 +8,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 import HomeScreen from './src/screens/HomeScreen';
+import CompareCelebScreen from './src/screens/CompareCelebScreen';
+import screenStyles from './src/screens/styles/screenStyles';
 
 
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -21,9 +23,10 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <NavigationContainer>
-      <HomeScreen />
-    </NavigationContainer>
+    <View style={ screenStyles.container }>
+      {/* <HomeScreen /> */}
+      <CompareCelebScreen />
+    </View>
   );
 }
 
