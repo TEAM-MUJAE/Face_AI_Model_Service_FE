@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, Text, useWindowDimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 
 
-import ImagePicker from 'react-native-image-picker';
-import commonComponentStyles from './styles/commonComponentStyles';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
-const uploadFormImage = require("../../static/img/resource/uploadForm.png");
+import InsertURL from './InsertURL';
+import ExploreButton from '../../static/Svg/ExploreButton';
+
 
 function InsertImage() {
 
-    // const [imageUri, setImageUri] = useState(uploadFormImage);
-    // const [imageUri, setImageUri] = useState(null);
-    const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+    const uploadFormImageUri = "../../static/img/resource/uploadForm.png"
+    const uploadFormImage = require(uploadFormImageUri);
+    console.log("확인", uploadFormImage)
+
+    
+    const [imageUri, setImageUri] = useState(uploadFormImageUri);
+    const [image, setImage] = useState(uploadFormImage)
 
     // const launchCameraHandler = () => {
     //     ImagePicker.launchCamera(
@@ -28,30 +33,49 @@ function InsertImage() {
     //     );
     // };
 
+    // useEffect(() => {
+    //     const changedImage = imageUri;
+    //     setImage(changedImage)
+
+    // }, [imageUri]);
+
     const launchImageLibraryHandler = () => {
-        ImagePicker.launchImageLibrary(
+        launchImageLibrary(
             {
                 mediaType: "photo",
                 includeBase64: false,
             },
             (res) => {
                 if (!res.didCancel) {
-                    setImageUri(res.uri);
+                    console.log("왔냐? :", res)
+                    setImageUri(res.assets[0].uri);
+                    // console.log("safgagdsg? :", imageUri)
+                }
+                else {
+                    console.log("안와!!?")
                 }
             }
         );
     };
 
+
+    const explorePressHandler = () => {
+        console.log('Explore Button clicked!');
+    }
+    
+
     return (
-        <View style={ commonComponentStyles.contentContainer }>
-            {/* {imageUri && (
+        <View>
+            {imageUri && (
                 <TouchableOpacity onPress={ launchImageLibraryHandler }>
-                    <Image source={ uploadFormImage } width={ 100 } height={ 100 } />
+                    <Image source={ image } />
                 </TouchableOpacity>
-            )} */}
-            <TouchableOpacity onPress={ launchImageLibraryHandler }>
+            )}
+            {/* <TouchableOpacity onPress={ launchImageLibraryHandler }>
                 <Image source={ uploadFormImage } width={ 100 } height={ 100 } />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <InsertURL />
+            <ExploreButton key="explore" onPress={ explorePressHandler } />
         </View>
     );
 

@@ -1,14 +1,21 @@
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const { width : screenWidth, height : screenHeight } = useWindowDimensions();
+
+const { width : screenWidth, height : screenHeight } = Dimensions.get('window');
+
 
 const screenStyles = StyleSheet.create({
   container: {
-    flex: 1, 
-    flexDirection: "column",
-    alignItems: 'center', 
-    justifyContent: 'center',
-    // width : screenWidth
+    flex: 1,
+    width: screenWidth
+  },
+  header: {
+    flex: 1,
+    width: screenWidth
+  },
+  content: {
+    flex: 5,
+    width: screenWidth
   }
 });
 

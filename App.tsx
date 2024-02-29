@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StatusBar, useColorScheme, View } from 'react-native';
+import React from 'react';
+import { StatusBar, useColorScheme, SafeAreaView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import CompareCelebScreen from './src/screens/CompareCelebScreen';
 import screenStyles from './src/screens/styles/screenStyles';
-
+import CelebBanner from './src/components/CompareCeleb/CelebBanner';
 
 
 // const Stack = createNativeStackNavigator();
@@ -23,10 +23,14 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <View style={ screenStyles.container }>
+    <SafeAreaView>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={ backgroundStyle.backgroundColor }
+      />
       {/* <HomeScreen /> */}
       <CompareCelebScreen />
-    </View>
+    </SafeAreaView>
   );
 }
 

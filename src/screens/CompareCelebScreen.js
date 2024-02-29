@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { View } from 'react-native';
 
 
-import screenStyles from './styles/screenStyles';
-import Header from '../components/Layout/Header';
-import CompareCelebContent from '../components/Layout/CompareCelebContent';
+
+import Header from '../components/Common/Header';
+import CompareCelebContent from '../components/CompareCeleb/CompareCelebContent';
 
 function CompareCelebScreen() {
 
@@ -14,7 +14,7 @@ function CompareCelebScreen() {
     , []);
 
     return (
-        <View style={ screenStyles.container }>
+        <View>
             <Header />
             <CompareCelebContent />
         </View>

@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import { TouchableOpacity } from 'react-native';
 
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"

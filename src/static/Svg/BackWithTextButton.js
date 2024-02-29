@@ -1,10 +1,10 @@
-import * as React from "react"
+import React from "react"
 import { TouchableOpacity } from 'react-native';
 
 import Svg, { Rect, Path } from "react-native-svg"
 
 
-const BackButton = ({ onPress }) => (
+const BackWithTextButton = ({ onPress }) => (
     <TouchableOpacity onPress={ onPress }>
         <Svg width={157} height={47} viewBox="0 0 157 47" xmlns="http://www.w3.org/2000/svg" fill="none">
             <Rect width={157} height={47} fill="#3791FA" rx={5} />
@@ -15,4 +15,4 @@ const BackButton = ({ onPress }) => (
         </Svg>
     </TouchableOpacity>
 )
-export default BackButton;
+export default BackWithTextButton;

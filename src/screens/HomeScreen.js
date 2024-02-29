@@ -2,15 +2,14 @@ import React from 'react';
 import { View } from 'react-native';
 
 
-import screenStyles from './styles/screenStyles';
-import Header from '../components/Layout/Header';
-import NavContent from '../components/Layout/NavContent';
+import Header from '../components/Common/Header';
+import NavContent from '../components/MainHome/NavContent';
 
 
 function HomeScreen() {
   
   return (
-    <View style={ screenStyles.container }>
+    <View>
       <Header />
       <NavContent />
     </View>

@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 
-import layoutStyles from './styles/layoutStyles';
-import CompareCelebButton from '../Svg/CompareCelebButton';
-import CompareTwoButton from '../Svg/CompareTwoButton';
-import CompareMultiButton from '../Svg/CompareMultiButton';
-
+import CompareCelebButton from '../../static/Svg/CompareCelebButton';
+import CompareTwoButton from '../../static/Svg/CompareTwoButton';
+import CompareMultiButton from '../../static/Svg/CompareMultiButton';
 
 
 function NavContent() {
@@ -28,8 +26,8 @@ function NavContent() {
   }
 
   return (
-    <View style={ layoutStyles.contentContainer }>
-      <Text style={ layoutStyles.contentText }>터치하여 계속</Text>
+    <View>
+      <Text>터치하여 계속</Text>
       <CompareCelebButton key="celeb" onPress={ celebPressHandler } />
       <CompareTwoButton key="twoPeople" onPress={ compareTwobPressHandler } />
       <CompareMultiButton key="multiPeople" onPress={ compareMultiPressHandler } />
