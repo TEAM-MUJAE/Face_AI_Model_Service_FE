@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedImageIndex } from '../../features/compareCelebSlice';
 
 
 function CelebBanner() {
 
-    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+    const selectedImage = useSelector(state => state.compareCeleb.selectedImageIndex);
+    const dispatch = useDispatch();
+
 
     const bannerImages = [
         require("../../static/img/banner/lei.jpg"),
@@ -16,8 +20,8 @@ function CelebBanner() {
     ];
 
     const imagePressHandler = (index) => {
-        console.log('image banner clicked!');
-        setSelectedImageIndex(index);
+        console.log(`${index+1}번째 image banner clicked!`);
+        dispatch(setSelectedImageIndex(index));
     }
 
     return (
@@ -29,7 +33,7 @@ function CelebBanner() {
                     onPress={() => imagePressHandler(index)}
                     style={[
                         styles.imageContainer,
-                        selectedImageIndex === index && styles.selectedImageContainer
+                        selectedImage === index && styles.selectedImageContainer
                     ]}
                 >
                     <Image source={image} style={styles.image} />
