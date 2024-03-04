@@ -10,7 +10,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import CompareCelebScreen from './src/screens/CompareCelebScreen';
 import screenStyles from './src/screens/styles/screenStyles';
-import CelebBanner from './src/components/CompareCeleb/CelebBanner';
+import CelebBanner from './src/components/Common/CelebBanner';
+import CompareTwoPeopleScreen from './src/screens/CompareTwoPeopleScreen';
 
 
 // const Stack = createNativeStackNavigator();
@@ -29,7 +30,8 @@ function App(): React.JSX.Element {
         backgroundColor={ backgroundStyle.backgroundColor }
       />
       {/* <HomeScreen /> */}
-      <CompareCelebScreen />
+      {/* <CompareCelebScreen /> */}
+      <CompareTwoPeopleScreen />
     </SafeAreaView>
   );
 }

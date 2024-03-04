@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput } from 'react-native';
 
 
-function InsertURL() {
+function FirstInsertURL() {
 
     const [text, setText] = useState('');
 
@@ -19,4 +19,4 @@ function InsertURL() {
 
 }
 
-export default InsertURL;
+export default FirstInsertURL;

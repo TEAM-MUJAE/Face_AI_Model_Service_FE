@@ -1,14 +1,18 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+
+
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedImageIndex } from '../../features/compareCelebSlice';
+
+
+import { setSelectedImageIndex } from '../../features/secondCompareSlice';
+import { setSelectedImage } from '../../features/secondCompareSlice';
 
 
 function CelebBanner() {
 
-    const selectedImage = useSelector(state => state.compareCeleb.selectedImageIndex);
+    const selectedImage = useSelector(state => state.secondCompare.selectedImageIndex);
     const dispatch = useDispatch();
-
 
     const bannerImages = [
         require("../../static/img/banner/lei.jpg"),
@@ -19,9 +23,10 @@ function CelebBanner() {
         require("../../static/img/banner/leeseo.webp"),
     ];
 
-    const imagePressHandler = (index) => {
+    const imagePressHandler = (image, index) => {
         console.log(`${index+1}번째 image banner clicked!`);
         dispatch(setSelectedImageIndex(index));
+        dispatch(setSelectedImage(image))
     }
 
     return (
@@ -30,7 +35,7 @@ function CelebBanner() {
             {bannerImages.map((image, index) => (
                 <TouchableOpacity
                     key={index}
-                    onPress={() => imagePressHandler(index)}
+                    onPress={() => imagePressHandler(image, index)}
                     style={[
                         styles.imageContainer,
                         selectedImage === index && styles.selectedImageContainer
