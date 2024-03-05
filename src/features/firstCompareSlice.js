@@ -15,22 +15,22 @@ const initialState = {
 //     }
 // };
 
-export const compareCelebSlice = createSlice({
-    name: 'compareCeleb',
+export const firstCompareSlice = createSlice({
+    name: 'firstCompare',
     initialState,
     reducers: {
         setSelectedImageIndex: (state, action) => {
             state.selectedImageIndex = action.payload
         },
         setSelectedImage: (state, action) => {
-            console.log("슬라이스1",state.selectedImage)
-            console.log("슬라이스2",action.payload)
+            console.log("1번 이미지 슬라이스의 selectedImage : ", state.selectedImage)
+            console.log("1번 이미지 슬라이스의 payload : ", action.payload)
             
             state.selectedImage = action.payload;
         }
     }
 });
 
-export const { setSelectedImageIndex, setSelectedImage } = compareCelebSlice.actions;
+export const { setSelectedImageIndex, setSelectedImage } = firstCompareSlice.actions;
 
-export default compareCelebSlice.reducer;
+export default firstCompareSlice.reducer;

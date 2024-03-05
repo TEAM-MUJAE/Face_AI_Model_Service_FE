@@ -7,15 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import RNFS from 'react-native-fs'
 
 
-import InsertURL from './InsertURL';
-import ExploreButton from '../../static/Svg/ExploreButton';
-import { setSelectedImage } from '../../features/compareCelebSlice';
+import FirstInsertURL from './FirstInsertURL';
+import { setSelectedImage } from '../../features/firstCompareSlice';
 
 
 
-function InsertImage() {
+function FirstInsertImage() {
 
-    const uploadFormImage = useSelector(state => state.compareCeleb.selectedImage)
+    const uploadFormImage = useSelector(state => state.firstCompare.selectedImage)
     // const uploadFormImage = File('file:///data/user/0/com.face_ai_model_service_fe/cache/rn_image_picker_lib_temp_bec45f53-0f31-48dd-9bc1-c537fc643d34.webp')
 
     
@@ -89,10 +88,6 @@ function InsertImage() {
     };
 
 
-    const explorePressHandler = () => {
-        console.log('Explore Button clicked!');
-    }
-    
     return (
         <View>
             <TouchableOpacity onPress={ imageUploadHandler }>
@@ -101,11 +96,10 @@ function InsertImage() {
             {/* <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={uploadFormImage.uri} source={ renderImageSource() } />
             </TouchableOpacity> */}
-            <InsertURL />
-            <ExploreButton key="explore" onPress={ explorePressHandler } />
+            <FirstInsertURL />
         </View>
     );
 
 }
 
-export default InsertImage;
+export default FirstInsertImage;

@@ -1,11 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import compareCelebReducer from "./features/compareCelebSlice"
+
+
+import firstCompareReducer from "./features/firstCompareSlice"
+import secondCompareReducer from "./features/secondCompareSlice"
+import thirdCompareReducer from "./features/thirdCompareSlice"
 
 
 
 const store = configureStore({
     reducer: {
-        compareCeleb: compareCelebReducer
+        firstCompare: firstCompareReducer,
+        secondCompare: secondCompareReducer,
+        thirdCompare: thirdCompareReducer
     }
 });
 
