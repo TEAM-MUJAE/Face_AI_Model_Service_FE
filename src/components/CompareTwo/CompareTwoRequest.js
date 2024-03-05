@@ -9,7 +9,7 @@ import ExploreButton from '../../static/Svg/ExploreButton';
 
 
 
-function CompareTwoContent() {
+function CompareTwoRequest() {
 
 
   const exploreToComparePressHandler = () => {
@@ -30,4 +30,4 @@ function CompareTwoContent() {
     );
   }
   
-  export default CompareTwoContent;
+  export default CompareTwoRequest;

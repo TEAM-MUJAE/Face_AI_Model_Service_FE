@@ -1,38 +1,38 @@
 import React from 'react';
-import { StatusBar, useColorScheme, SafeAreaView } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { View } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 import HomeScreen from './src/screens/HomeScreen';
-import CompareCelebScreen from './src/screens/CompareCelebScreen';
-import screenStyles from './src/screens/styles/screenStyles';
-import CelebBanner from './src/components/Common/CelebBanner';
-import CompareTwoPeopleScreen from './src/screens/CompareTwoPeopleScreen';
+import CompareCelebRequestScreen from './src/screens/CompareCelebRequestScreen';
+import CompareTwoRequestScreen from './src/screens/CompareTwoRequestScreen';
+import CompareCelebResponseScreen from './src/screens/CompareCelebResponseScreen';
 
 
-// const Stack = createNativeStackNavigator();
+
+// const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  // const Stack = createStackNavigator();
 
   return (
-    <SafeAreaView>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={ backgroundStyle.backgroundColor }
-      />
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName='Home'>
+    //     <Stack.Screen name='Home' component={HomeScreen} />
+    //     <Stack.Screen name='CompareCeleb' component={CompareCelebRequestScreen} />
+    //     <Stack.Screen name='CompareTwo' component={CompareTwoRequestScreen} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <View>
       {/* <HomeScreen /> */}
-      {/* <CompareCelebScreen /> */}
-      <CompareTwoPeopleScreen />
-    </SafeAreaView>
+      {/* <CompareCelebRequestScreen /> */}
+      {/* <CompareCelebResponseScreen /> */}
+      <CompareTwoRequestScreen />
+    </View>
   );
 }
 

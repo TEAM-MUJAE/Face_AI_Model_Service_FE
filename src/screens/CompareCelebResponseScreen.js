@@ -4,9 +4,9 @@ import { View } from 'react-native';
 
 
 import Header from '../components/Common/Header';
-import CompareTwoContent from '../components/CompareTwo/CompareTwoContent';
+import CompareCelebResponse from '../components/CompareCeleb/CompareCelebResponse';
 
-function CompareTwoPeopleScreen() {
+function CompareCelebResponseScreen() {
 
     useEffect(() => {
         return () => {}
@@ -16,9 +16,9 @@ function CompareTwoPeopleScreen() {
     return (
         <View>
             <Header />
-            <CompareTwoContent />
+            <CompareCelebResponse />
         </View>
     );
 }
 
-export default CompareTwoPeopleScreen;
+export default CompareCelebResponseScreen;

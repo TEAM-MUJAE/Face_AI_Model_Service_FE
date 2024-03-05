@@ -3,21 +3,15 @@ import { Text, View } from 'react-native';
 
 import ScreenTitle from '../Common/ScreenTitle';
 import FirstInsertImage from '../Common/FirstInsertImage';
-import CelebBanner from '../Common/CelebBanner';
 import ExploreButton from '../../static/Svg/ExploreButton';
 
 
 
-function CompareCelebContent() {
+function CompareCelebRequest() {
 
   const exploreToFindPressHandler = () => {
     console.log('Explore To Find Button clicked!');
   }
-
-  const exploreToComparePressHandler = () => {
-    console.log('Explore To Compare Button clicked!');
-  }
-
 
   return (
     <View>
@@ -25,10 +19,8 @@ function CompareCelebContent() {
       <Text>분석하고 싶은 얼굴 사진을 올려주세요!</Text>
       <FirstInsertImage />
       <ExploreButton key="exploreToFind" onPress={ exploreToFindPressHandler } />
-      {/* <CelebBanner />
-      <ExploreButton key="exploreToCompare" onPress={ exploreToComparePressHandler } /> */}
     </View>
   );
 }
 
-export default CompareCelebContent;
+export default CompareCelebRequest;
