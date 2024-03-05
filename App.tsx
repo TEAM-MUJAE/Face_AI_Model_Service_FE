@@ -30,8 +30,8 @@ function App(): React.JSX.Element {
     <View>
       {/* <HomeScreen /> */}
       {/* <CompareCelebRequestScreen /> */}
-      {/* <CompareCelebResponseScreen /> */}
-      <CompareTwoRequestScreen />
+      <CompareCelebResponseScreen />
+      {/* <CompareTwoRequestScreen /> */}
     </View>
   );
 }

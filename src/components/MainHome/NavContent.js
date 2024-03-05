@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 
-import { useNavigation } from '@react-navigation/native';
-
 
 import CompareCelebButton from '../../static/Svg/CompareCelebButton';
 import CompareTwoButton from '../../static/Svg/CompareTwoButton';
