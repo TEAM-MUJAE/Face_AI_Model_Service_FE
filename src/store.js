@@ -1,18 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-
-import firstCompareReducer from "./features/firstCompareSlice"
-import secondCompareReducer from "./features/secondCompareSlice"
-import thirdCompareReducer from "./features/thirdCompareSlice"
-
+import rootReducer from "./features";
 
 
 const store = configureStore({
-    reducer: {
-        firstCompare: firstCompareReducer,
-        secondCompare: secondCompareReducer,
-        thirdCompare: thirdCompareReducer
-    }
+    reducer: rootReducer
 });
 
 export default store;
