@@ -12,7 +12,7 @@ function FirstInsertURL() {
             <TextInput
                 onChangeText={ setText }
                 value={ text }
-                placeholder='혹은 이미지 URL을 입력해주세요'
+                placeholder='혹은 이미지 URL을 입력해주세요..'
             />
         </View>
     );
