@@ -1,18 +1,22 @@
 import axios from 'axios';
-// import RNFetchBlob from 'react-native-fetch-blob';
 
 // CommonAPI.js
 
 const baseURL = 'http://192.168.0.25:8000';
+// const baseURL = 'http://127.0.0.1:8000'
+// const url2 = 'http://127.0.0.1:8000/upload';
 
 
 export const requestImageFromAPI = async (method, url, data) => {
     console.log('requestImageFromAPI 호출됨!');
 
     console.log('method : ', method);
+    console.log('baseURL : ', baseURL);
     console.log('url : ', url);
-    console.log('data : ', data);
-    try {
+    console.log('엔드포인트? : ', `${baseURL}${url}`);
+    console.log('file : ', data);
+    // console.log('url2 : ', url2);
+    // try {
         console.log("어디까지 왔을까")
         const response = await axios({
             method,
@@ -23,35 +27,40 @@ export const requestImageFromAPI = async (method, url, data) => {
             }
         });
 
-        console.log('Response from API: ', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('Error requesting API: ', error.stack);
-        throw error;
-    }
+        console.log('Response from API: ', response);
+        return response;
+    // } catch (error) {
+    //     console.error('Error requesting API: ', error);
+    //     throw error;
+    // }
 }
-// export const requestImageFromAPI = async (method, url) => {
 
-    
+// const API_SERVER = 'http://localhost:8000';
 
-//     console.log('requestImageFromAPI 호출됨!');
-//     console.log('이미지 파일 : ', imageFile);
-//     const formData = new FormData();
-//     formData.append('image', {
-//         uri: imageFile.uri,
-//         type: imageFile.type,
-//         name: 'image.jpg'
-//     });
+// export const createAxios = (configs) =>{
+//     const INITIAL_CONFIG = {
+//         baseURL: `${API_SERVER}`,
+//         withCredentials: true,
+//         timeout: 3000,
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     };
 
-//     try {
-//         const response = await RNFetchBlob.fetch(method, `${baseURL}${url}`, {
-//             'Content-Type' : 'multipart/form-data',
-//         }, formData);
+//     return axios.create(Object.assign(INITIAL_CONFIG, configs));
+// };
 
-//         console.log('Response from API: ', response.data);
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error requesting image from API: ', error);
-//         throw error;
-//     }
-// }
+// export const customAxios = (configs) => {
+//     return createAxios(
+//         Object.assign(
+//             {
+//                 headers: {
+//                     'Content-Type': 'multipart/form-data',
+//                 },
+//             },
+//             configs
+//         )
+//     );
+// };
+
+

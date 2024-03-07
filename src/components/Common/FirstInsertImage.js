@@ -16,10 +16,6 @@ function FirstInsertImage() {
 
     const uploadFormImage = useSelector(state => state.firstCompare.selectedImage)
     
-
-
-
-    
     const dispatch = useDispatch();
 
     const renderImageSource = (imageSource) => {
