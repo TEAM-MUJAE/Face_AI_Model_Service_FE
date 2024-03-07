@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // CommonAPI.js
 
-const baseURL = 'http://localhost:8000';
+const baseURL = 'http://192.168.0.25:8000';
 
 
 export const requestImageFromAPI = async (method, url, data) => {
@@ -26,7 +26,7 @@ export const requestImageFromAPI = async (method, url, data) => {
         console.log('Response from API: ', response.data);
         return response.data;
     } catch (error) {
-        console.error('Error requesting API: ', error);
+        console.error('Error requesting API: ', error.stack);
         throw error;
     }
 }

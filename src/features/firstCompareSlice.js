@@ -6,15 +6,6 @@ const initialState = {
     selectedImage: require('../static/img/resource/uploadForm.png')
 };
 
-// const initialState = {
-//     selectedImageIndex: null,
-//     selectedImage: {
-//         uri: 'src/static/img/resource/uploadform.png',
-        
-//         type: 'uri'
-//     }
-// };
-
 export const firstCompareSlice = createSlice({
     name: 'firstCompare',
     initialState,
@@ -29,7 +20,7 @@ export const firstCompareSlice = createSlice({
             state.selectedImage = action.payload;
         }
     }
-});
+});``
 
 export const { setSelectedImageIndex, setSelectedImage } = firstCompareSlice.actions;
 

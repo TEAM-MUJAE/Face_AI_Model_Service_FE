@@ -8,6 +8,7 @@ export function callGetCompareCelebAPI() {
         console.log('callGetCompareCelebAPI 호출됨!');
         try {
             const selectedImage = getState().firstCompare.selectedImage;
+            
             const formData = new FormData();
             formData.append('file', {
                 uri: selectedImage.uri,
