@@ -12,7 +12,6 @@ import CompareTwoRequestScreen from './src/screens/CompareTwoRequestScreen';
 import CompareCelebResponseScreen from './src/screens/CompareCelebResponseScreen';
 
 
-
 // const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
@@ -29,9 +28,9 @@ function App(): React.JSX.Element {
     // </NavigationContainer>
     <View>
       {/* <HomeScreen /> */}
-      {/* <CompareCelebRequestScreen /> */}
+      <CompareCelebRequestScreen />
       {/* <CompareCelebResponseScreen /> */}
-      <CompareTwoRequestScreen />
+      {/* <CompareTwoRequestScreen /> */}
     </View>
   );
 }
