@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,12 +26,12 @@ function App(): React.JSX.Element {
     //     <Stack.Screen name='CompareTwo' component={CompareTwoRequestScreen} />
     //   </Stack.Navigator>
     // </NavigationContainer>
-    <View>
+    <ScrollView>
       {/* <HomeScreen /> */}
       <CompareCelebRequestScreen />
-      {/* <CompareCelebResponseScreen /> */}
+      <CompareCelebResponseScreen />
       {/* <CompareTwoRequestScreen /> */}
-    </View>
+    </ScrollView>
   );
 }
 

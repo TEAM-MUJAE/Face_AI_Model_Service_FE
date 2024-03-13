@@ -15,7 +15,7 @@ const similaritySlice = createSlice({
         setSimilarityPeopleData: (state, {payload}) => {
             return payload;
         }
-    },
+    }
 });
 
 export const { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } = similaritySlice.actions;

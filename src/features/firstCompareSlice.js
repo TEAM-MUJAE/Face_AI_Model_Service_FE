@@ -20,7 +20,7 @@ export const firstCompareSlice = createSlice({
             state.selectedImage = action.payload;
         }
     }
-});``
+});
 
 export const { setSelectedImageIndex, setSelectedImage } = firstCompareSlice.actions;
 
