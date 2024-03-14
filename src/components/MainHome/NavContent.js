@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 
+import { useNavigation } from '@react-navigation/native';
+
 
 import CompareCelebButton from '../../static/Svg/CompareCelebButton';
 import CompareTwoButton from '../../static/Svg/CompareTwoButton';
@@ -11,7 +13,8 @@ import CompareMultiButton from '../../static/Svg/CompareMultiButton';
 
 function NavContent() {
 
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
+
 
   useEffect(() => {
     return () => {}
@@ -19,12 +22,12 @@ function NavContent() {
 
   const celebPressHandler = () => {
     console.log('CompareCeleb Button clicked!');
-    // navigation.navigate('CompareCeleb');
+    navigation.navigate('CompareCelebRequest');
   }
 
   const compareTwobPressHandler = () => {
     console.log('CompareTwoPeople Button clicked!');
-    // navigation.navigate('CompareTwoPeople');
+    navigation.navigate('CompareTwoPeople');
   }
 
   const compareMultiPressHandler = () => {

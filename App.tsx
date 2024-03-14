@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,26 +12,28 @@ import CompareTwoRequestScreen from './src/screens/CompareTwoRequestScreen';
 import CompareCelebResponseScreen from './src/screens/CompareCelebResponseScreen';
 
 
-// const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
 
-  // const Stack = createStackNavigator();
-
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName='Home'>
-    //     <Stack.Screen name='Home' component={HomeScreen} />
-    //     <Stack.Screen name='CompareCeleb' component={CompareCelebRequestScreen} />
-    //     <Stack.Screen name='CompareTwo' component={CompareTwoRequestScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    <View>
-      {/* <HomeScreen /> */}
-      <CompareCelebRequestScreen />
-      {/* <CompareCelebResponseScreen /> */}
-      {/* <CompareTwoRequestScreen /> */}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator 
+        initialRouteName='Home' 
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name='Home' component={HomeScreen} />
+        <Stack.Screen name='CompareCelebRequest' component={CompareCelebRequestScreen} />
+        <Stack.Screen name='CompareCelebResponse' component={CompareCelebResponseScreen} />
+        <Stack.Screen name='CompareTwoPeople' component={CompareTwoRequestScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <ScrollView>
+    //   <HomeScreen />
+    //   <CompareCelebRequestScreen />
+    //   <CompareCelebResponseScreen />
+    //   <CompareTwoRequestScreen />
+    // </ScrollView>
   );
 }
 

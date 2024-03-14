@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {};
 
-const similaritySlice = createSlice({
-    name: "similarity",
+const similarityDataSlice = createSlice({
+    name: "similarityData",
     initialState,
     reducers: {
         setSimilarityCelebData: (state, {payload}) => {
@@ -15,9 +15,9 @@ const similaritySlice = createSlice({
         setSimilarityPeopleData: (state, {payload}) => {
             return payload;
         }
-    },
+    }
 });
 
-export const { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } = similaritySlice.actions;
+export const { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } = similarityDataSlice.actions;
 
-export default similaritySlice.reducer;
+export default similarityDataSlice.reducer;

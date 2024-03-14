@@ -11,12 +11,11 @@ import BackButton from '../../static/Svg/BackButton';
 
 function ScreenTitle() {
 
-    const [text, setText] = useState('');
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
 
     const backPressHandler = () => {
         console.log('back Button clicked!');
-        // navigation.navigate('Home')
+        navigation.goBack();
     }
 
     return (

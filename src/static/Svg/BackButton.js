@@ -12,12 +12,12 @@ const BackButton = ({ onPress }) => (
                 height={41}
                 x={1.5}
                 y={1.5}
-                stroke="#fff"
+                stroke="#000"
                 strokeWidth={3}
                 rx={3.5}
             />
             <Path
-                fill="#fff"
+                fill="#000"
                 d="M38.5 20.167H11.759l9.704-9.704L18.87 7.87 4.742 22l14.13 14.129 2.592-2.593-9.704-9.704H38.5v-3.666Z"
             />
         </Svg>
