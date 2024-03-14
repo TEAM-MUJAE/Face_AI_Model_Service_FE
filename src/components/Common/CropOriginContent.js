@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import BxSort from '../../static/Svg/BxSort';
-import { setSelectedImage } from '../../features/firstCompareSlice';
 
 
 
 function CropOriginContent() {
 
-    const mostSimilarCelebImage = useSelector(state => state.similarityImage.mostSimilarImage);
+    const mostSimilarCelebImage = useSelector(state => state.similarityRank.mostSimilarImage);
 
     const renderImageSource = (imageSource) => {
         if (typeof imageSource === 'string') {

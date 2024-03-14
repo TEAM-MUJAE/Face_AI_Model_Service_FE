@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-
-import { customAxios, requestImageFromAPI } from './CommonAPI';
+import { requestImageFromAPI } from './CommonAPI';
 import { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } from '../features/similarityDataSlice'; 
 
 

@@ -59,9 +59,6 @@ function FirstInsertImage() {
             <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={uploadFormImage} source={ renderImageSource(uploadFormImage) } style={styles.image} />
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={ imageUploadHandler }>
-                <Image key={uploadFormImage.uri} source={ renderImageSource() } />
-            </TouchableOpacity> */}
             <FirstInsertURL />
         </View>
     );

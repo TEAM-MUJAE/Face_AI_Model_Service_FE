@@ -3,9 +3,6 @@ import axios from 'axios';
 // CommonAPI.js
 
 const baseURL = 'http://192.168.0.25:8000';
-// const baseURL = 'http://127.0.0.1:8000'
-// const url2 = 'http://127.0.0.1:8000/upload';
-
 
 export const requestImageFromAPI = async (method, url, data) => {
     console.log('requestImageFromAPI 호출됨!');
@@ -15,8 +12,7 @@ export const requestImageFromAPI = async (method, url, data) => {
     console.log('url : ', url);
     console.log('엔드포인트? : ', `${baseURL}${url}`);
     console.log('file : ', data);
-    // console.log('url2 : ', url2);
-    // try {
+    try {
         console.log("어디까지 왔을까")
         const response = await axios({
             method,
@@ -26,13 +22,11 @@ export const requestImageFromAPI = async (method, url, data) => {
                 'Content-Type': 'multipart/form-data'
             }
         });
-
-        console.log('Response from API: ', response);
         return response;
-    // } catch (error) {
-    //     console.error('Error requesting API: ', error);
-    //     throw error;
-    // }
+    } catch (error) {
+        console.error('Error requesting API: ', error);
+        throw error;
+    }
 }
 
 // const API_SERVER = 'http://localhost:8000';
