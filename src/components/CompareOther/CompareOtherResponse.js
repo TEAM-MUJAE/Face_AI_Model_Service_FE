@@ -6,13 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 
 
 import ScreenTitle from '../Common/ScreenTitle';
-import CelebResultBanner from './CelebResultBanner';
 import BackWithTextButton from '../../static/Svg/BackWithTextButton';
-import TwoResultContent from '../Common/TwoResultContent';
+import OtherResultContent from './OtherResultContent';
 
 
 
-function CompareCelebResponse() {
+function CompareOtherResponse() {
 
   const celebData = useSelector(state => state.similarityData);
   const navigation = useNavigation();
@@ -28,12 +27,11 @@ function CompareCelebResponse() {
   return (
     <View>
       <ScreenTitle />
-      <Text>유사한 인물과 어떻게 닮았는지 알려드릴게요!</Text>
-      {shouldRenderTwoResultContent && <TwoResultContent />}
+      <Text>두 사람과 어떻게 닮았는지 알려드릴게요!</Text>
+      {shouldRenderTwoResultContent && <OtherResultContent />}
       <BackWithTextButton key="goHomeScreen" onPress={ goHomeScreenPressHandler } />
-      {shouldRenderTwoResultContent && <CelebResultBanner />}
     </View>
     );
   }
   
-  export default CompareCelebResponse;
+  export default CompareOtherResponse;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 
 
@@ -14,10 +14,10 @@ function CompareCelebRequestScreen() {
     , []);
 
     return (
-        <View>
+        <ScrollView>
             <Header />
             <CompareCelebRequest />
-        </View>
+        </ScrollView>
     );
 }
 

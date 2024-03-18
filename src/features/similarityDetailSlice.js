@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    mostSimilarImage: require('../static/img/resource/croppedImage.png'),
     currentRankPath: '',
     mostSimilarTotalScore: 0,
     mostSimilarEyeScore: 0,
@@ -10,13 +9,10 @@ const initialState = {
     mostSimilarMouthScore: 0
 };
 
-export const similarityRankSlice = createSlice({
-    name: 'similarityRank',
+export const similarityDetailSlice = createSlice({
+    name: 'similarityDetail',
     initialState,
     reducers: {
-        setMostSimilarImage: (state, action) => {
-            state.mostSimilarImage = action.payload
-        },
         setCurrentRankPath: (state, action) => {
             state.currentRankPath = action.payload
         },
@@ -32,6 +28,6 @@ export const similarityRankSlice = createSlice({
     }
 });
 
-export const { setMostSimilarImage, setCurrentRankPath, setMostSimilarEyeScore, setMostSimilarNoseScore, setMostSimilarMouthScore } = similarityRankSlice.actions;
+export const { setCurrentRankPath, setMostSimilarEyeScore, setMostSimilarNoseScore, setMostSimilarMouthScore } = similarityDetailSlice.actions;
 
-export default similarityRankSlice.reducer;
+export default similarityDetailSlice.reducer;

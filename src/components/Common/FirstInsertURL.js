@@ -6,7 +6,6 @@ function FirstInsertURL() {
 
     const [text, setText] = useState('');
 
-
     return (
         <View>
             <TextInput

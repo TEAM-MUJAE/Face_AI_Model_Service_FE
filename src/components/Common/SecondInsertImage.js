@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import SecondInsertURL from './SecondInsertURL';
-import ExploreButton from '../../static/Svg/ExploreButton';
-import { setSelectedImage } from '../../features/secondCompareSlice';
-
+import { setIsSecondSelected, setSelectedImage } from '../../features/secondCompareSlice';
+import BxTrash from '../../static/Svg/BxTrash';
 
 
 function SecondInsertImage() {
 
+    const initialFormImage = require('../../static/img/resource/uploadForm.png');
     const uploadFormImage = useSelector(state => state.secondCompare.selectedImage)
+    const isSecondSelected = useSelector(state => state.secondCompare.isSecondSelected);
 
     const dispatch = useDispatch();
 
@@ -30,9 +31,9 @@ function SecondInsertImage() {
     };
 
     const imageUploadHandler = () => {
-        console.log("동작순서 확인 1")
+        console.log("두번째 이미지 선택 버튼 클릭됨!")
+
         launchImageLibrary({ mediaType: "photo" },(response) => {
-            console.log('Response = ', response);
 
             if (response.didCancel) {
                 console.log('이미지 선택을 취소했거나 이미지가 없습니다!');
@@ -43,21 +44,27 @@ function SecondInsertImage() {
             } else {
                 console.log("이미지 선택 완료!", response.assets[0])
 
-                console.log("상태 바꾸기 전?",uploadFormImage)
-                // 디바이스 내 이미지 선택
-                dispatch(setSelectedImage(response.assets[0]));
+                // 선택한 이미지 정보
+                const selectedImage = response.assets[0];
 
-                console.log("상태 바꼈니?", uploadFormImage)
+                // 디바이스 내 선택 이미지 반영
+                dispatch(setSelectedImage(selectedImage));
             }
         });
     };
+
+    const trashPressHandler = () => {
+        dispatch(setIsSecondSelected(false));
+        dispatch(setSelectedImage(initialFormImage));
+    }
     
     return (
         <ScrollView>
             <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={uploadFormImage} source={ renderImageSource(uploadFormImage) } style={styles.image} />
             </TouchableOpacity>
-            <SecondInsertURL />
+            {isSecondSelected && <BxTrash onPress={ trashPressHandler } />}
+            {/* <SecondInsertURL /> */}
         </ScrollView>
     );
 

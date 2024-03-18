@@ -4,9 +4,9 @@ import { ScrollView } from 'react-native';
 
 
 import Header from '../components/Common/Header';
-import CompareCelebResponse from '../components/CompareCeleb/CompareCelebResponse';
+import CompareOtherRequest from '../components/CompareOther/CompareOtherRequest';
 
-function CompareCelebResponseScreen() {
+function CompareOtherRequestScreen() {
 
     useEffect(() => {
         return () => {}
@@ -16,9 +16,9 @@ function CompareCelebResponseScreen() {
     return (
         <ScrollView>
             <Header />
-            <CompareCelebResponse />
+            <CompareOtherRequest />
         </ScrollView>
     );
 }
 
-export default CompareCelebResponseScreen;
+export default CompareOtherRequestScreen;
