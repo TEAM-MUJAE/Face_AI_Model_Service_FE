@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
 
-const CompareTwoButton = ({ onPress }) => (
+const CompareOtherButton = ({ onPress }) => (
     <TouchableOpacity onPress={ onPress }>
         <Svg width={246} height={47} viewBox="0 0 246 47" xmlns="http://www.w3.org/2000/svg" fill="none">
             <G clipPath="url(#a)">
@@ -27,4 +27,4 @@ const CompareTwoButton = ({ onPress }) => (
         </Svg>
     </TouchableOpacity>
 )
-export default CompareTwoButton;
+export default CompareOtherButton;

@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     selectedImageIndex: null,
     selectedImage: require('../static/img/resource/uploadForm.png'),
-    isLoading: false
+    isLoading: false,
+    isFirstSelected: false
 };
 
 export const firstCompareSlice = createSlice({
@@ -22,10 +23,13 @@ export const firstCompareSlice = createSlice({
         },
         setIsLoading: (state, action) => {
             state.isLoading = action.payload;
+        },
+        setIsFirstSelected: (state, action) => {
+            state.isFirstSelected = action.payload;
         }
     }
 });
 
-export const { setSelectedImageIndex, setSelectedImage, setIsLoading } = firstCompareSlice.actions;
+export const { setSelectedImageIndex, setSelectedImage, setIsLoading, setIsFirstSelected } = firstCompareSlice.actions;
 
 export default firstCompareSlice.reducer;

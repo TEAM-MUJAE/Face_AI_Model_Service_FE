@@ -6,10 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 import BackButton from '../../static/Svg/BackButton';
+import { useSelector } from 'react-redux';
 
 
 
 function ScreenTitle() {
+
+    const screenTitle = useSelector(state => state.title.changedTitleText);
 
     const navigation = useNavigation();
 
@@ -21,7 +24,7 @@ function ScreenTitle() {
     return (
         <View>
             <BackButton key="back" onPress={ backPressHandler } />
-            <Text>닮은 연예인 찾기</Text>
+            <Text>{`${ screenTitle }`}</Text>
         </View>
     );
 

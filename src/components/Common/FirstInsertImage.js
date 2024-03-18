@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 
 
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import FirstInsertURL from './FirstInsertURL';
-import { setSelectedImage } from '../../features/firstCompareSlice';
-import { callGetCompareCelebAPI } from '../../apis/SimilarityAPI';
-
+import { setIsFirstSelected, setSelectedImage } from '../../features/firstCompareSlice';
+import BxTrash from '../../static/Svg/BxTrash';
 
 
 function FirstInsertImage() {
 
-    const uploadFormImage = useSelector(state => state.firstCompare.selectedImage)
+    const initialFormImage = require('../../static/img/resource/uploadForm.png');
+    const uploadFormImage = useSelector(state => state.firstCompare.selectedImage);
+    const isFirstSelected = useSelector(state => state.firstCompare.isFirstSelected);
     
     const dispatch = useDispatch();
 
@@ -30,10 +31,9 @@ function FirstInsertImage() {
     };
 
     const imageUploadHandler = () => {
-        console.log("이미지 선택 버튼 클릭됨!")
+        console.log("첫번째 이미지 선택 버튼 클릭됨!")
 
         launchImageLibrary({ mediaType: 'photo' }, (response) => {
-            console.log('Response = ', response);
 
             if (response.didCancel) {
                 console.log('이미지 선택을 취소했거나 이미지가 없습니다!');
@@ -43,32 +43,38 @@ function FirstInsertImage() {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 console.log("이미지 선택 완료!", response.assets[0])
+                
+                // 선택한 이미지 정보
+                const selectedImage = response.assets[0];
 
-                console.log("상태 바꾸기 전?",uploadFormImage)
-                // 디바이스 내 이미지 선택
-                dispatch(setSelectedImage(response.assets[0]));
-
-                console.log("상태 바꼈니?", uploadFormImage)
+                // 디바이스 내 선택 이미지 반영
+                dispatch(setSelectedImage(selectedImage));
             }
         });   
     };
 
+    const trashPressHandler = () => {
+        dispatch(setIsFirstSelected(false));
+        dispatch(setSelectedImage(initialFormImage));
+    }
+
 
     return (
-        <View>
+        <ScrollView horizontal>
             <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={uploadFormImage} source={ renderImageSource(uploadFormImage) } style={styles.image} />
             </TouchableOpacity>
-            <FirstInsertURL />
-        </View>
+            {isFirstSelected && <BxTrash onPress={ trashPressHandler } />}
+            {/* <FirstInsertURL /> */}
+        </ScrollView>
     );
 
 }
 
 const styles = StyleSheet.create({
     image: {
-        width: 300,
-        height: 300,
+        width: 150,
+        height: 150,
         resizeMode: 'contain',
     }
 });

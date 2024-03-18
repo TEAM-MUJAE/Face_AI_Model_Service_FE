@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// CommonAPI.js
-
 const baseURL = 'http://192.168.0.25:8000';
 
 export const requestImageFromAPI = async (method, url, data) => {
@@ -11,7 +9,7 @@ export const requestImageFromAPI = async (method, url, data) => {
     console.log('baseURL : ', baseURL);
     console.log('url : ', url);
     console.log('엔드포인트? : ', `${baseURL}${url}`);
-    console.log('file : ', data);
+    console.log('data : ', data);
     try {
         console.log("어디까지 왔을까")
         const response = await axios({

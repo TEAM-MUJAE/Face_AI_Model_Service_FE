@@ -3,7 +3,7 @@ import { ScrollView, Text, TouchableOpacity, Image, StyleSheet } from 'react-nat
 
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentRankPath } from '../../features/similarityRankSlice';
+import { setCurrentRankPath } from '../../features/similarityDetailSlice';
 
 function CelebResultBanner() {
 

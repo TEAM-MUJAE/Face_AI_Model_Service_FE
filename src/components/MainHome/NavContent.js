@@ -3,43 +3,49 @@ import { Text, View } from 'react-native';
 
 
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 
 import CompareCelebButton from '../../static/Svg/CompareCelebButton';
-import CompareTwoButton from '../../static/Svg/CompareTwoButton';
-import CompareMultiButton from '../../static/Svg/CompareMultiButton';
+import CompareOtherButton from '../../static/Svg/CompareOtherButton';
+import ComparePeopleButton from '../../static/Svg/ComparePeopleButton';
+import { setChangedTitleText } from '../../features/titleSlice';
 
 
 
 function NavContent() {
 
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {}
   }, []);
 
   const celebPressHandler = () => {
-    console.log('CompareCeleb Button clicked!');
+    const changeTitle = '나와 닮은 연예인이 있을까?';
+    dispatch(setChangedTitleText(changeTitle));
     navigation.navigate('CompareCelebRequest');
   }
 
-  const compareTwobPressHandler = () => {
-    console.log('CompareTwoPeople Button clicked!');
-    navigation.navigate('CompareTwoPeople');
+  const otherbPressHandler = () => {
+    const changeTitle = '너와 나는 얼마나 닮았을까?';
+    dispatch(setChangedTitleText(changeTitle));
+    navigation.navigate('CompareOtherRequest');
   }
 
-  const compareMultiPressHandler = () => {
-    console.log('CompareMultiPeople Button clicked!');
+  const peoplePressHandler = () => {
+    const changeTitle = '둘중에 누구와 더 닮았을까?';
+    dispatch(setChangedTitleText(changeTitle));
+    navigation.navigate('ComparePeopleRequest');
   }
 
   return (
     <View>
       <Text>터치하여 계속</Text>
       <CompareCelebButton key="celeb" onPress={ celebPressHandler } />
-      <CompareTwoButton key="twoPeople" onPress={ compareTwobPressHandler } />
-      <CompareMultiButton key="multiPeople" onPress={ compareMultiPressHandler } />
+      <CompareOtherButton key="other" onPress={ otherbPressHandler } />
+      <ComparePeopleButton key="people" onPress={ peoplePressHandler } />
     </View>
   );
 }
