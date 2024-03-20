@@ -9,13 +9,14 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import FirstInsertImage from '../Common/FirstInsertImage';
 import SecondInsertImage from '../Common/SecondInsertImage';
 import ThirdInsertImage from '../Common/ThirdInsertImage';
-import Loading from '../Common/Loading';
 import ScreenTitle from '../Common/ScreenTitle';
+import AnalyzeLoading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetComparePeopleAPI } from '../../apis/SimilarityAPI';
 import { setIsFirstSelected } from '../../features/firstCompareSlice';
 import { setIsSecondSelected } from '../../features/secondCompareSlice';
 import { setIsLoading, setIsThirdSelected } from '../../features/thirdCompareSlice';
+
 
 
 function ComparePeopleRequest() {
@@ -85,7 +86,7 @@ function ComparePeopleRequest() {
   if (isLoading) {
     return (
       <View>
-        <Loading />
+        <AnalyzeLoading />
       </View>
     );
   }

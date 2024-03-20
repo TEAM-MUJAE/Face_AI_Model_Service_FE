@@ -1,4 +1,4 @@
-import { requestImageFromAPI } from './CommonAPI';
+import { requestImageFromAPI } from './SimilarityCommonAPI';
 import { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } from '../features/similarityDataSlice';  
 
 export function callGetCompareCelebAPI() {

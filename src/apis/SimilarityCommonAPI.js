@@ -27,32 +27,5 @@ export const requestImageFromAPI = async (method, url, data) => {
     }
 }
 
-// const API_SERVER = 'http://localhost:8000';
-
-// export const createAxios = (configs) =>{
-//     const INITIAL_CONFIG = {
-//         baseURL: `${API_SERVER}`,
-//         withCredentials: true,
-//         timeout: 3000,
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     };
-
-//     return axios.create(Object.assign(INITIAL_CONFIG, configs));
-// };
-
-// export const customAxios = (configs) => {
-//     return createAxios(
-//         Object.assign(
-//             {
-//                 headers: {
-//                     'Content-Type': 'multipart/form-data',
-//                 },
-//             },
-//             configs
-//         )
-//     );
-// };
 
 
