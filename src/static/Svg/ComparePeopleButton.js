@@ -1,12 +1,14 @@
 import React from "react"
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View,Image } from 'react-native';
 
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
+import BannerImage from '../../static/img/mainBanner/banner.jpg'; 
+
 
 const ComparePeopleButton = ({ onPress }) => (
-    <TouchableOpacity onPress={ onPress }>
-        <Svg width={246} height={47} viewBox="0 0 246 47" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <TouchableOpacity onPress={ onPress } style={styles.button}>
+        {/* <Svg width={246} height={47} viewBox="0 0 246 47" xmlns="http://www.w3.org/2000/svg" fill="none">
             <G clipPath="url(#a)">
                 <Path
                     fill="#F4EB64"
@@ -24,7 +26,43 @@ const ComparePeopleButton = ({ onPress }) => (
                     <Path fill="#fff" d="M0 0h246v47H0z" />
                 </ClipPath>
             </Defs>
-        </Svg>
+        </Svg> */}
+          <View style={styles.contentContainer}>
+          <Text style={styles.title}>둘중에 누구와 더 닮았을까?</Text>
+         <Image source={BannerImage} style={styles.image} resizeMode="cover" />
+      </View>
     </TouchableOpacity>
 )
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#6F50F8",
+    borderRadius: 8,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    margin: 10,
+  },
+  contentContainer: {
+    height: 250,
+    alignItems: 'center',
+  },
+  image: {
+    width: 246, 
+    height: 150, 
+    marginBottom: 30,
+  },
+  title: {
+    padding: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "#FFFFFF",
+    marginBottom: 10,
+  },
+});
 export default ComparePeopleButton;

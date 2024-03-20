@@ -10,7 +10,6 @@ function AgreeScreen() {
 
     return (
         <ScrollView>
-            <Header />
             <Agree />
         </ScrollView>
     );

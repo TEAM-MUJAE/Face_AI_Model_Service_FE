@@ -1,12 +1,13 @@
 import React from "react"
-import { TouchableOpacity } from 'react-native';
+import {StyleSheet,Text, TouchableOpacity, View } from 'react-native';
 
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
 
 const ExploreButton = ({ onPress }) => (
-  <TouchableOpacity onPress={ onPress }>
-    <Svg width={184} height={47} viewBox="0 0 184 47" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <View style={styles.container}>
+  <TouchableOpacity onPress={ onPress } style={styles.button}>
+    {/* <Svg width={184} height={47} viewBox="0 0 184 47" xmlns="http://www.w3.org/2000/svg" fill="none">
       <G clipPath="url(#a)">
         <Path
           fill="#F4EB64"
@@ -28,8 +29,33 @@ const ExploreButton = ({ onPress }) => (
           <Path fill="#fff" d="M.5 0h183v47H.5z" />
         </ClipPath>
       </Defs>
-    </Svg>
+    </Svg> */}
+    <Text style={styles.buttonText}>Explore Now</Text>
   </TouchableOpacity>
+  </View>
 )
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  button: {
+    width: '80%',
+    padding: 15,
+    marginVertical: 5,
+    alignItems: 'center',
+    backgroundColor: '#6F50F8',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#ffffff',
+  },
+});
+
 export default ExploreButton;
 

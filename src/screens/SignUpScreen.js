@@ -10,7 +10,6 @@ function SignUpScreen() {
 
     return (
         <ScrollView>
-            <Header />
             <SignUp />
         </ScrollView>
     );
