@@ -3,18 +3,18 @@ import { ScrollView } from 'react-native';
 
 
 import Header from '../components/Common/Header';
-import CompareOtherRequest from '../components/CompareOther/CompareOtherRequest';
+import ComparePeopleResponse from '../components/ComparePeople/ComparePeopleResponse';
 
 
-function CompareOtherRequestScreen() {
+function ComparePeopleResponseScreen() {
 
-
+   
     return (
         <ScrollView>
             <Header />
-            <CompareOtherRequest />
+            <ComparePeopleResponse />
         </ScrollView>
     );
 }
 
-export default CompareOtherRequestScreen;
+export default ComparePeopleResponseScreen;

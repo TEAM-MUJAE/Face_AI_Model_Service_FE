@@ -20,7 +20,7 @@ export function callGetCompareCelebAPI() {
 
             const response = await requestImageFromAPI('POST', '/upload', formData);
 
-            // 스토어에 데이터 저장
+            // 스토어에 응답 데이터 저장
             const responseData = response.data;
             dispatch(setSimilarityCelebData(responseData));
             

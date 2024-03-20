@@ -1,43 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 
 
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
 
 
 import CompareCelebButton from '../../static/Svg/CompareCelebButton';
 import CompareOtherButton from '../../static/Svg/CompareOtherButton';
 import ComparePeopleButton from '../../static/Svg/ComparePeopleButton';
-import { setChangedTitleText } from '../../features/titleSlice';
 
 
 
 function NavContent() {
 
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {}
-  }, []);
 
   const celebPressHandler = () => {
-    const changeTitle = '나와 닮은 연예인이 있을까?';
-    dispatch(setChangedTitleText(changeTitle));
-    navigation.navigate('CompareCelebRequest');
+    navigation.navigate('CompareCelebRequest', {
+      title: '나와 닮은 연예인이 있을까?'
+    });
   }
 
   const otherbPressHandler = () => {
-    const changeTitle = '너와 나는 얼마나 닮았을까?';
-    dispatch(setChangedTitleText(changeTitle));
-    navigation.navigate('CompareOtherRequest');
+    navigation.navigate('CompareOtherRequest', {
+      title: '너와 나는 얼마나 닮았을까?'
+    });
   }
 
   const peoplePressHandler = () => {
-    const changeTitle = '둘중에 누구와 더 닮았을까?';
-    dispatch(setChangedTitleText(changeTitle));
-    navigation.navigate('ComparePeopleRequest');
+    navigation.navigate('ComparePeopleRequest', {
+      title: '둘중에 누구와 더 닮았을까?'
+    });
   }
 
   return (

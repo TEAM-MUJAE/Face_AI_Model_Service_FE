@@ -2,18 +2,18 @@ import { View } from 'react-native';
 
 
 import CropOriginContent from '../Common/CropOriginContent';
-import OtherResultDetail from './OtherResultDetail';
+import PeopleResultDetail from './PeopleResultDetail';
 
 
-function OtherResultContent() {
+function PeopleResultContent() {
     
 
     return (
         <View>
             <CropOriginContent />
-            <OtherResultDetail />
+            <PeopleResultDetail />
         </View>
     );
 }
 
-export default OtherResultContent;
+export default PeopleResultContent;

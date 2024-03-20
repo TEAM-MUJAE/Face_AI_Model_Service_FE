@@ -11,11 +11,16 @@ import BxSort from '../../static/Svg/BxSort';
 function CropOriginContent() {
 
     const userCrop = useSelector(state => state.similarityData.cropped_file_paths);
-    const firstCropImage = useSelector(state => state.similarityData.encoded_img1);
-    const secondCropImage = useSelector(state => state.similarityData.encoded_img2);
+    const firstCropImage = useSelector(state => state.similarityData.encoded_img1); // 첫번째 크롭 base64 문자열
+    const secondCropImage = useSelector(state => state.similarityData.encoded_img2); // 두번째 크롭 base64 문자열
+    const thirdCropImage = useSelector(state => state.similarityData.encoded_img3); // 세번째 크롭 base64 문자열
     
 
-    let userCropImage = '';
+    /*  userCrop이 falsy 값이 아닐때만 셀럽 결과에서 이미지 base64 문자열을 가져옴 
+        닮은 연예인 찾기(CompareCelebRequest) 기능에서 AI 서빙 패키지에 요청했을 경우에만
+        userCrop이 falsy 값이 아님
+    */
+    let userCropImage = ''; 
     if (userCrop) {
         const reformattedCropImage = userCrop.map(([name, path]) => ({ name, path }));
         console.log("reformattedCropImage : ", reformattedCropImage);
@@ -24,19 +29,36 @@ function CropOriginContent() {
 
     return (
         <View>
-            <Text>AI가 얼굴을 분석할때 이미지의 이 부분을 사용했다고 하는군요!3333333</Text>
+            <Text>AI가 얼굴을 분석할때 이미지의 이 부분을 사용했다고 하는군요!</Text>
             {userCropImage && <View style={styles.oneCropContainer}>
                 <Image key={userCropImage} source={{ uri: `data:image/jpg;base64,${ userCropImage }` }} style={styles.resultImage} />
             </View>}
-            {firstCropImage && <View style={styles.twoCropContainer}>
+            {(firstCropImage && !thirdCropImage) && <View style={styles.twoCropContainer}>
                 <View style={styles.resultImageContainer}>
                     <Image key={firstCropImage} source={{ uri: `data:image/jpg;base64,${ firstCropImage }` }} style={styles.resultImage} />
                 </View>
-                <View style={styles.bxSortSvg}> 
+                <View> 
                     <BxSort width={50} height={50} viewBox="0 0 50 50" />
                 </View>
                 <View style={styles.resultImageContainer}>
                     <Image key={secondCropImage} source={{ uri: `data:image/jpg;base64,${ secondCropImage }` }} style={styles.resultImage} />
+                </View>
+            </View>}
+            {thirdCropImage && <View style={styles.threeCropContainer}>
+                <View style={styles.resultImageContainer}>
+                    <Image key={firstCropImage} source={{ uri: `data:image/jpg;base64,${ firstCropImage }` }} style={styles.resultImage} />
+                </View>
+                <View> 
+                    <BxSort width={50} height={50} viewBox="0 0 50 50" />
+                </View>
+                <View style={styles.resultImageContainer}>
+                    <Image key={secondCropImage} source={{ uri: `data:image/jpg;base64,${ secondCropImage }` }} style={styles.resultImage} />
+                </View>
+                <View> 
+                    <BxSort width={50} height={50} viewBox="0 0 50 50" />
+                </View>
+                <View style={styles.resultImageContainer}>
+                    <Image key={thirdCropImage} source={{ uri: `data:image/jpg;base64,${ thirdCropImage }` }} style={styles.resultImage} />
                 </View>
             </View>}
         </View>
@@ -49,16 +71,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     oneCropContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 16,
-        marginBottom: 16
     },
     twoCropContainer: {
-        flexDirection: 'row',
-        marginTop: 16,
-        marginBottom: 16,
-        marginHorizontal: 48
+    },
+    threeCropContainer: {
     },
     resultImageContainer: {
         flex: 1
@@ -67,12 +83,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         resizeMode: 'cover'
-    },
-    bxSortSvg: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-
     }
 })
 

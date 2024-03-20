@@ -8,8 +8,6 @@ import NavContent from '../components/MainHome/NavContent';
 
 function HomeScreen() {
 
-
-  
   return (
     <ScrollView>
       <Header />

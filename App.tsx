@@ -6,12 +6,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import HomeScreen from './src/screens/HomeScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import AgreeScreen from './src/screens/AgreeScreen';
+import ComparePeopleRequestScreen from './src/screens/ComparePeopleRequestScreen';
+import ComparePeopleResponseScreen from './src/screens/ComparePeopleResponseScreen';
 import CompareCelebRequestScreen from './src/screens/CompareCelebRequestScreen';
 import CompareOtherRequestScreen from './src/screens/CompareOtherRequestScreen';
 import CompareCelebResponseScreen from './src/screens/CompareCelebResponseScreen';
 import CompareOtherResponseScreen from './src/screens/CompareOtherResponseScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import AgreeScreen from './src/screens/AgreeScreen';
 
 
 const Stack = createStackNavigator();
@@ -34,6 +36,8 @@ function App(): React.JSX.Element {
         <Stack.Screen name='CompareCelebResponse' component={CompareCelebResponseScreen} />
         <Stack.Screen name='CompareOtherRequest' component={CompareOtherRequestScreen} />
         <Stack.Screen name='CompareOtherResponse' component={CompareOtherResponseScreen} />
+        <Stack.Screen name='ComparePeopleRequest' component={ComparePeopleRequestScreen} />
+        <Stack.Screen name='ComparePeopleResponse' component={ComparePeopleResponseScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

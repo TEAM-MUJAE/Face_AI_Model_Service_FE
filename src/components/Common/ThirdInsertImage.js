@@ -6,27 +6,27 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-import SecondInsertURL from './SecondInsertURL';
-import { setIsSecondSelected, setSelectedImage } from '../../features/secondCompareSlice';
+import ThirdInsertURL from './ThirdInsertURL';
+import { setIsThirdSelected, setSelectedImage } from '../../features/thirdCompareSlice';
 import BxTrash from '../../static/Svg/BxTrash';
 
 
-function SecondInsertImage() {
+function ThirdInsertImage() {
 
     const initialFormImage = require('../../static/img/resource/uploadForm.png');
-    const uploadFormImage = useSelector(state => state.secondCompare.selectedImage) // initialFormImage와 같음
-    const isSecondSelected = useSelector(state => state.secondCompare.isSecondSelected); // false
+    const uploadFormImage = useSelector(state => state.thirdCompare.selectedImage); // initialFormImage와 같음 
+    const isThirdSelected = useSelector(state => state.thirdCompare.isThirdSelected); // false
  
     const dispatch = useDispatch();
 
     useEffect(() => {
         console.log("동작순서 확인 1")
-        console.log("두번째 이미지 선택 컴포넌트 마운트 완료!")
+        console.log("세번째 이미지 선택 컴포넌트 마운트 완료!")
         return () => {
             console.log("동작순서 확인 2")
-            dispatch(setIsSecondSelected(false));
+            dispatch(setIsThirdSelected(false));
             dispatch(setSelectedImage(initialFormImage));
-            console.log("두번째 이미지 선택 컴포넌트 언마운트 완료!")
+            console.log("세번째 이미지 선택 컴포넌트 언마운트 완료!")
         }
     }, []);
 
@@ -42,7 +42,7 @@ function SecondInsertImage() {
     };
 
     const imageUploadHandler = () => {
-        console.log("두번째 이미지 선택 버튼 클릭됨!")
+        console.log("세번째 이미지 선택 버튼 클릭됨!")
 
         launchImageLibrary({ mediaType: "photo" },(response) => {
 
@@ -65,7 +65,7 @@ function SecondInsertImage() {
     };
 
     const trashPressHandler = () => {
-        dispatch(setIsSecondSelected(false));
+        dispatch(setIsThirdSelected(false));
         dispatch(setSelectedImage(initialFormImage));
     }
     
@@ -74,8 +74,8 @@ function SecondInsertImage() {
             <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={ uploadFormImage } source={ renderImageSource(uploadFormImage) } style={styles.image} />
             </TouchableOpacity>
-            {isSecondSelected && <BxTrash onPress={ trashPressHandler } />}
-            {/* <SecondInsertURL /> */}
+            {isThirdSelected && <BxTrash onPress={ trashPressHandler } />}
+            {/* <ThirdInsertURL /> */}
         </ScrollView>
     );
 
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SecondInsertImage;
+export default ThirdInsertImage;

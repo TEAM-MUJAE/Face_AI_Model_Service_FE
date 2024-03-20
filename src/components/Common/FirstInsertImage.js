@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 
 
@@ -18,6 +18,17 @@ function FirstInsertImage() {
     const isFirstSelected = useSelector(state => state.firstCompare.isFirstSelected);
     
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log("동작순서 확인 1")
+        console.log("첫번째 이미지 선택 컴포넌트 마운트 완료!")
+        return () => {
+            console.log("동작순서 확인 2")
+            dispatch(setIsFirstSelected(false));
+            dispatch(setSelectedImage(initialFormImage));
+            console.log("첫번째 이미지 선택 컴포넌트 언마운트 완료!")
+        }
+    }, [dispatch]);
 
     const renderImageSource = (imageSource) => {
         if (typeof imageSource === 'string') {
@@ -60,7 +71,7 @@ function FirstInsertImage() {
 
 
     return (
-        <ScrollView horizontal>
+        <ScrollView>
             <TouchableOpacity onPress={ imageUploadHandler }>
                 <Image key={uploadFormImage} source={ renderImageSource(uploadFormImage) } style={styles.image} />
             </TouchableOpacity>
