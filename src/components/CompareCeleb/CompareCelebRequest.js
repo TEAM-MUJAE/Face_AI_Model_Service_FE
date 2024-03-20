@@ -8,7 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import ScreenTitle from '../Common/ScreenTitle';
 import FirstInsertImage from '../Common/FirstInsertImage';
-import Loading from '../Common/Loading';
+import Loading from '../Common/CommonLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareCelebAPI } from '../../apis/SimilarityAPI';
 import { setIsFirstSelected, setIsLoading } from '../../features/firstCompareSlice';

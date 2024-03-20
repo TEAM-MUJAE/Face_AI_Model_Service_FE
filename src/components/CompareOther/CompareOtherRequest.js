@@ -9,7 +9,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import FirstInsertImage from '../Common/FirstInsertImage';
 import SecondInsertImage from '../Common/SecondInsertImage';
 import CelebBanner from '../Common/CelebBanner';
-import Loading from '../Common/Loading';
+import Loading from '../Common/CommonLoading';
 import ScreenTitle from '../Common/ScreenTitle';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareOtherAPI } from '../../apis/SimilarityAPI';
