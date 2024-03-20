@@ -5,19 +5,18 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 
-import CelebResultBanner from './CelebResultBanner';
 import BackWithTextButton from '../../static/Svg/BackWithTextButton';
-import TwoResultContent from '../Common/TwoResultContent';
+import PeopleResultContent from './PeopleResultContent';
 
 
 
-function CompareCelebResponse() {
+function ComparePeopleResponse() {
 
   const celebData = useSelector(state => state.similarityData);
   const navigation = useNavigation();
 
-  /* store에 응답데이터가 들어왔을때만 TwoResultContent 컴포넌트가 렌더링 되도록 설정 */
-  const shouldRenderTwoResultContent = Object.keys(celebData).length > 0;
+  /* store에 응답데이터가 들어왔을때만 PeopleResultContent 컴포넌트가 렌더링 되도록 설정 */
+  const shouldRenderPeopleResultContent = Object.keys(celebData).length > 0;
 
   const goHomeScreenPressHandler = () => {
     console.log('Go To Home Screen Button clicked!');
@@ -26,12 +25,11 @@ function CompareCelebResponse() {
 
   return (
     <View>
-      <Text>유사한 인물과 어떻게 닮았는지 알려드릴게요!</Text>
-      {shouldRenderTwoResultContent && <TwoResultContent />}
+      <Text>이 사람과 요 사람 중 더 닮았다고 생각하는 사람과 어떻게 닮았는지 알려드릴게요!</Text>
+      {shouldRenderPeopleResultContent && <PeopleResultContent />}
       <BackWithTextButton key="goHomeScreen" onPress={ goHomeScreenPressHandler } />
-      {shouldRenderTwoResultContent && <CelebResultBanner />}
     </View>
     );
   }
   
-  export default CompareCelebResponse;
+  export default ComparePeopleResponse;

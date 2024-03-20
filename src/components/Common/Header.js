@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 
@@ -7,24 +8,24 @@ import { useNavigation } from '@react-navigation/native';
 import LoginIcon from '../../static/Svg/LoginIcon';
 import LogoutIcon from '../../static/Svg/LogoutIcon';
 import UserSettingsIcon from '../../static/Svg/UserSettingsIcon';
-import { useDispatch } from 'react-redux';
-import { setChangedTitleText } from '../../features/titleSlice';
 
 
 function Header() {
 
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const loginPressHandler = () => {
     console.log('Login Button clicked!');
-    dispatch(setChangedTitleText('로그인'));
-    navigation.navigate('Login');
+    navigation.navigate('Login', {
+      title: '로그인'
+    });
   }
 
   const logoutPressHandler = () => {
     console.log('Logout Button clicked!');
-    navigation.navigate('Home');
+    navigation.navigate('Home', {
+      title: '홈 화면'
+    });
   }
 
   const userSettingsPressHandler = () => {

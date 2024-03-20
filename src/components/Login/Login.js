@@ -1,34 +1,37 @@
 import React, { useState } from 'react';
 import { TextInput, Text, View } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 
+import ScreenTitle from '../Common/ScreenTitle';
 import LoginWithTextButton from '../../static/Svg/LoginWithTextButton';
 import SignUpWithTextButton from '../../static/Svg/SignUpWithTextButton';
 import ForgotIdButton from '../../static/Svg/ForgotIdButton';
 import ForgotPasswordButton from '../../static/Svg/ForgotPasswordButton';
-import { setChangedTitleText } from '../../features/titleSlice';
+
 
 
 
 function Login() {
+    
+    const navigation = useNavigation();
+    const route = useRoute();
 
     const [idText, setIdText] = useState('');
     const [passwordText, setPasswordText] = useState('');   
 
-    const navigation = useNavigation();
-    const dispatch = useDispatch();
+    const title = route.params?.title ?? '지정된 타이틀 없음 무야호~~~~';
 
     const loginPressHandler = () => {
         console.log('Login Button clicked!');
     }
 
     const SignUpPressHandler = () => {
-        console.log('SignUp Button clicked!');
-        dispatch(setChangedTitleText('회원가입'));
-        navigation.navigate('Agree');
+        navigation.navigate('Agree', {
+            title: '회원가입-이용약관'
+        });
     }
 
     const forgotIdPressHandler = () => {
@@ -39,9 +42,9 @@ function Login() {
         console.log('ForgotPass Button clicked!');
     }
     
-  
     return (
         <View>
+            <ScreenTitle title={ title } />
             <TextInput
                 onChangeText={ setIdText }
                 value={ idText }
