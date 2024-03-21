@@ -64,14 +64,7 @@ function Agree() {
     return (
         <View>
             <ScreenTitle title={ title } />
-            <View style={styles.checkAndTextContainer}>
-                <CheckBox
-                    value={ isCheckedFullAgree }
-                    onValueChange={ fullAgreeCheckHandler }
-                />
-                <Text>전체 동의하기</Text>
-            </View>
-            <Text>이용 약관 및 개인정보 수집 / 이용 동의를 모두 포함합니다.</Text>
+            {!isCheckedFullAgree && <Text style={styles.stepTitle}>{`[필수] 항목에 모두 동의해야 다음 단계로 넘어갈 수 있습니다.`}</Text>}
             <View style={styles.checkAndTextContainer}>
                 <CheckBox
                     value={ isCheckedTermsAgree }
@@ -88,7 +81,13 @@ function Agree() {
                 <Text>{`[필수] 개인정보 수집 및 이용`}</Text>
             </View>
             <UsePrivacy />
-            {!isCheckedFullAgree && <Text>{`[필수] 항목에 모두 동의해야 다음 단계로 넘어갈 수 있습니다.`}</Text>}
+            <View style={styles.checkAllContainer}>
+                <CheckBox
+                    value={ isCheckedFullAgree }
+                    onValueChange={ fullAgreeCheckHandler }
+                />
+                <Text>전체 동의하기</Text>
+            </View>
             {(isCheckedFullAgree && isCheckedTermsAgree && isCheckedPrivacyAgree) && <ActivateNextButton onPress={ activateNextPressHandler } />}
         </View>
     );
@@ -96,8 +95,15 @@ function Agree() {
 
 const styles = StyleSheet.create({
     checkAndTextContainer: {
+        marginTop: 20,
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    checkAllContainer: {
+        marginTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     termsContainer: {
         marginHorizontal: 20,
@@ -110,6 +116,14 @@ const styles = StyleSheet.create({
     termsText: {
         fontSize: 12,
     },
+    stepTitle: {
+        fontSize: 13,
+        color: 'red', // Slightly lighter text for the description
+        textAlign: 'center', // Center align description
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 20,
+      },
 });
 
 export default Agree;

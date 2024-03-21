@@ -11,7 +11,7 @@ function CompareCelebRequestScreen() {
 
     return (
         <ScrollView>
-            <Header />
+            {/* <Header /> */}
             <CompareCelebRequest />
         </ScrollView>
     );

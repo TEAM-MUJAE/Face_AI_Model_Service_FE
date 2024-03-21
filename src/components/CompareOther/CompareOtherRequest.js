@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Text, View, Alert } from 'react-native';
+import {StyleSheet, Text, View, Alert } from 'react-native';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import FirstInsertImage from '../Common/FirstInsertImage';
 import SecondInsertImage from '../Common/SecondInsertImage';
 import CelebBanner from '../Common/CelebBanner';
-import Loading from '../Common/CommonLoading';
+import Loading from '../Common/AnalyzeLoading';
 import ScreenTitle from '../Common/ScreenTitle';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareOtherAPI } from '../../apis/SimilarityAPI';
@@ -83,15 +83,53 @@ function CompareOtherRequest() {
   return (
     <View>
       <ScreenTitle title={ title } />
-      <Text>분석하고 싶은 얼굴 사진을 올려주세요!</Text>
+      <Text style={styles.stepTitle}>Step1. 분석하고 싶은 얼굴 사진을 올려주세요!</Text>
       <FirstInsertImage />
-      <Text>비교 대상 얼굴 사진을 올려주세요!</Text>
+      <Text style={styles.stepTitle}>Step2. 비교 대상 얼굴 사진을 올려주세요!</Text>
       <SecondInsertImage />
-      <Text>TIP. 혹시 직접 비교하고 싶은 연예인이 이중에 있나요? 골라보세요!</Text>
+      <Text style={styles.stepTitle}>TIP.연예인과 직접 비교하기</Text>
       <CelebBanner />
       <ExploreButton key="exploreToCompare" onPress={ exploreToComparePressHandler } />
     </View>
     );
   }
   
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      backgroundColor: '#FFFFFF', // A light background color
+    },
+    stepTitle: {
+      fontSize: 15,
+      color: '#6F50F8', // Slightly lighter text for the description
+      textAlign: 'center', // Center align description
+      fontWeight: 'bold',
+      marginBottom: 10,
+      marginTop: 10,
+    },
+    button: {
+      marginTop: 20,
+      backgroundColor: '#007BFF', // A blue color for the button
+      paddingVertical: 12,
+      paddingHorizontal: 25,
+      borderRadius: 25, // Rounded corners
+      shadowColor: '#000', // Shadow for depth
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    buttonText: {
+      fontSize: 18,
+      color: '#FFFFFF', // White text on the button
+      textAlign: 'center',
+    },
+  });
+
   export default CompareOtherRequest;

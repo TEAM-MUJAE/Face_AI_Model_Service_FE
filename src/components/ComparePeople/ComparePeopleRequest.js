@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Text, View, Alert } from 'react-native';
+import {StyleSheet, Text, View, Alert } from 'react-native';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -94,15 +94,52 @@ function ComparePeopleRequest() {
   return (
     <View>
       <ScreenTitle title={ title } />
-      <Text>분석하고 싶은 얼굴 사진을 올려주세요!</Text>
+      <Text style={styles.stepTitle}>Step1. 분석하고 싶은 얼굴 사진을 올려주세요!</Text>
       <FirstInsertImage />
-      <Text>이 사람과 더 닮았을까? 궁금한 첫번째 얼굴 사진을 올려주세요!</Text>
+      <Text style={styles.stepTitle}>Step2. 궁금한 첫번째 얼굴 사진을 올려주세요!</Text>
       <SecondInsertImage />
-        <Text>아니면 요 사람과 더 닮았을까? 궁금한 두번째 얼굴 사진을 올려주세요!</Text>
+      <Text style={styles.stepTitle}>Step3. 궁금한 두번째 얼굴 사진을 올려주세요!</Text>
         <ThirdInsertImage />
       <ExploreButton key="exploreToCompare" onPress={ exploreToComparePressHandler } />
     </View>
     );
   }
   
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      backgroundColor: '#FFFFFF', // A light background color
+    },
+    stepTitle: {
+      fontSize: 15,
+      color: '#6F50F8', // Slightly lighter text for the description
+      textAlign: 'center', // Center align description
+      fontWeight: 'bold',
+      marginBottom: 10,
+      marginTop: 10,
+    },
+    button: {
+      marginTop: 20,
+      backgroundColor: '#007BFF', // A blue color for the button
+      paddingVertical: 12,
+      paddingHorizontal: 25,
+      borderRadius: 25, // Rounded corners
+      shadowColor: '#000', // Shadow for depth
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    buttonText: {
+      fontSize: 18,
+      color: '#FFFFFF', // White text on the button
+      textAlign: 'center',
+    },
+  });
   export default ComparePeopleRequest;

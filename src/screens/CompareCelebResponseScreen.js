@@ -10,7 +10,7 @@ function CompareCelebResponseScreen() {
 
     return (
         <ScrollView>
-            <Header />
+            {/* <Header /> */}
             <CompareCelebResponse />
         </ScrollView>
     );

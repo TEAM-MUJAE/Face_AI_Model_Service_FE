@@ -11,7 +11,7 @@ function ComparePeopleResponseScreen() {
    
     return (
         <ScrollView>
-            <Header />
+            {/* <Header /> */}
             <ComparePeopleResponse />
         </ScrollView>
     );

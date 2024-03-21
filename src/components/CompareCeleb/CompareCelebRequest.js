@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Alert, Text, View } from 'react-native';
+import {StyleSheet , Alert, Text, View } from 'react-native';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import ScreenTitle from '../Common/ScreenTitle';
 import FirstInsertImage from '../Common/FirstInsertImage';
-import Loading from '../Common/CommonLoading';
+import Loading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareCelebAPI } from '../../apis/SimilarityAPI';
 import { setIsFirstSelected, setIsLoading } from '../../features/firstCompareSlice';
@@ -28,6 +28,8 @@ function CompareCelebRequest() {
   const isFirstSelected = useSelector(state => state.firstCompare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
   const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
+
+  console.log('title1', title);
 
   useEffect(() => {
     if (selectedFirstImage !== initialFormImage) {
@@ -68,12 +70,49 @@ function CompareCelebRequest() {
 
   return (
     <View>
-      <ScreenTitle title={ title } />
-      <Text>분석하고 싶은 얼굴 사진을 올려주세요!</Text>
+      <ScreenTitle title={title} />
       <FirstInsertImage />
+      <Text style={styles.descriptionText} >분석하고 싶은 얼굴 사진을 올려주세요!</Text>
       <ExploreButton key="exploreToFind" onPress={ exploreToFindPressHandler } />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF', // A light background color
+  },
+  descriptionText: {
+    fontSize: 15,
+    color: 'red', // Slightly lighter text for the description
+    textAlign: 'center', // Center align description
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: '#007BFF', // A blue color for the button
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 25, // Rounded corners
+    shadowColor: '#000', // Shadow for depth
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#FFFFFF', // White text on the button
+    textAlign: 'center',
+  },
+});
 
 export default CompareCelebRequest;
