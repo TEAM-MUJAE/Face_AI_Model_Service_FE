@@ -11,7 +11,7 @@ function ComparePeopleRequestScreen() {
 
     return (
         <ScrollView>
-            <Header />
+            {/* <Header /> */}
             <ComparePeopleRequest />
         </ScrollView>
     );

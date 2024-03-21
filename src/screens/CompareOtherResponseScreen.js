@@ -11,7 +11,7 @@ function CompareOtherResponseScreen() {
    
     return (
         <ScrollView>
-            <Header />
+            {/* <Header /> */}
             <CompareOtherResponse />
         </ScrollView>
     );

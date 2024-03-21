@@ -84,9 +84,10 @@ function FirstInsertImage() {
 
 const styles = StyleSheet.create({
     image: {
-        width: 150,
+        width: 400,
         height: 150,
         resizeMode: 'contain',
+        marginBottom: 10,
     }
 });
 

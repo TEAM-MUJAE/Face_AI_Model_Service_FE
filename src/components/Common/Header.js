@@ -1,48 +1,56 @@
-import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
-
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
-
-import LoginIcon from '../../static/Svg/LoginIcon';
 import LogoutIcon from '../../static/Svg/LogoutIcon';
-import UserSettingsIcon from '../../static/Svg/UserSettingsIcon';
-
+import LogoImage from '../../static/img/logo/logo.png';
 
 function Header() {
-
   const navigation = useNavigation();
-
-  const loginPressHandler = () => {
-    console.log('Login Button clicked!');
-    navigation.navigate('Login', {
-      title: '로그인'
-    });
-  }
 
   const logoutPressHandler = () => {
     console.log('Logout Button clicked!');
-    navigation.navigate('Home', {
-      title: '홈 화면'
+    navigation.navigate('Login', {
+      title: '로그인',
     });
-  }
-
-  const userSettingsPressHandler = () => {
-    console.log('UserSettings Button clicked!');
-    // navigation.navigate('UserSettings');
-  }
-
+  };
 
   return (
-    <View>
-      <Text>일반인이었던 내가!</Text>
-      <Text>알고보니 ○○○?</Text>
-      <LoginIcon key="login" onPress={ loginPressHandler } />
-      <LogoutIcon key="logout" onPress={ logoutPressHandler } />
-      <UserSettingsIcon key="userSettings" onPress={ userSettingsPressHandler } />
+    <View style={styles.container}>
+      <View style={{ width: 50 }}></View> 
+      <View style={styles.centerContainer}>
+        <Image source={LogoImage} style={styles.logo} />
+        <Text style={styles.title}>AlGo보니?</Text>
+      </View>
+        <LogoutIcon key='logout' onPress={logoutPressHandler}/>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: '#ffffff',
+  },
+  centerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 50,
+    height: 50,
+  },
+  title: {
+    fontSize: 24,
+    color: '#6F50F8',
+    fontWeight: 'bold',
+  },
+});
 
 export default Header;

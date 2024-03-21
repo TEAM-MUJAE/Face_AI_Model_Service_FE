@@ -26,7 +26,7 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName='Home' 
+        initialRouteName='Login' 
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name='Home' component={HomeScreen} />

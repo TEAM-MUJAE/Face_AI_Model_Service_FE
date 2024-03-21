@@ -11,7 +11,6 @@ function LoginScreen() {
 
     return (
         <ScrollView>
-            <Header />
             <Login />
         </ScrollView>
     );
