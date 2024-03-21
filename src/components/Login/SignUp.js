@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TextInput, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { TouchableOpacity, TextInput, Text, View, StyleSheet, ScrollView } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -179,7 +179,7 @@ function SignUp() {
                     />
                 </View>
                 {isSecurityEntry ? <Invisible onPress={ inVisiblePressHandler } /> : <Visible onPress={ visiblePressHandler } />}
-                {!passwordCheckTextValid && <Text style={styles.stepTitle}>비밀번호 확인은 필수로 입력해야 합니다.</Text>}
+                {!passwordCheckTextValid && <Text style={styles.stepTitle}>비밀번호가 일치하지 않습니다. </Text>}
                 <View style={nameTextValid ? styles.inputGroup1 : styles.inputGroup2}>
                     <TextInput
                         style={styles.input}

@@ -39,9 +39,6 @@ function Login() {
             Alert.alert('알림', '비밀번호를 입력해주세요.');
             return;
         }
-        // navigation.navigate('Home', {
-        //     title: '메인 화면'
-        // });
         
         try {
             console.log('idText: ', idText);
