@@ -25,7 +25,6 @@ export function callPostJoinAPI() {
 
             // 스토어에 데이터 저장
             const response = await requestRegisterFromAPI('POST', '/register', memberData);
-            console.log('response : ', response);
             const responseData = response.data;
             console.log('responseData : ', responseData);
             dispatch(setRegisterResData(responseData));

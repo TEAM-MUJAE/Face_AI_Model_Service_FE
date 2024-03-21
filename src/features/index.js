@@ -6,6 +6,7 @@ import similarityDataReducer from "./similarityDataSlice";
 import similarityRankReducer from "./similarityDetailSlice";
 import signupReducer from "./signUpSlice";
 import loginReducer from "./loginSlice";
+import memberDataReducer from "./memberDataSlice";
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     thirdCompare: thirdCompareReducer,
     similarityData: similarityDataReducer,
     similarityRank: similarityRankReducer,
+    memberData: memberDataReducer,
     signup: signupReducer,
     login: loginReducer
 });

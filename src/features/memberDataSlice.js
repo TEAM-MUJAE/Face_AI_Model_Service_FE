@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+    registerResData: null,
+    loginResData: null
+
+};
 
 const memberDataSlice = createSlice({
     name: "memberData",
     initialState,
     reducers: {
         setRegisterResData: (state, {payload}) => {
-            return payload;
+            state.registerResData = payload;
         },
         setLoginResData: (state, {payload}) => {
-            return payload;
+            state.loginResData = payload;
         }
 
     }
