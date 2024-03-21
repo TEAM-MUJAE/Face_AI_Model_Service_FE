@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
+import Eye from '../../static/img/resource/eye.png';
+import Nose from '../../static/img/resource/nose.png';
+import Mouth from '../../static/img/resource/mouth.png';
 
 
 function TwoResultRank() {
@@ -45,9 +48,18 @@ function TwoResultRank() {
                     <Image source={{ uri: `data:image/png;base64,${ reformattedLandmarkSift[0].path }` }} style={styles.siftResultImage} />
                 </View>
                 <View style={styles.resultTextContainer}>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Eye}/>
                     <Text style={styles.resultText}>{`눈 유사도 ${ Math.round( mostSimilarEyeScore ) }`}</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Nose}/>
                     <Text style={styles.resultText}>{`코 유사도 ${ Math.round( mostSimilarNoseScore ) }`}</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Mouth}/>
                     <Text style={styles.resultText}>{`입 유사도 ${ Math.round( mostSimilarMouthScore ) }`}</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -58,25 +70,55 @@ const styles = StyleSheet.create({
     twoResultContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        // backgroundColor: 'yellow',
     },
     siftResultContainer: {
+        // backgroundColor: 'blue',
+        margin: 10,
+        padding: 10,
     },
     siftResultImageContainer: {
-        flex: 1
+        // backgroundColor: 'red',
+        width: 350, 
+        height: 350, 
+        justifyContent: 'center', 
+        alignItems: 'center',
     },
     siftResultImage: {
+        backgroundColor: 'brown',
         width: 350,
         height: 350,
-        resizeMode: 'contain'
+        // resizeMode: 'contain'
+        // backgroundColor: 'red',
     },
     resultTextContainer: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'purple',
     },
     resultText: {
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+        color: '#6F50F8',
+        fontWeight: 'bold',
+        // backgroundColor: 'purple',
+    },
+    ImageSize: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        // backgroundColor: 'green'
+    },
+    inputGroup: {
+        flexDirection: 'row',
+        width: '100%',
+        // borderWidth: 1,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+    },
 })
 
 export default TwoResultRank;
