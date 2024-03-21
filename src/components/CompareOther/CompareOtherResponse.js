@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View,ScrollView } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import BackWithTextButton from '../../static/Svg/BackWithTextButton';
 import OtherResultContent from './OtherResultContent';
+import ScreenTitle from '../Common/ScreenTitle';
 
 
 
@@ -24,12 +25,51 @@ function CompareOtherResponse() {
   }
 
   return (
-    <View>
-      <Text>두 사람과 어떻게 닮았는지 알려드릴게요!</Text>
+    <ScrollView>
+      <ScreenTitle title={'얼굴 비교결과'} />
+      <Text style={styles.stepTitle} >두 사람과 어떻게 닮았는지 알려드릴게요!</Text>
       {shouldRenderOtherResultContent && <OtherResultContent />}
       <BackWithTextButton key="goHomeScreen" onPress={ goHomeScreenPressHandler } />
-    </View>
+    </ScrollView>
     );
   }
   
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      backgroundColor: '#FFFFFF', // A light background color
+    },
+    stepTitle: {
+      fontSize: 15,
+      color: '#6F50F8', // Slightly lighter text for the description
+      textAlign: 'center', // Center align description
+      fontWeight: 'bold',
+      marginBottom: 10,
+      marginTop: 10,
+    },
+    button: {
+      marginTop: 20,
+      backgroundColor: '#007BFF', // A blue color for the button
+      paddingVertical: 12,
+      paddingHorizontal: 25,
+      borderRadius: 25, // Rounded corners
+      shadowColor: '#000', // Shadow for depth
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    buttonText: {
+      fontSize: 18,
+      color: '#FFFFFF', // White text on the button
+      textAlign: 'center',
+    },
+  });
+
   export default CompareOtherResponse;
