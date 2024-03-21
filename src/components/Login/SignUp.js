@@ -1,5 +1,5 @@
-import React from 'react';
-import { TextInput, Text, View, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ScreenTitle from '../Common/ScreenTitle';
 import CommonLoading from '../Common/CommonLoading';
-import { setEmailText, setEmailTextValid, setIdText, setIdTextValid, setIsLoading, setNameText, setNameTextValid, setPasswordCheckText, setPasswordCheckTextValid, setPasswordText, setPasswordTextValid, setPhoneText, setPhoneTextValid } from '../../features/signUpSlice';
+import { setEmailText, setEmailTextValid, setIdText, setIdTextValid, setIsLoading, setIsSecurityEntry, setIsValidationEnabled, setNameText, setNameTextValid, setPasswordCheckText, setPasswordCheckTextValid, setPasswordText, setPasswordTextValid, setPhoneText, setPhoneTextValid } from '../../features/signUpSlice';
 import SignUpButton from '../../static/Svg/SignUpButton';
 import { callPostJoinAPI } from '../../apis/MemberAPI';
+import Invisible from '../../static/Svg/Invisible';
+import Visible from '../../static/Svg/Visible';
 
 
 
@@ -35,6 +37,45 @@ function SignUp() {
     const nameTextValid = useSelector(state => state.signup.nameTextValid);
     const emailTextValid = useSelector(state => state.signup.emailTextValid);
     const phoneTextValid = useSelector(state => state.signup.phoneTextValid);
+    const isValidationEnabled = useSelector(state => state.signup.isValidationEnabled); // 초기값 false
+    const isSecurityEntry = useSelector(state => state.signup.isSecurityEntry); // 초기값 true
+
+    /* 유효성 체크용 useEffect */
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setIdTextValid(idText !== ''));
+        }
+    }, [idText, isValidationEnabled]);
+
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setPasswordTextValid(passwordText !== ''));
+        }
+    }, [passwordText, isValidationEnabled]);
+
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setPasswordCheckTextValid(passwordCheckText === passwordText));
+        }
+    }, [passwordCheckText, isValidationEnabled]);
+
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setNameTextValid(nameText !== ''));
+        }
+    }, [nameText, isValidationEnabled]);
+
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setEmailTextValid(emailText !== ''));
+        }
+    }, [emailText, isValidationEnabled]);
+
+    useEffect(() => {
+        if (isValidationEnabled) {
+            dispatch(setPhoneTextValid(phoneText !== ''));
+        }
+    }, [phoneText, isValidationEnabled]);
 
     /* 긴 요청 처리용 state */
     const isLoading = useSelector(state => state.signup.isLoading);
@@ -42,13 +83,17 @@ function SignUp() {
 
 
     const signUpPressHandler = async () => {
+        
+        /* 핸들러 동작 시 유효성 체크용 useEffect들을 활성화 */
+        dispatch(setIsValidationEnabled(true));
 
-        dispatch(setIdTextValid(idText !== '')); // 아이디 입력값이 없으면 idTextValid 를 false, 있으면 true로 설정
-        dispatch(setPasswordTextValid(passwordText !== '')); // 비밀번호 입력값이 없으면 passwordTextValid 를 false, 있으면 true로 설정
-        dispatch(setPasswordCheckTextValid(passwordCheckText !== '')); // 비밀번호 확인 입력값이 없으면 passwordCheckTextValid 를 false, 있으면 true로 설정
-        dispatch(setNameTextValid(nameText !== '')); // 이름 입력값이 없으면 nameTextValid 를 false, 있으면 true로 설정
-        dispatch(setEmailTextValid(emailText !== '')); // 이메일 입력값이 없으면 emailTextValid 를 false, 있으면 true로 설정
-        dispatch(setPhoneTextValid(phoneText !== '')); // 휴대폰 번호 입력값이 없으면 phoneTextValid 를 false, 있으면 true로 설정
+        /* 입력 값이 없으면 각 textValid를 초기값과 다르게 하여 false로 설정 */
+        dispatch(setIdTextValid(idText !== ''));
+        dispatch(setPasswordTextValid(passwordText !== '')); 
+        dispatch(setPasswordCheckTextValid(passwordCheckText !== ''));
+        dispatch(setNameTextValid(nameText !== '')); 
+        dispatch(setEmailTextValid(emailText !== '')); 
+        dispatch(setPhoneTextValid(phoneText !== '')); 
         
         console.log('idTextValid: ', idTextValid);
         console.log('passwordTextValid: ', passwordTextValid);
@@ -57,12 +102,30 @@ function SignUp() {
         console.log('emailTextValid: ', emailTextValid);
         console.log('phoneTextValid: ', phoneTextValid);
         
-        if (!idTextValid || !passwordTextValid || !passwordCheckTextValid || !nameTextValid || !emailTextValid || !phoneTextValid) {
+        if (!idTextValid || !passwordTextValid || !passwordCheckTextValid || !nameTextValid || !emailTextValid || !phoneTextValid || isValidationEnabled === false) {
             return;
         }
 
-        
+        dispatch(setIsLoading(true));
+        try {
+            await dispatch(callPostJoinAPI());
+            navigation.navigate('SignUpResponse');
+        } catch (error) {
+            console.error('API 호출 에러 : ', error);
+        } finally {
+            dispatch(setIsLoading(false));
+        }
     };
+
+    const inVisiblePressHandler = () => {
+        console.log('inVisiblePressHandler');
+        dispatch(setIsSecurityEntry(false));
+    }
+
+    const visiblePressHandler = () => {
+        console.log('visiblePressHandler');
+        dispatch(setIsSecurityEntry(true));
+    }
 
     if (isLoading) {
         return (
@@ -111,9 +174,12 @@ function SignUp() {
                     value={ passwordCheckText }
                     onChangeText={ (text) => dispatch(setPasswordCheckText(text)) }
                     placeholder='비밀번호 확인'
+                    secureTextEntry={isSecurityEntry}
                 />
+                {isSecurityEntry ? <Invisible onPress={ inVisiblePressHandler } /> : <Visible onPress={ visiblePressHandler } />}
             </View>
-            {!passwordCheckTextValid && <Text>비밀번호 확인은 필수로 입력해야 합니다.</Text>}
+            {!passwordCheckTextValid && <Text>비밀번호가 일치하지 않습니다.</Text>}
+            {(passwordCheckTextValid && isValidationEnabled) && <Text>비밀번호가 일치합니다.</Text>}
             <View style={{
                 borderColor: nameTextValid ? 'black' : 'red',
                 borderWidth: 1,

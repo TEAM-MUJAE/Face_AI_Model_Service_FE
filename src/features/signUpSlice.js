@@ -17,6 +17,8 @@ const initialState = {
     nameTextValid: true,
     emailTextValid: true,
     phoneTextValid: true,
+    isValidationEnabled: false,
+    isSecurityEntry: true,
     isLoading: false,
 };
 
@@ -70,12 +72,18 @@ export const signUpSlice = createSlice({
         setPhoneTextValid: (state, action) => {
             state.phoneTextValid = action.payload
         },
+        setIsValidationEnabled: (state, action) => {
+            state.isValidationEnabled = action.payload
+        },
+        setIsSecurityEntry: (state, action) => {
+            state.isSecurityEntry = action.payload
+        },
         setIsLoading: (state, action) => {
             state.isLoading = action.payload
         },
     }
 });
 
-export const { setIsCheckedFullAgree, setIsCheckedTermsAgree, setIsCheckedPrivacyAgree, setIdText, setPasswordText, setPasswordCheckText, setNameText, setEmailText, setPhoneText, setIdTextValid, setPasswordTextValid, setPasswordCheckTextValid, setNameTextValid, setEmailTextValid, setPhoneTextValid, setIsLoading } = signUpSlice.actions;
+export const { setIsCheckedFullAgree, setIsCheckedTermsAgree, setIsCheckedPrivacyAgree, setIdText, setPasswordText, setPasswordCheckText, setNameText, setEmailText, setPhoneText, setIdTextValid, setPasswordTextValid, setPasswordCheckTextValid, setNameTextValid, setEmailTextValid, setPhoneTextValid, setIsValidationEnabled, setIsSecurityEntry, setIsLoading } = signUpSlice.actions;
 
 export default signUpSlice.reducer;
