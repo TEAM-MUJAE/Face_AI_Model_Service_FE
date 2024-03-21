@@ -109,7 +109,7 @@ function SignUp() {
         dispatch(setIsLoading(true));
         try {
             await dispatch(callPostJoinAPI());
-            navigation.navigate('SignUpResponse');
+            navigation.navigate('RegistrationComplete');
         } catch (error) {
             console.error('API 호출 에러 : ', error);
         } finally {
@@ -161,6 +161,7 @@ function SignUp() {
                     value={ passwordText }
                     onChangeText={ (text) => dispatch(setPasswordText(text)) }
                     placeholder='비밀번호'
+                    secureTextEntry={isSecurityEntry}
                 />
             </View>
             {!passwordTextValid && <Text>비밀번호는 필수로 입력해야 합니다.</Text>}
