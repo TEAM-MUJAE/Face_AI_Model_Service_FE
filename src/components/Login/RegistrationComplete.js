@@ -13,8 +13,8 @@ function RegistrationComplete() {
 
     const navigation = useNavigation();
 
-    const registerMessage = useSelector(state => state.memberData.registerResponseMessage);
-    console.log(registerMessage);
+    // const registerMessage = useSelector(state => state.memberData.registerResponseMessage);
+    // console.log(registerMessage);
 
     const backPressHandler = () => {
         navigation.navigate('Login', {
@@ -24,7 +24,7 @@ function RegistrationComplete() {
 
     return (
         <View>
-        {registerMessage && <Text>{`${registerMessage}`}</Text>}
+        {/* {registerMessage && <Text>{`${registerMessage}`}</Text>} */}
         <BackToLoginButton key="back" onPress={ backPressHandler } />
         </View>
     );

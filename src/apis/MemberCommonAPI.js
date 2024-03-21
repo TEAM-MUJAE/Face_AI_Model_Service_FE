@@ -18,8 +18,7 @@ export const requestRegisterFromAPI = async (method, url, data) => {
             data
         });
         return response;
-    } catch (error) {
-        console.error('Error requesting API: ', error);
+    } catch (error) {     
         throw error;
     }
 }
