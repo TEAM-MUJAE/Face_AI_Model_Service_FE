@@ -7,15 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import ThirdInsertURL from './ThirdInsertURL';
-import { setIsThirdSelected, setSelectedImage } from '../../features/thirdCompareSlice';
 import BxTrash from '../../static/Svg/BxTrash';
+import { setIsThirdSelected, setSelectedThirdImage } from '../../features/compareSlice';
 
 
 function ThirdInsertImage() {
 
     const initialFormImage = require('../../static/img/resource/uploadForm.png');
-    const uploadFormImage = useSelector(state => state.thirdCompare.selectedImage); // initialFormImage와 같음 
-    const isThirdSelected = useSelector(state => state.thirdCompare.isThirdSelected); // false
+    const uploadFormImage = useSelector(state => state.compare.selectedThirdImage); // initialFormImage와 같음 
+    const isThirdSelected = useSelector(state => state.compare.isThirdSelected); // false
  
     const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ function ThirdInsertImage() {
         return () => {
             console.log("동작순서 확인 2")
             dispatch(setIsThirdSelected(false));
-            dispatch(setSelectedImage(initialFormImage));
+            dispatch(setSelectedThirdImage(initialFormImage));
             console.log("세번째 이미지 선택 컴포넌트 언마운트 완료!")
         }
     }, []);
@@ -59,14 +59,14 @@ function ThirdInsertImage() {
                 const selectedImage = response.assets[0];
 
                 // 디바이스 내 선택 이미지 반영
-                dispatch(setSelectedImage(selectedImage));
+                dispatch(setSelectedThirdImage(selectedImage));
             }
         });
     };
 
     const trashPressHandler = () => {
         dispatch(setIsThirdSelected(false));
-        dispatch(setSelectedImage(initialFormImage));
+        dispatch(setSelectedThirdImage(initialFormImage));
     }
     
     return (

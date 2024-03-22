@@ -6,7 +6,7 @@ export function callGetCompareCelebAPI() {
     return async (dispatch, getState) => {
         console.log('callGetCompareCelebAPI 호출됨!');
         try {
-            const uploadImage = getState().firstCompare.selectedImage;
+            const uploadImage = getState().compare.selectedFirstImage;
             
             const formData = new FormData();
 
@@ -43,8 +43,8 @@ export function callGetCompareOtherAPI() {
     return async (dispatch, getState) => {
         console.log('callGetCompareOtherAPI 호출됨!');
         try {
-            const uploadFirstImage = getState().firstCompare.selectedImage;
-            const uploadSecondImage = getState().secondCompare.selectedImage;
+            const uploadFirstImage = getState().compare.selectedFirstImage;
+            const uploadSecondImage = getState().compare.selectedSecondImage;
             
             const formData = new FormData();
 
@@ -87,9 +87,9 @@ export function callGetComparePeopleAPI() {
     return async (dispatch, getState) => {
         console.log('callGetComparePeopleAPI 호출됨!');
         try {
-            const uploadFirstImage = getState().firstCompare.selectedImage;
-            const uploadSecondImage = getState().secondCompare.selectedImage;
-            const uploadThirdImage = getState().thirdCompare.selectedImage;
+            const uploadFirstImage = getState().compare.selectedFirstImage;
+            const uploadSecondImage = getState().compare.selectedSecondImage;
+            const uploadThirdImage = getState().compare.selectedThirdImage;
             
             const formData = new FormData();
 

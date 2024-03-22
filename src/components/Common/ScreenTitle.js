@@ -6,17 +6,34 @@ import { useNavigation } from '@react-navigation/native';
 
 
 import BackButton from '../../static/Svg/BackButton';
+import { useDispatch } from 'react-redux';
+import { setFirstImageUrl, setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected, setSecondImageUrl, setSelectedFirstImage, setSelectedSecondImage, setSelectedThirdImage, setThirdImageUrl } from '../../features/compareSlice';
 
 
 function ScreenTitle({ title }) {
 
 
+    const initialFormImage = require('../../static/img/resource/uploadForm.png');
+
+
     console.log('title2', title);
 
+    const dispatch = useDispatch();
     const navigation = useNavigation();
 
     const backPressHandler = () => {
         console.log('back Button clicked!');
+        dispatch(setSelectedFirstImage(initialFormImage));
+        dispatch(setIsFirstSelected(false));
+        dispatch(setSelectedSecondImage(initialFormImage));
+        dispatch(setIsSecondSelected(false));
+        dispatch(setSelectedThirdImage(initialFormImage));
+        dispatch(setIsThirdSelected(false));
+        dispatch(setFirstImageUrl(''));
+        dispatch(setSecondImageUrl(''));
+        dispatch(setThirdImageUrl(''));
+        dispatch(setIsLoading(false));
+
         navigation.goBack();
     }
 

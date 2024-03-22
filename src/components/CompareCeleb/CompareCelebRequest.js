@@ -11,7 +11,7 @@ import FirstInsertImage from '../Common/FirstInsertImage';
 import Loading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareCelebAPI } from '../../apis/SimilarityAPI';
-import { setIsFirstSelected, setIsLoading } from '../../features/firstCompareSlice';
+import { setIsFirstSelected, setIsLoading } from '../../features/compareSlice';
 
 
 function CompareCelebRequest() {
@@ -22,10 +22,10 @@ function CompareCelebRequest() {
   
 
   const initialFormImage = require('../../static/img/resource/uploadForm.png');
-  const isLoading = useSelector(state => state.firstCompare.isLoading); // isLoading이 true이면 Loading 컴포넌트를 렌더링 (초기값은 false)
+  const isLoading = useSelector(state => state.compare.isLoading); // isLoading이 true이면 Loading 컴포넌트를 렌더링 (초기값은 false)
 
-  const selectedFirstImage = useSelector(state => state.firstCompare.selectedImage);
-  const isFirstSelected = useSelector(state => state.firstCompare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
+  const selectedFirstImage = useSelector(state => state.compare.selectedFirstImage);
+  const isFirstSelected = useSelector(state => state.compare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
   const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
 
@@ -42,7 +42,9 @@ function CompareCelebRequest() {
     console.log('Explore To Find Button clicked!');
 
     if (!isFirstSelected) {
-      Alert.alert("알림", `분석할 이미지가 선택되지 않았어요. 상단 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`);
+      Alert.alert("알림", `분석할 이미지가 선택되지 않았어요. 상단 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`, [
+        { text: '확인' }
+      ]);
       return;
     }
 
