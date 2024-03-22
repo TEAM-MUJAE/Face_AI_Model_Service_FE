@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert,Dimensions } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-import ScreenTitle from '../Common/ScreenTitle';
-import LoginWithTextButton from '../../static/Svg/LoginWithTextButton';
-import SignUpWithTextButton from '../../static/Svg/SignUpWithTextButton';
-import ForgotIdButton from '../../static/Svg/ForgotIdButton';
-import ForgotPasswordButton from '../../static/Svg/ForgotPasswordButton';
 import { setIdText, setIsLoading, setPasswordText } from '../../features/loginSlice';
 import { setIsCheckedFullAgree, setIsCheckedPrivacyAgree, setIsCheckedTermsAgree, setSignEmailText, setSignIdText, setSignNameText, setSignPasswordCheckText, setSignPasswordText, setSignPhoneText } from '../../features/signUpSlice';
 import { callPostLoginAPI } from '../../apis/MemberAPI';
@@ -28,7 +22,6 @@ function Login() {
     const passwordText = useSelector(state => state.login.passwordText);
 
     const isLoading = useSelector(state => state.login.isLoading);
-    const title = route.params?.title ?? 'AlGo보니?';
     const navigationFrom = route.params?.navigateFrom ?? '';
     console.log('navigationFrom1 : ', navigationFrom);
 
@@ -93,7 +86,7 @@ function Login() {
 
     const SignUpPressHandler = () => {
         navigation.navigate('Agree', {
-            title: '회원가입-이용약관'
+            title: '이용약관'
         });
     }
 
@@ -127,17 +120,17 @@ function Login() {
     }
 
     
-    
     return (
         <View style={styles.container}>
         <Image source={LogoImage} style={styles.logo} />
-        <Text style={{fontSize: 20, marginBottom: 10, color: '#6F50F8', fontWeight: 'bold'}}>{title}</Text>
+        <Text style={{fontSize: 30, marginBottom: 10, color: '#6F50F8', fontWeight: '900'}}>AlGo보니?</Text>
         <TextInput
             style={styles.input}
             onChangeText={ (text) => { dispatch(setIdText(text)) }}   
             value={idText}
             placeholder="아이디"
             maxLength={15}
+            placeholderTextColor={'#9a9a9a'}
         />
         <TextInput
             style={styles.input}
@@ -145,6 +138,7 @@ function Login() {
             value={passwordText}
             placeholder="비밀번호"
             maxLength={15}
+            placeholderTextColor={'#9a9a9a'}
         />
         <TouchableOpacity onPress={loginPressHandler} style={styles.button}>
             <Text style={styles.buttonText}>로그인</Text>
@@ -168,16 +162,18 @@ function Login() {
     );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 20,
+      height: height,
       backgroundColor: '#f5f5f5',
     },
     input: {
-      width: '100%',
+      width: width * 0.8, // 화면 너비의 80%
       marginVertical: 10,
       borderWidth: 1,
       borderColor: '#ccc',
@@ -185,7 +181,7 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
     button: {
-      width: '100%',
+      width: width * 0.8, // 화면 너비의 80%
       padding: 15,
       marginVertical: 5,
       alignItems: 'center',
@@ -200,9 +196,9 @@ const styles = StyleSheet.create({
     },
   
     logo: {
-      width: 100, // Adjust according to your logo's dimensions
-      height: 100, // Adjust according to your logo's dimensions
-      marginBottom: 20, // Adjust spacing as needed
+      width: width * 0.3, // 화면 너비의 25%
+      height: width * 0.3, // 같은 비율로 높이 설정
+      marginBottom: 10,
       },
      
   

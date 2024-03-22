@@ -1,5 +1,5 @@
 import React from "react"
-import {StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import {Dimensions, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
 import Svg, { Rect, Path } from "react-native-svg"
 
@@ -19,16 +19,19 @@ const ActivateNextButton = ({ onPress }) => (
     </View>
 )
 
+const { width, height } = Dimensions.get('window');
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#ffffff',
   },
   button: {
-    width: '80%',
+    width: width * 0.8, // 화면 너비의 80%
     padding: 15,
     marginVertical: 5,
     alignItems: 'center',

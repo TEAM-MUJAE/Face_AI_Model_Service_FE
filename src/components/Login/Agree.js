@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {ScrollView, Dimensions, Text, View, StyleSheet } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -56,20 +56,21 @@ function Agree() {
     const activateNextPressHandler = () => {
         console.log('Next Button clicked!');
         navigation.navigate('SignUp', {
-            title: '회원가입-정보입력'
+            title: '회원가입'
         });
     }
 
     return (
-        <View>
+        <ScrollView>
             <ScreenTitle title={ title } />
+            <View style={styles.container}>
             {!isCheckedFullAgree && <Text style={styles.stepTitle}>{`[필수] 항목에 모두 동의해야 다음 단계로 넘어갈 수 있습니다.`}</Text>}
             <View style={styles.checkAndTextContainer}>
                 <CheckBox
                     value={ isCheckedTermsAgree }
                     onValueChange={ termsAgreeCheckHandler }
                 />
-                <Text>{`[필수] 이용약관`}</Text>
+                <Text style={styles.termsText}>{`[필수] 이용약관`}</Text>
             </View>
             <Terms />
             <View style={styles.checkAndTextContainer}>
@@ -77,7 +78,7 @@ function Agree() {
                     value={ isCheckedPrivacyAgree }
                     onValueChange={ privacyAgreeCheckHandler }
                 />
-                <Text>{`[필수] 개인정보 수집 및 이용`}</Text>
+                <Text style={styles.termsText}>{`[필수] 개인정보 수집 및 이용`}</Text>
             </View>
             <UsePrivacy />
             <View style={styles.checkAllContainer}>
@@ -85,14 +86,23 @@ function Agree() {
                     value={ isCheckedFullAgree }
                     onValueChange={ fullAgreeCheckHandler }
                 />
-                <Text>전체 동의하기</Text>
+                <Text style={styles.termsText}>전체 동의</Text>
             </View>
             {(isCheckedFullAgree && isCheckedTermsAgree && isCheckedPrivacyAgree) && <ActivateNextButton onPress={ activateNextPressHandler } />}
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        height: height,
+        backgroundColor: 'white',
+    },
     checkAndTextContainer: {
         marginTop: 20,
         flexDirection: 'row',
@@ -110,18 +120,21 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         padding: 15,
-        height: 150,
+        height: height * 0.2,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     termsText: {
-        fontSize: 12,
+        fontSize: 13,
+        color: 'black',
+        fontWeight: 'bold',
     },
     stepTitle: {
         fontSize: 13,
-        color: 'red', // Slightly lighter text for the description
-        textAlign: 'center', // Center align description
+        color: 'red',
+        textAlign: 'center', 
         fontWeight: 'bold',
-        marginBottom: 10,
-        marginTop: 20,
+        marginTop: 10,
       },
 });
 
