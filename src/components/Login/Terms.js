@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     },
     termsText: {
         fontSize: 12,
+        color: 'black',
     },
 });
 

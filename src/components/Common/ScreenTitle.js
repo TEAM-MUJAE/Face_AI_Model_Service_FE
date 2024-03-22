@@ -27,6 +27,7 @@ function ScreenTitle({ title }) {
         <View style={styles.centerContainer}>
         <Text style={styles.title}>{`${ title }`}</Text>
         </View>
+        {/* <View style={{flex: 1}}></View> */}
       </View>
     );
 
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       padding: 10,
       backgroundColor: '#ffffff',
+      borderBottomWidth: 1,
     },
     centerContainer: {
       flex: 1,
@@ -46,14 +48,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    logo: {
-      width: 50,
-      height: 50,
-    },
     title: {
-      fontSize: 20,
+      fontSize: 25,
       color: '#6F50F8',
-      fontWeight: 'bold',
+      fontWeight: '900',
     },
   });
 

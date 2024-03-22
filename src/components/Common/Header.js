@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,17 +23,21 @@ function Header() {
         <Image source={LogoImage} style={styles.logo} />
         <Text style={styles.title}>AlGo보니?</Text>
       </View>
-        <LogoutIcon key='logout' onPress={logoutPressHandler}/>
+      <TouchableOpacity style={{ marginRight: 10 }}>
+        <LogoutIcon key='logout' onPress={logoutPressHandler} />
+        </TouchableOpacity>
     </View>
   );
 }
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    height: height * 0.1,
     backgroundColor: '#ffffff',
   },
   centerContainer: {
@@ -43,13 +47,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: width*0.15,
+    height: width*0.15,
   },
   title: {
-    fontSize: 24,
+    fontSize: width < 600 ? 25 : 30,
     color: '#6F50F8',
-    fontWeight: 'bold',
+    fontWeight: '900',
+    paddingLeft: 10,
   },
 });
 
