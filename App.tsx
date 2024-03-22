@@ -15,7 +15,7 @@ import CompareCelebRequestScreen from './src/screens/CompareCelebRequestScreen';
 import CompareOtherRequestScreen from './src/screens/CompareOtherRequestScreen';
 import CompareCelebResponseScreen from './src/screens/CompareCelebResponseScreen';
 import CompareOtherResponseScreen from './src/screens/CompareOtherResponseScreen';
-import RegistrationComplete from './src/components/Login/RegistrationComplete';
+import RegistrationResult from './src/components/Login/RegistrationResult';
 
 
 
@@ -33,7 +33,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='Agree' component={AgreeScreen} />
         <Stack.Screen name='SignUp' component={SignUpScreen} />
-        <Stack.Screen name='RegistrationComplete' component={RegistrationComplete} />
+        <Stack.Screen name='RegistrationResult' component={RegistrationResult} />
         {/* <Stack.Screen name='forgotId' component= />
         <Stack.Screen name='forgotPassword' component= />
         <Stack.Screen name='UserSettings' component= /> */}
@@ -43,6 +43,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name='CompareOtherResponse' component={CompareOtherResponseScreen} />
         <Stack.Screen name='ComparePeopleRequest' component={ComparePeopleRequestScreen} />
         <Stack.Screen name='ComparePeopleResponse' component={ComparePeopleResponseScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

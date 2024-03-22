@@ -36,22 +36,22 @@ export const signUpSlice = createSlice({
         setIsCheckedPrivacyAgree: (state, action) => {
             state.isCheckedPrivacyAgree = action.payload
         },
-        setIdText: (state, action) => {
+        setSignIdText: (state, action) => {
             state.idText = action.payload
         },
-        setPasswordText: (state, action) => {
+        setSignPasswordText: (state, action) => {
             state.passwordText = action.payload
         },
-        setPasswordCheckText: (state, action) => {
+        setSignPasswordCheckText: (state, action) => {
             state.passwordCheckText = action.payload
         },
-        setNameText: (state, action) => {
+        setSignNameText: (state, action) => {
             state.nameText = action.payload
         },
-        setEmailText: (state, action) => {
+        setSignEmailText: (state, action) => {
             state.emailText = action.payload
         },
-        setPhoneText: (state, action) => {
+        setSignPhoneText: (state, action) => {
             state.phoneText = action.payload
         },
         setIdTextValid: (state, action) => {
@@ -84,6 +84,6 @@ export const signUpSlice = createSlice({
     }
 });
 
-export const { setIsCheckedFullAgree, setIsCheckedTermsAgree, setIsCheckedPrivacyAgree, setIdText, setPasswordText, setPasswordCheckText, setNameText, setEmailText, setPhoneText, setIdTextValid, setPasswordTextValid, setPasswordCheckTextValid, setNameTextValid, setEmailTextValid, setPhoneTextValid, setIsValidationEnabled, setIsSecurityEntry, setIsLoading } = signUpSlice.actions;
+export const { setIsCheckedFullAgree, setIsCheckedTermsAgree, setIsCheckedPrivacyAgree, setSignIdText, setSignPasswordText, setSignPasswordCheckText, setSignNameText, setSignEmailText, setSignPhoneText, setIdTextValid, setPasswordTextValid, setPasswordCheckTextValid, setNameTextValid, setEmailTextValid, setPhoneTextValid, setIsValidationEnabled, setIsSecurityEntry, setIsLoading } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

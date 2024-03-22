@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://192.168.0.25:8000';
+const baseURL = 'http://43.201.132.221:8000';
 
 export const requestImageFromAPI = async (method, url, data) => {
     console.log('requestImageFromAPI 호출됨!');
