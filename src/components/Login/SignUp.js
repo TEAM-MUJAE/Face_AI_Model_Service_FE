@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ScreenTitle from '../Common/ScreenTitle';
 import CommonLoading from '../Common/CommonLoading';
-import { setEmailText, setEmailTextValid, setIdText, setIdTextValid, setIsLoading, setIsSecurityEntry, setIsValidationEnabled, setNameText, setNameTextValid, setPasswordCheckText, setPasswordCheckTextValid, setPasswordText, setPasswordTextValid, setPhoneText, setPhoneTextValid } from '../../features/signUpSlice';
+import { setSignEmailText, setEmailTextValid, setSignIdText, setIdTextValid, setIsLoading, setIsSecurityEntry, setIsValidationEnabled, setSignNameText, setNameTextValid, setSignPasswordCheckText, setPasswordCheckTextValid, setSignPasswordText, setPasswordTextValid, setSignPhoneText, setPhoneTextValid } from '../../features/signUpSlice';
 import SignUpButton from '../../static/Svg/SignUpButton';
 import { callPostJoinAPI } from '../../apis/MemberAPI';
 import Invisible from '../../static/Svg/Invisible';
@@ -57,7 +57,7 @@ function SignUp() {
         if (isValidationEnabled) {
             dispatch(setPasswordCheckTextValid(passwordCheckText === passwordText));
         }
-    }, [passwordCheckText, isValidationEnabled]);
+    }, [passwordCheckText, passwordText, isValidationEnabled]);
 
     useEffect(() => {
         if (isValidationEnabled) {
@@ -76,6 +76,11 @@ function SignUp() {
             dispatch(setPhoneTextValid(phoneText !== ''));
         }
     }, [phoneText, isValidationEnabled]);
+
+    /* 중복체크용 state */
+
+    /* 중복체크용 useEffect */
+
 
     /* 긴 요청 처리용 state */
     const isLoading = useSelector(state => state.signup.isLoading);
@@ -109,12 +114,16 @@ function SignUp() {
         dispatch(setIsLoading(true));
         try {
             await dispatch(callPostJoinAPI());
-            navigation.navigate('RegistrationComplete');
+            navigation.navigate('RegistrationResult');
         } catch (error) {
-            console.error('API 호출 에러 : ', error);
+            console.log('회원가입 에러 발생: ', error);
         } finally {
             dispatch(setIsLoading(false));
         }
+        // const response = await dispatch(callPostJoinAPI());
+        // if (response.payload) {
+        //     navigation.navigate('RegistrationResult');
+        // }
     };
 
     const inVisiblePressHandler = () => {
@@ -151,7 +160,7 @@ function SignUp() {
                             styles.input
                         }
                         value={idText}
-                        onChangeText={(text) => dispatch(setIdText(text))}
+                        onChangeText={(text) => dispatch(setSignIdText(text))}
                         placeholder='아이디'
                     />
                     <TouchableOpacity style={styles.checkButton} onPress={checkDuplicates}>
@@ -163,7 +172,7 @@ function SignUp() {
                     <TextInput
                         style={styles.input}
                         value={passwordText}
-                        onChangeText={(text) => dispatch(setPasswordText(text))}
+                        onChangeText={(text) => dispatch(setSignPasswordText(text))}
                         placeholder='비밀번호'
                         secureTextEntry={isSecurityEntry}
                     />
@@ -173,18 +182,20 @@ function SignUp() {
                     <TextInput
                         style={styles.input}
                         value={passwordCheckText}
-                        onChangeText={(text) => dispatch(setPasswordCheckText(text))}
+                        onChangeText={(text) => dispatch(setSignPasswordCheckText(text))}
                         placeholder='비밀번호 확인'
                         secureTextEntry={isSecurityEntry}
                     />
+                    <View style={{ width:60, height:60, alignItems:'center', alignContent:'center', justifyContent:'center' }}>
+                    {isSecurityEntry ? <Invisible onPress={ inVisiblePressHandler } /> : <Visible onPress={ visiblePressHandler } />}
+                    </View>
                 </View>
-                {isSecurityEntry ? <Invisible onPress={ inVisiblePressHandler } /> : <Visible onPress={ visiblePressHandler } />}
                 {!passwordCheckTextValid && <Text style={styles.stepTitle}>비밀번호가 일치하지 않습니다. </Text>}
                 <View style={nameTextValid ? styles.inputGroup1 : styles.inputGroup2}>
                     <TextInput
                         style={styles.input}
                         value={nameText}
-                        onChangeText={(text) => dispatch(setNameText(text))}
+                        onChangeText={(text) => dispatch(setSignNameText(text))}
                         placeholder='이름'
                     />
                 </View>
@@ -193,7 +204,7 @@ function SignUp() {
                     <TextInput
                         style={styles.input}
                         value={emailText}
-                        onChangeText={(text) => dispatch(setEmailText(text))}
+                        onChangeText={(text) => dispatch(setSignEmailText(text))}
                         placeholder='이메일'
                     />
                 </View>
@@ -202,7 +213,7 @@ function SignUp() {
                     <TextInput
                         style={styles.input}
                         value={phoneText}
-                        onChangeText={(text) => dispatch(setPhoneText(text))}
+                        onChangeText={(text) => dispatch(setSignPhoneText(text))}
                         placeholder='휴대폰 번호'
                     />
                 </View>

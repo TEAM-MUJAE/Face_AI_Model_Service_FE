@@ -20,7 +20,7 @@ export const loginSlice = createSlice({
         },
         setIsLoading: (state, action) => {
             state.isLoading = action.payload
-        }
+        },
     }
 });
 

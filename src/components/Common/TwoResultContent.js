@@ -46,19 +46,8 @@ function TwoResultContent() {
     // /* =============================================== */
 
     // /* 정렬된 데이터 재구성 */
-    // const reformattedTotalSimilarity = sortedTotalSimilarity.map(([path, score]) => ({ path, score }));
-    // console.log("reformattedTotalSimilarity : ", reformattedTotalSimilarity)
-    // const reformattedEyeSimilarity = averageEyeSimilarity.map(([path, score]) => ({ path, score }));
-    // console.log("reformattedEyeSimilarity : ", reformattedEyeSimilarity)
-    // const reformattedNoseSimilarity = noseSimilarity.map(([path, score]) => ({ path, score }));
-    // console.log("reformattedNoseSimilarity : ", reformattedNoseSimilarity)
-    // const reformattedMouthSimilarity = mouthSimilarity.map(([path, score]) => ({ path, score }));
-    // console.log("reformattedMouthSimilarity : ", reformattedMouthSimilarity)
     
-
     // const mostSimilarCelebPath = reformattedTotalSimilarity[0].path; // 가장 유사한 사진의 경로
-
-
     // const mostSimilarTotalScore = reformattedTotalSimilarity[0].score; // 가장 유사한 사진의 전체 유사도
 
     // const mostSimilarEyeScoreObj = reformattedEyeSimilarity.find(obj => obj.path === mostSimilarCelebPath);

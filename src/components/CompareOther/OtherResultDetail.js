@@ -19,8 +19,7 @@ function OtherResultDetail() {
     /* ======================== 데이터 재구성 ======================== */
 
     /* totalSimilarity 데이터 */
-    const reformattedTotalSimilarity = totalSimilarity.distance
-    console.log("reformattedTotalSimilarity : ", reformattedTotalSimilarity)
+    const totalScore = totalSimilarity.distance;
 
     /* landmarkSift 데이터 */
     const reformattedLandmarkSift = landmarkSift[0].map(([name, path]) => ({ name, path }));
@@ -52,6 +51,19 @@ function OtherResultDetail() {
     const reformattedMouthSimilarity = mouthSimilarity.map(([path, score]) => ({ path, score }));
     const mouthScore = reformattedMouthSimilarity[0].score
 
+    /* 전체 유사도 스케일링 */
+    let similarText = '';
+
+    if (totalScore < 0.576) {
+        similarText = '와 ! 도플갱어 수준으로 닮았어요.. 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
+    } else if (0.576 < totalScore < 0.656 ) {
+        similarText = '아주아주 많이~ 닮은 사람으로 보여요. 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
+    } else if (0.656 < totalScore < 0.69) {
+        similarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
+    } else {
+        similarText = '아쉽게도 닮은 정도가 낮아요. 주변 사람에게 서로의 매력을 어필하는게 중요해보이는군요!';
+    }
+
     /* 가장 닮은 부분을 출력하기 위한 과정 */
     const lowestScore = Math.min(eyeScore, noseScore, mouthScore);
     let mostSimilarFeature = '';
@@ -70,7 +82,7 @@ function OtherResultDetail() {
     return (
         <View style={styles.otherResultContainer}>
             <View style={styles.siftResultContainer}>
-            <Text>{`전체 유사도 ${ reformattedTotalSimilarity }`}</Text>
+            <Text>{similarText}</Text>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ landmarkSiftPath }` }} style={styles.siftResultImage} />
                 </View>

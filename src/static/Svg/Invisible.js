@@ -6,14 +6,14 @@ import Svg, { Path } from "react-native-svg"
 
 const Invisible = ({ onPress }) => (
     <TouchableOpacity onPress={ onPress }>
-        <Svg width={60} height={60} viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <Svg width={30} height={30} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="none">
             <Path
-                stroke="#000"
+                stroke="#999"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={5}
-                d="M7.5 25a33.392 33.392 0 0 0 7.5 6.712m0 0a28.188 28.188 0 0 0 10 4.063c3.303.635 6.697.635 10 0a28.188 28.188 0 0 0 10-4.063m-30 0-3.75 4.538M52.5 25a33.392 33.392 0 0 1-7.5 6.712m0 0 3.75 4.538M25 35.773l-1.25 5.477M35 35.773l1.25 5.477"
-            />
+                strokeWidth={2}
+                d="M3.75 12.5a16.698 16.698 0 0 0 3.75 3.356m0 0a14.095 14.095 0 0 0 5 2.031c1.652.318 3.348.318 5 0a14.095 14.095 0 0 0 5-2.03m-15 0-1.875 2.268M26.25 12.5a16.699 16.699 0 0 1-3.75 3.356m0 0 1.875 2.269M12.5 17.886l-.625 2.739m5.625-2.739.625 2.739"
+            />  
         </Svg>
     </TouchableOpacity>
 )

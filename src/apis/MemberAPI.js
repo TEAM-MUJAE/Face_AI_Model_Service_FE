@@ -3,6 +3,9 @@ import { requestRegisterFromAPI } from "./MemberCommonAPI";
 
 
 export function callPostJoinAPI() {
+
+
+
     console.log("왔니?")
     return async (dispatch, getState) => {
         console.log('callPostJoinAPI 호출됨!');
@@ -20,12 +23,9 @@ export function callPostJoinAPI() {
                 email: userEmail,
                 phone: userPhone
             };
-            
-            console.log('이건가? : ', memberData);
 
             // 스토어에 데이터 저장
             const response = await requestRegisterFromAPI('POST', '/register', memberData);
-            console.log('response : ', response);
             const responseData = response.data;
             console.log('responseData : ', responseData);
             dispatch(setRegisterResData(responseData));
@@ -33,12 +33,14 @@ export function callPostJoinAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                console.error('요청 에러 메시지 :', error.response.data);
-                console.error('에러 응답 코드 :', error.response.status);
+                console.log('응답 에러 :', error.response);
+                console.log('응답 에러 데이터 :', error.response.data);
+                const responseData = error.response.data;
+                dispatch(setRegisterResData(responseData));
             } else if (error.request) {
-                console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
+                console.log('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
             } else {
-                console.error('요청을 보내지 못함... :', error.message);
+                console.log('요청을 보내지 못함... :', error.message);
             }
             console.log('설정된 에러 : ', error.config);
         }

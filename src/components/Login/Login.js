@@ -12,9 +12,10 @@ import SignUpWithTextButton from '../../static/Svg/SignUpWithTextButton';
 import ForgotIdButton from '../../static/Svg/ForgotIdButton';
 import ForgotPasswordButton from '../../static/Svg/ForgotPasswordButton';
 import { setIdText, setIsLoading, setPasswordText } from '../../features/loginSlice';
+import { setIsCheckedFullAgree, setIsCheckedPrivacyAgree, setIsCheckedTermsAgree, setSignEmailText, setSignIdText, setSignNameText, setSignPasswordCheckText, setSignPasswordText, setSignPhoneText } from '../../features/signUpSlice';
 import { callPostLoginAPI } from '../../apis/MemberAPI';
-
 import LogoImage from '../../static/img/logo/logo.png';
+
 
 function Login() {
     
@@ -27,6 +28,28 @@ function Login() {
 
     const isLoading = useSelector(state => state.login.isLoading);
     const title = route.params?.title ?? 'AlGo보니?';
+    const navigationFrom = route.params?.navigateFrom ?? '';
+
+    /* 회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화 */
+    useEffect(() => {
+        console.log('navigationFrom : ', navigationFrom);
+        if (navigationFrom === 'RegistrationResult') {
+            console.log('회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
+            dispatch(setIdText(''));
+            dispatch(setPasswordText(''));
+            dispatch(setIsCheckedFullAgree(false));
+            dispatch(setIsCheckedTermsAgree(false));
+            dispatch(setIsCheckedPrivacyAgree(false));
+            dispatch(setSignIdText(''));
+            dispatch(setSignPasswordText(''));
+            dispatch(setSignPasswordCheckText(''));
+            dispatch(setSignNameText(''));
+            dispatch(setSignEmailText(''));
+            dispatch(setSignPhoneText(''));
+            
+        }
+    }, [navigationFrom]);
+
 
     const loginPressHandler = async () => {
 
