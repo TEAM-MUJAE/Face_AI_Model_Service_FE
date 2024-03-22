@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert,Dimensions } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -27,7 +27,6 @@ function Login() {
     const passwordText = useSelector(state => state.login.passwordText);
 
     const isLoading = useSelector(state => state.login.isLoading);
-    const title = route.params?.title ?? 'AlGo보니?';
     const navigationFrom = route.params?.navigateFrom ?? '';
 
     /* 회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화 */
@@ -53,33 +52,36 @@ function Login() {
 
     const loginPressHandler = async () => {
 
-        if (idText === '') {
-            Alert.alert('알림', '아이디를 입력해주세요.');
-            return;
-        }
+        // if (idText === '') {
+        //     Alert.alert('알림', '아이디를 입력해주세요.');
+        //     return;
+        // }
 
-        if (passwordText === '') {
-            Alert.alert('알림', '비밀번호를 입력해주세요.');
-            return;
-        }
+        // if (passwordText === '') {
+        //     Alert.alert('알림', '비밀번호를 입력해주세요.');
+        //     return;
+        // }
         
-        try {
-            console.log('idText: ', idText);
-            console.log('passwordText: ', passwordText);
-            await dispatch(callPostLoginAPI());
-            navigation.navigate('Home', {
-                title: '메인 화면'
-            });
-        } catch (error) {
-            console.log('API 호출 에러 : ', error);
-        } finally {
-            dispatch(setIsLoading(false));
-        }
+        // try {
+        //     console.log('idText: ', idText);
+        //     console.log('passwordText: ', passwordText);
+        //     await dispatch(callPostLoginAPI());
+        //     navigation.navigate('Home', {
+        //         title: '메인 화면'
+        //     });
+        // } catch (error) {
+        //     console.log('API 호출 에러 : ', error);
+        // } finally {
+        //     dispatch(setIsLoading(false));
+        // }
+
+        navigation.navigate('Home')
+
     };
 
     const SignUpPressHandler = () => {
         navigation.navigate('Agree', {
-            title: '회원가입-이용약관'
+            title: '이용약관'
         });
     }
 
@@ -92,22 +94,23 @@ function Login() {
     }
 
     
-    
     return (
         <View style={styles.container}>
         <Image source={LogoImage} style={styles.logo} />
-        <Text style={{fontSize: 20, marginBottom: 10, color: '#6F50F8', fontWeight: 'bold'}}>{title}</Text>
+        <Text style={{fontSize: 30, marginBottom: 10, color: '#6F50F8', fontWeight: '900'}}>AlGo보니?</Text>
         <TextInput
             style={styles.input}
             onChangeText={ (text) => { dispatch(setIdText(text)) }}   
             value={idText}
             placeholder="아이디"
+            placeholderTextColor={'#9a9a9a'}
         />
         <TextInput
             style={styles.input}
             onChangeText={ (text) => { dispatch(setPasswordText(text)) }}
             value={passwordText}
             placeholder="비밀번호"
+            placeholderTextColor={'#9a9a9a'}
         />
         <TouchableOpacity onPress={loginPressHandler} style={styles.button}>
             <Text style={styles.buttonText}>로그인</Text>
@@ -125,16 +128,18 @@ function Login() {
     );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 20,
+      height: height,
       backgroundColor: '#f5f5f5',
     },
     input: {
-      width: '100%',
+      width: width * 0.8, // 화면 너비의 80%
       marginVertical: 10,
       borderWidth: 1,
       borderColor: '#ccc',
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
     button: {
-      width: '100%',
+      width: width * 0.8, // 화면 너비의 80%
       padding: 15,
       marginVertical: 5,
       alignItems: 'center',
@@ -157,9 +162,9 @@ const styles = StyleSheet.create({
     },
   
     logo: {
-      width: 100, // Adjust according to your logo's dimensions
-      height: 100, // Adjust according to your logo's dimensions
-      marginBottom: 20, // Adjust spacing as needed
+      width: width * 0.3, // 화면 너비의 25%
+      height: width * 0.3, // 같은 비율로 높이 설정
+      marginBottom: 10,
       },
      
   

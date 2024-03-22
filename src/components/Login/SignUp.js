@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TouchableOpacity, TextInput, Text, View, StyleSheet, ScrollView } from 'react-native';
+import {Dimensions, TouchableOpacity, TextInput, Text, View, StyleSheet, ScrollView } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -162,6 +162,7 @@ function SignUp() {
                         value={idText}
                         onChangeText={(text) => dispatch(setSignIdText(text))}
                         placeholder='아이디'
+                        placeholderTextColor={'#9a9a9a'}
                     />
                     <TouchableOpacity style={styles.checkButton} onPress={checkDuplicates}>
                         <Text style={styles.checkButtonText}>중복 확인</Text>
@@ -174,6 +175,7 @@ function SignUp() {
                         value={passwordText}
                         onChangeText={(text) => dispatch(setSignPasswordText(text))}
                         placeholder='비밀번호'
+                        placeholderTextColor={'#9a9a9a'}
                         secureTextEntry={isSecurityEntry}
                     />
                 </View>
@@ -185,6 +187,7 @@ function SignUp() {
                         onChangeText={(text) => dispatch(setSignPasswordCheckText(text))}
                         placeholder='비밀번호 확인'
                         secureTextEntry={isSecurityEntry}
+                        placeholderTextColor={'#9a9a9a'}
                     />
                     <View style={{ width:60, height:60, alignItems:'center', alignContent:'center', justifyContent:'center' }}>
                     {isSecurityEntry ? <Invisible onPress={ inVisiblePressHandler } /> : <Visible onPress={ visiblePressHandler } />}
@@ -197,6 +200,7 @@ function SignUp() {
                         value={nameText}
                         onChangeText={(text) => dispatch(setSignNameText(text))}
                         placeholder='이름'
+                        placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
                 {!nameTextValid && <Text style={styles.stepTitle}>이름은 필수로 입력해야 합니다.</Text>}
@@ -206,6 +210,7 @@ function SignUp() {
                         value={emailText}
                         onChangeText={(text) => dispatch(setSignEmailText(text))}
                         placeholder='이메일'
+                        placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
                 {!emailTextValid && <Text style={styles.stepTitle}>이메일은 필수로 입력해야 합니다.</Text>}
@@ -215,6 +220,7 @@ function SignUp() {
                         value={phoneText}
                         onChangeText={(text) => dispatch(setSignPhoneText(text))}
                         placeholder='휴대폰 번호'
+                        placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
                 {!phoneTextValid && <Text style={styles.stepTitle}>전화번호는 필수로 입력해야 합니다.</Text>}
@@ -223,6 +229,8 @@ function SignUp() {
         </ScrollView>
     );
 }
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -233,22 +241,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
     },
     stepTitle: {
-        fontSize: 13,
+        fontSize: width * 0.035, // 동적으로 폰트 크기 조정
         color: 'red',
         textAlign: 'center',
         fontWeight: 'bold',
     },
     inputGroup: {
         flexDirection: 'row',
-        width: '100%',
+        width: width * 0.9, // 전체 너비의 90%
+        height: height * 0.08, // 전체 높이의 7%
         borderWidth: 1,
         borderRadius: 5,
         margin: 10,
     },
     inputGroup1: {
         flexDirection: 'row',
-        width: '100%',
-        height: 65,
+        width: width * 0.9, // 전체 너비의 90%
+        height: height * 0.08, // 전체 높이의 7%
         borderWidth: 1,
         borderRadius: 5,
         borderColor: 'black',
@@ -256,9 +265,9 @@ const styles = StyleSheet.create({
     },
     inputGroup2: {
         flexDirection: 'row',
-        width: '100%',
+        width: width * 0.9, // 전체 너비의 90%
+        height: height * 0.08, // 전체 높이의 7%
         borderWidth: 1,
-        height: 65,
         borderRadius: 5,
         borderColor: 'red',
         margin: 10,
@@ -285,7 +294,6 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         padding: 15,
-        marginTop: 10,
         backgroundColor: '#6F50F8',
         borderRadius: 5,
         alignItems: 'center',
