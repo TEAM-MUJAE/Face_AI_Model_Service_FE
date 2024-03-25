@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://192.168.0.25:8000';
+const baseURL = 'http://43.201.132.221:9000';
 
 export const requestRegisterFromAPI = async (method, url, data) => {
     console.log('requestRegisterFromAPI 호출됨!');

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert,Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert, Dimensions } from 'react-native';
 
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -9,7 +9,6 @@ import { setIdText, setIsLoading, setPasswordText } from '../../features/loginSl
 import { setIsCheckedFullAgree, setIsCheckedPrivacyAgree, setIsCheckedTermsAgree, setSignEmailText, setSignIdText, setSignNameText, setSignPasswordCheckText, setSignPasswordText, setSignPhoneText } from '../../features/signUpSlice';
 import { callPostLoginAPI } from '../../apis/MemberAPI';
 import LogoImage from '../../static/img/logo/logo.png';
-import { err } from 'react-native-svg';
 
 
 function Login() {
@@ -21,15 +20,12 @@ function Login() {
     const idText = useSelector(state => state.login.idText);
     const passwordText = useSelector(state => state.login.passwordText);
 
-    const isLoading = useSelector(state => state.login.isLoading);
     const navigationFrom = route.params?.navigateFrom ?? '';
     console.log('navigationFrom1 : ', navigationFrom);
 
-    /* 회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화 */
     useEffect(() => {
-        console.log('navigationFrom2 : ', navigationFrom);
-        if (navigationFrom === 'RegistrationResult' || navigationFrom === 'Header') {
-            console.log('회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
+        const focusListener = navigation.addListener('focus', () => {
+            console.log('네비게이션 적용 및 물리적 뒤로가기 터치 실행 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
             dispatch(setIdText(''));
             dispatch(setPasswordText(''));
             dispatch(setIsCheckedFullAgree(false));
@@ -41,8 +37,10 @@ function Login() {
             dispatch(setSignNameText(''));
             dispatch(setSignEmailText(''));
             dispatch(setSignPhoneText(''));
-        }
-    }, [navigationFrom]);
+        });
+
+        return focusListener;
+    }, [navigation, navigationFrom]);
 
 
     const loginPressHandler = async () => {
@@ -98,27 +96,6 @@ function Login() {
     //     console.log('ForgotPass Button clicked!');
     // }
 
-    const next = () => {
-        navigation.navigate('CompareCelebResponse', {
-            title: '결과,,!',
-            navigateFrom: 'Login'
-        });
-    }
-
-    const next2 = () => {
-        navigation.navigate('CompareOtherResponse', {
-            title: '결과,,!',
-            navigateFrom: 'Login'
-        });
-    }
-
-    const next3 = () => {
-        navigation.navigate('ComparePeopleResponse', {
-            title: '결과,,!',
-            navigateFrom: 'Login'
-        });
-    }
-
     
     return (
         <View style={styles.container}>
@@ -145,15 +122,6 @@ function Login() {
         </TouchableOpacity>
         <TouchableOpacity onPress={SignUpPressHandler} style={styles.button}>
             <Text style={styles.buttonText}>회원가입</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={next} style={styles.button}>
-            <Text style={styles.buttonText}>넘어갈거야~~~celeb</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={next2} style={styles.button}>
-            <Text style={styles.buttonText}>넘어갈거야~~~other</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={next3} style={styles.button}>
-            <Text style={styles.buttonText}>넘어갈거야~~~people</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity onPress={forgotPassPressHandler} style={styles.link}>
             <Text>비밀번호 찾기</Text>
