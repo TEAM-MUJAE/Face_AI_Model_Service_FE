@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import { View, Image, StyleSheet, Text,Dimensions } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
@@ -45,38 +45,45 @@ function CropOriginContent() {
             </View>}
             {thirdCropImage && <View style={styles.threeCropContainer}>
                 <View style={[styles.resultThreeCropTriangle, styles.firstImage]}>
+                    <Text style={styles.cropImageText}>기준 얼굴</Text>
                     <Image key={firstCropImage} source={{ uri: `data:image/jpg;base64,${firstCropImage}` }} style={styles.resultImage} />
-                    <Text style={styles.descriptionText}>기준 얼굴</Text>
                 </View>
                 <View style={[styles.bxSortLeft, styles.bxSortRotateRight]}>
                     <BxSort width={50} height={50} viewBox="0 0 50 50" />
                 </View>
                 <View style={[styles.resultThreeCropTriangle, styles.secondImage]}>
                     <Image key={secondCropImage} source={{ uri: `data:image/jpg;base64,${secondCropImage}` }} style={styles.resultImage} />
-                    <Text style={styles.descriptionText}>첫번째 인물</Text>
+                    <Text style={styles.cropImageText}>첫번째 인물</Text>
                 </View>
                 <View style={[styles.bxSortRight, styles.bxSortRotateLeft]}>
                     <BxSort width={50} height={50} viewBox="0 0 50 50" />
                 </View>
                 <View style={[styles.resultThreeCropTriangle, styles.thirdImage]}>
                     <Image key={thirdCropImage} source={{ uri: `data:image/jpg;base64,${thirdCropImage}` }} style={styles.resultImage} />
-                    <Text style={styles.descriptionText}>두번째 인물</Text>
+                    <Text style={styles.cropImageText}>두번째 인물</Text>
                 </View>
             </View>}
+            <View style={styles.resultTextContainer}>
             <Text style={styles.descriptionText}>AI가 얼굴을 분석할때 이 부분을 사용했다고 하는군요!</Text>
+            </View>
         </View>
     );
 
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        padding: 20,
+        padding: 10,
+        borderWidth: 1,
+        // backgroundColor: 'blue',
     },
     resultContainer: {
         flex: 1,
+        alignItems: 'center',
         // backgroundColor: 'red',
     },
     oneCropContainer: {
@@ -85,32 +92,36 @@ const styles = StyleSheet.create({
     },
     twoCropContainer: {
         flexDirection: 'row',
+        justifyContent: 'space-around', // 이미지 사이의 공간을 균등하게 배분
+        width: '100%', // 컨테이너의 너비를 화면에 맞춤
         // backgroundColor: 'green',
     },
     threeCropContainer: {
         position: 'relative', // 부모를 relative로 설정
-        height: 300, // 삼각형 형태를 유지하기 위해 적절한 높이 설정
+        height: height * 0.4, // 화면 높이의 40%를 사용
         width: '100%', // 삼각형 형태를 유지하기 위해 적절한 너비 설정
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor: 'green',
     },
     resultThreeCropTriangle: {
         position: 'absolute', // 절대 위치 설정
         margin: -10,
         bottom: 0, // 아래쪽에 위치
+        // backgroundColor: 'red',
     },
     firstImage: {
-        top: 0, // 첫 번째 이미지를 위로
+        top: '3%', // 첫 번째 이미지를 위로
         alignSelf: 'center',
         // backgroundColor: 'red',
     },
     secondImage: {
-        bottom: 0, // 두 번째 이미지를 아래 왼쪽으로
-        left: 0,
+        bottom: '-10%', // 두 번째 이미지를 아래 왼쪽으로
+        left: '3%', // 화면 너비의 10% 지점에 위치
     },
     thirdImage: {
-        bottom: 0, // 세 번째 이미지를 아래 오른쪽으로
-        right: 0,
+        bottom: '-10%', // 세 번째 이미지를 아래 오른쪽으로
+        right: '3%', // 화면 너비의 10% 지점에 위치
     },
     resultImageContainer: {
         flex: 1,
@@ -127,13 +138,14 @@ const styles = StyleSheet.create({
         color: '#6F50F8', // Slightly lighter text for the description
         textAlign: 'center', // Center align description
         fontWeight: 'bold',
-        marginBottom: 20,
-        marginTop: 20,
+        // marginBottom: 10,
+        // marginTop: 20,
         // backgroundColor: 'red',
     },
     cropImageText: {
-        fontSize: 10,
+        fontSize: 15,
         color: '#6F50F8',
+        textAlign: 'center', // Center align description
         fontWeight: 'bold',
     },
     bxSortLeft: {
@@ -155,6 +167,20 @@ const styles = StyleSheet.create({
     },
     bxSortRotateLeft: {
         transform: [{ rotate: '45deg' }], // Rotates the icon to point towards the third image
+    },
+    resultTextContainer: {
+        flex: 1,
+        // justify/Content: 'center',
+        // backgroundColor: 'green',
+        // marginBottom: 20,
+        marginTop: 50,
+        alignItems: 'center',
+        // borderWidth: 1,
+    },
+    resultText: {
+        textAlign: 'center',
+        fontSize: width * 0.04,
+        // backgroundColor: 'puple',
     },
 })
 

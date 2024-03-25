@@ -123,7 +123,7 @@ function CompareOtherRequest() {
       alignItems: 'center',
       justifyContent: 'center',
       padding: 20,
-      backgroundColor: 'burlywood', // A light background color
+      // backgroundColor: 'burlywood', // A light background color
     },
     stepTitle: {
       fontSize: 15,

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image,Dimensions } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ function TwoResultRank() {
 
     /* totalSimilarity 데이터를 score를 기준으로 정렬 */
     const sortedTotalSimilarity = [...totalSimilarity].sort((a, b) => a[1] - b[1]);
+    console.log("sortedTotalSimilarity : ", sortedTotalSimilarity)
 
     /* eyeSimilarity 데이터를 score를 평균낸 후 기준으로 정렬 */
     const combinedSimilarity = {};
@@ -65,7 +66,7 @@ function TwoResultRank() {
     let similarText = '';
 
     if (totalScore < 0.576) {
-        similarText = '어라라.. 혹시 본인 아니신가요..? 오늘도 여전히 눈이 부시네요.';
+        similarText = '어라라.. 혹시 본인 아니신가요..? 아주 눈이 부십니다.';
     } else if (0.576 < totalScore < 0.656 ) {
         similarText = '아주 많이~ 닮았어요! 이 연예인이 평소에 무엇이 잘 어울리는지 얼른 찾아볼까요?';
     } else if (0.656 < totalScore < 0.69) {
@@ -74,17 +75,11 @@ function TwoResultRank() {
         similarText = '아쉽게도 닮은 정도가 낮아요. 하지만 이것은 곧 당신만의 매력이 넘쳐난다는 뜻이라고 생각해요.';
     }
 
-    /* 가장 닮은 부분을 출력하기 위한 과정 */
-    const lowestScore = Math.min(eyeScore, noseScore, mouthScore);
-    let mostSimilarFeature = '';
-
-    if (lowestScore === eyeScore) {
-        mostSimilarFeature = '눈';
-    } else if (lowestScore === noseScore) {
-        mostSimilarFeature = '코';
-    } else {
-        mostSimilarFeature = '입';
-    }
+    /* 현재 순위 이미지 경로에서 파일 확장자 추출 */
+    console.log("currentRankPath : ", currentRankPath)
+    const filename = currentRankPath.split('/').pop();
+    const fileExtension = filename.split('.').pop();
+    console.log("fileExtension : ", fileExtension)
 
     return (
         <View style={styles.twoResultContainer}>
@@ -92,7 +87,20 @@ function TwoResultRank() {
             <View style={styles.siftResultContainer}>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ reformattedLandmarkSift[0].path }` }} style={styles.siftResultImage} />
-                    <Text style={styles.descriptionText}>{`서로의 얼굴 특징에서 가장 닮은 부분은 ${mostSimilarFeature} 부분 이군요!`}</Text>
+                </View>
+                <View style={styles.resultTextContainer}>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Eye}/>
+                    <Text style={styles.resultText}>{`눈 유사도 ${ Math.round( eyeScore ) }`}</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Nose}/>
+                    <Text style={styles.resultText}>{`코 유사도 ${ Math.round( noseScore ) }`}</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Image style={styles.ImageSize} source={Mouth}/>
+                    <Text style={styles.resultText}>{`입 유사도 ${ Math.round( mouthScore ) }`}</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -100,6 +108,8 @@ function TwoResultRank() {
 }
 
 const { width, height } = Dimensions.get('window');
+
+
 const styles = StyleSheet.create({
     twoResultContainer: {
         flex: 1,
@@ -108,39 +118,35 @@ const styles = StyleSheet.create({
         // backgroundColor: 'yellow',
     },
     siftResultContainer: {
-        width: width * 0.9, // 화면 너비의 90%를 차지하도록 조정
-        height: height * 0.3, // 화면 높이의 50%를 차지하도록 조정
-        // marginTop: 10,
-        justifyContent: 'center',
-        // backgroundColor: '#333333',
+        // backgroundColor: 'blue',
+        margin: 10,
+        padding: 10,
     },
     siftResultImageContainer: {
-        width: '100%', // 컨테이너 너비에 맞춤
-        height: '100%', // 컨테이너 높이의 55%를 차지하도록 조정
-        // alignItems: 'center',
-        justifyContent: 'center',
         // backgroundColor: 'red',
-
+        width: width * 0.8, // 화면 너비의 80%
+        height: height * 0.4, // 화면 높이의 40% 
+        justifyContent: 'center', 
+        alignItems: 'center',
     },
     siftResultImage: {
-        width: '100%', // 컨테이너 너비에 맞춤
-        height: '80%', // 컨테이너 높이의 55%를 차지하도록 조정
-        resizeMode: 'contain'
-
+        backgroundColor: 'brown',
+        width: '100%', // 부모 컨테이너에 맞게 조정
+        height: '50%', // 비율을 유지하면서 조정
+        // resizeMode: 'contain',
+        // backgroundColor: 'red',
     },
     resultTextContainer: {
+        flex: 1,
         justifyContent: 'center',
-        // backgroundColor: 'yellow',
-
+        alignItems: 'center',
+        // backgroundColor: 'purple',
     },
     resultText: {
-        fontSize: width * 0.04,
-        color: '#6F50F8', // Slightly lighter text for the description
-        textAlign: 'center', // Center align description
+        textAlign: 'center',
+        color: '#6F50F8',
         fontWeight: 'bold',
-        marginTop: 20,
-        marginBottom: 10,
-
+        // backgroundColor: 'purple',
     },
     ImageSize: {
         width: 50,
@@ -156,14 +162,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
+        padding: height * 0.01, // 화면 높이에 따라 패딩 조정
     },
-    descriptionText: {
-        fontSize: 15,
-        color: '#6F50F8', // Slightly lighter text for the description
-        textAlign: 'center', // Center align description
-        fontWeight: 'bold',
-        marginTop: 10,
-    }
 })
 
 export default TwoResultRank;

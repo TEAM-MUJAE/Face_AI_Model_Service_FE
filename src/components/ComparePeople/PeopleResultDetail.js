@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity,Dimensions } from 'react-native';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -77,23 +77,23 @@ function PeopleResultDetail() {
     let secondSimilarText = '';
 
     if (firstTotalScore < 0.576) {
-        firstSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
+        firstSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. \n 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
     } else if (0.576 < firstTotalScore < 0.656 ) {
-        firstSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
+        firstSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. \n 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
     } else if (0.656 < firstTotalScore < 0.69) {
-        firstSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
+        firstSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. \n 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
     } else {
-        firstSimilarText = `아쉽게도 닮은 정도가 낮아요. 개성이 강한건 곧 매력이랍니다!`;
+        firstSimilarText = `아쉽게도 닮은 정도가 낮아요. \n 개성이 강한건 곧 매력이랍니다!`;
     }
 
     if (secondTotalScore < 0.576) {
-        secondSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
+        secondSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. \n 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
     } else if (0.576 < secondTotalScore < 0.656 ) {
-        secondSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
+        secondSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. \n 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
     } else if (0.656 < secondTotalScore < 0.69) {
-        secondSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
+        secondSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. \n 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
     } else {
-        secondSimilarText = `아쉽게도 닮은 정도가 낮아요. 개성이 강한건 곧 매력이랍니다!`;
+        secondSimilarText = `아쉽게도 닮은 정도가 낮아요. \n 개성이 강한건 곧 매력이랍니다!`;
     }
 
     /* 얼굴 특징 중 가장 닮은 부분을 출력하기 위한 과정 */
@@ -172,8 +172,8 @@ function PeopleResultDetail() {
 
     return (
         <View style={styles.peopleResultContainer}>
-            <Text>{`${imageNumberText} 인물과 더 닮은것 같아요!`}</Text>
-            {!isLowerScore && <Text>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
+            <Text style={styles.resultText}>{`${imageNumberText} 인물과 더 닮은것 같아요!`}</Text>
+            {!isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
             {!isLowerScore && <View style={styles.siftResultContainer}>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ firstLandmarkSiftPath }` }} style={styles.siftResultImage} />
@@ -183,7 +183,7 @@ function PeopleResultDetail() {
                     <Text style={styles.resultText}>{mostSimilarPartText}</Text>
                 </View>
             </View>}
-            {isLowerScore && <Text>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
+            {isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
             {isLowerScore && <View style={styles.siftResultContainer}>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ secondLandmarkSiftPath }` }} style={styles.siftResultImage} />
@@ -200,33 +200,42 @@ function PeopleResultDetail() {
     );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     peopleResultContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#cccccc',
+        // backgroundColor: '#cccccc',
     },
     siftResultContainer: {
-        backgroundColor: '#333333',
+        width: width * 0.9, // 화면 너비의 90%를 차지하도록 조정
+        height: height * 0.5, // 화면 높이의 50%를 차지하도록 조정
+        // marginTop: 10,
+        // backgroundColor: '#333333',
     },
     siftResultImageContainer: {
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
+        width: '100%', // 컨테이너 너비에 맞춤
+        height: '70%', // 컨테이너 높이의 55%를 차지하도록 조정
+        // alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: 'red',
     },
     siftResultImage: {
-        width: 300,
-        height: 165,
+        width: '100%', // 컨테이너 너비에 맞춤
+        height: '80%', // 컨테이너 높이의 55%를 차지하도록 조정
         resizeMode: 'contain'
     },
     resultTextContainer: {
         justifyContent: 'center'
     },
     resultText: {
-        fontSize: 15,
+        fontSize: width * 0.04,
         color: '#6F50F8', // Slightly lighter text for the description
         textAlign: 'center', // Center align description
         fontWeight: 'bold',
+        marginBottom: 10,
     },
     button: {
         width: '100%',
