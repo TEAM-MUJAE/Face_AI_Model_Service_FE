@@ -42,7 +42,7 @@ function CompareCelebResponse() {
       alignItems: 'center',
       justifyContent: 'center',
       padding: 20,
-      backgroundColor: '#FFFFFF', // A light background color
+      backgroundColor: 'yellow', // A light background color
     },
     descriptionText: {
       fontSize: 15,
