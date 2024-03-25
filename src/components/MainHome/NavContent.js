@@ -36,7 +36,7 @@ function NavContent() {
         navigation.navigate('CompareOtherRequest', {
           title: '너와 나는 얼마나 닮았을까?',
         }),
-      backgroundColor: '#50E3C2',
+      backgroundColor: '#F7E559',
     },
     {
       title: '둘중에 누구와 더 닮았을까?',
@@ -45,7 +45,7 @@ function NavContent() {
         navigation.navigate('ComparePeopleRequest', {
           title: '둘중에 누구와 더 닮았을까?',
         }),
-      backgroundColor: '#F5A623',
+      backgroundColor: '#787667',
     },
   ];
 
@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 15,
+    // borderBottomColor: '#000',
+    // borderBottomWidth: 1,
   },
  
   // Adjust the carousel container if needed

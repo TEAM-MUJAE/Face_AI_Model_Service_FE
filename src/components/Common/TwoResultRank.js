@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,Dimensions } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
@@ -107,6 +107,9 @@ function TwoResultRank() {
     );
 }
 
+const { width, height } = Dimensions.get('window');
+
+
 const styles = StyleSheet.create({
     twoResultContainer: {
         flex: 1,
@@ -121,16 +124,16 @@ const styles = StyleSheet.create({
     },
     siftResultImageContainer: {
         // backgroundColor: 'red',
-        width: 350, 
-        height: 350, 
+        width: width * 0.8, // 화면 너비의 80%
+        height: height * 0.4, // 화면 높이의 40% 
         justifyContent: 'center', 
         alignItems: 'center',
     },
     siftResultImage: {
         backgroundColor: 'brown',
-        width: 350,
-        height: 350,
-        // resizeMode: 'contain'
+        width: '100%', // 부모 컨테이너에 맞게 조정
+        height: '50%', // 비율을 유지하면서 조정
+        // resizeMode: 'contain',
         // backgroundColor: 'red',
     },
     resultTextContainer: {
@@ -159,6 +162,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
+        padding: height * 0.01, // 화면 높이에 따라 패딩 조정
     },
 })
 
