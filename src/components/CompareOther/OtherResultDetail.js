@@ -81,13 +81,14 @@ function OtherResultDetail() {
 
     return (
         <View style={styles.otherResultContainer}>
+            <Text>서로 닮았다고 생각하는 부분을 연결해 보았어요</Text>
             <View style={styles.siftResultContainer}>
-            <Text>{similarText}</Text>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ landmarkSiftPath }` }} style={styles.siftResultImage} />
+                    <Text>{similarText}</Text>
                 </View>
                 <View style={styles.resultTextContainer}>
-                    <View style={styles.inputGroup}>
+                    {/* <View style={styles.inputGroup}>
                     <Image style={styles.ImageSize} source={Eye}/>
                     <Text style={styles.resultText}>{`눈 유사도 ${eyeScore}`}</Text>
                     </View>
@@ -98,7 +99,7 @@ function OtherResultDetail() {
                     <View style={styles.inputGroup}>
                     <Image style={styles.ImageSize} source={Mouth}/>
                     <Text style={styles.resultText}>{`입 유사도 ${mouthScore}`}</Text>
-                    </View>
+                    </View> */}
                     <Text style={styles.descriptionText}>{`서로의 얼굴 특징에서 가장 닮은 부분은 ${mostSimilarFeature} 부분 이군요!`}</Text>
                 </View>
             </View>
@@ -112,38 +113,35 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         // marginTop: 30,
-        // backgroundColor: 'red'
+        backgroundColor: 'red'
     },
     siftResultContainer: {
         width: 500,
         height: 600,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '#F4EB64',
+        backgroundColor: '#F4EB64',
         paddingTop: 0,
     },
     siftResultImageContainer: {
-        width: 300,
-        height: 300,
-        // justifyContent: 'center',
-        // backgroundColor: 'blue'
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
     },
     siftResultImage: {
         width: 300,
-        height: 300,
-        resizeMode: 'contain',
-        // backgroundColor: 'yellow'
+        height: 165,
+        resizeMode: 'contain'
     },
     ImageSize: {
         width: 50,
         height: 50,
         resizeMode: 'contain',
-        // backgroundColor: 'green'
+        backgroundColor: 'green'
     },
     resultTextContainer: {
         // flex: 1,
         // justify/Content: 'center',
-        // backgroundColor: 'green',
+        backgroundColor: 'green',
         marginBottom: 30,
         marginTop: 10,
         alignItems: 'center',

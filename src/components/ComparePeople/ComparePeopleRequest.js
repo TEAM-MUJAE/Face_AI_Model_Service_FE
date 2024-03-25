@@ -13,7 +13,7 @@ import ScreenTitle from '../Common/ScreenTitle';
 import AnalyzeLoading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetComparePeopleAPI } from '../../apis/SimilarityAPI';
-import { setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected } from '../../features/compareSlice';
+import { setFirstImageUrl, setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected, setSecondImageUrl, setSelectedFirstImage, setSelectedSecondImage, setSelectedThirdImage, setThirdImageUrl } from '../../features/compareSlice';
 
 
 
@@ -36,6 +36,11 @@ function ComparePeopleRequest() {
   const selectedThirdImage = useSelector(state => state.compare.selectedThirdImage);
   const isThirdSelected = useSelector(state => state.compare.isThirdSelected); // isThirdSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
+  /* ScreenTitle 컴포넌트에 화면 타이틀 전달 */
+  const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
+  const navigationFrom = route.params?.navigateFrom ?? '';
+  console.log('navigationFrom1 : ', navigationFrom);
+
   useEffect(() => {
     if (selectedFirstImage !== initialFormImage) {
       dispatch(setIsFirstSelected(true));
@@ -48,8 +53,24 @@ function ComparePeopleRequest() {
     }
   }, [selectedFirstImage, selectedSecondImage, selectedThirdImage]);
 
-    /* ScreenTitle 컴포넌트에 화면 타이틀 전달 */
-  const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
+
+  useEffect(() => {
+      const focusListener = navigation.addListener('focus', () => {
+          console.log('네비게이션 적용 및 물리적 뒤로가기 터치 실행 후 이미지 업로드 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
+          dispatch(setSelectedFirstImage(initialFormImage));
+          dispatch(setIsFirstSelected(false));
+          dispatch(setSelectedSecondImage(initialFormImage));
+          dispatch(setIsSecondSelected(false));
+          dispatch(setSelectedThirdImage(initialFormImage));
+          dispatch(setIsThirdSelected(false));
+          dispatch(setFirstImageUrl(''));
+          dispatch(setSecondImageUrl(''));
+          dispatch(setThirdImageUrl(''));
+          dispatch(setIsLoading(false));
+      });
+
+      return focusListener;
+  }, [navigation, navigationFrom]);
 
     /* 터치 이벤트 핸들러 */
   const exploreToComparePressHandler = async () => {

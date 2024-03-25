@@ -11,7 +11,7 @@ import FirstInsertImage from '../Common/FirstInsertImage';
 import Loading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareCelebAPI } from '../../apis/SimilarityAPI';
-import { setIsFirstSelected, setIsLoading } from '../../features/compareSlice';
+import { setFirstImageUrl, setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected, setSecondImageUrl, setSelectedFirstImage, setSelectedSecondImage, setSelectedThirdImage, setThirdImageUrl } from '../../features/compareSlice';
 
 
 function CompareCelebRequest() {
@@ -28,14 +28,33 @@ function CompareCelebRequest() {
   const isFirstSelected = useSelector(state => state.compare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
   const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
-
   console.log('title1', title);
+  const navigationFrom = route.params?.navigateFrom ?? '';
+  console.log('navigationFrom1 : ', navigationFrom);
 
   useEffect(() => {
     if (selectedFirstImage !== initialFormImage) {
       dispatch(setIsFirstSelected(true));
     }
   }, [selectedFirstImage]);
+
+  useEffect(() => {
+    const focusListener = navigation.addListener('focus', () => {
+        console.log('네비게이션 적용 및 물리적 뒤로가기 터치 실행 후 이미지 업로드 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
+        dispatch(setSelectedFirstImage(initialFormImage));
+        dispatch(setIsFirstSelected(false));
+        dispatch(setSelectedSecondImage(initialFormImage));
+        dispatch(setIsSecondSelected(false));
+        dispatch(setSelectedThirdImage(initialFormImage));
+        dispatch(setIsThirdSelected(false));
+        dispatch(setFirstImageUrl(''));
+        dispatch(setSecondImageUrl(''));
+        dispatch(setThirdImageUrl(''));
+        dispatch(setIsLoading(false));
+    });
+
+    return focusListener;
+  }, [navigation, navigationFrom]);
 
   const exploreToFindPressHandler = async () => {
     

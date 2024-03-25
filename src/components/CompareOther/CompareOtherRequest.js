@@ -8,12 +8,11 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import FirstInsertImage from '../Common/FirstInsertImage';
 import SecondInsertImage from '../Common/SecondInsertImage';
-import CelebBanner from '../Common/CelebBanner';
 import Loading from '../Common/AnalyzeLoading';
 import ScreenTitle from '../Common/ScreenTitle';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetCompareOtherAPI } from '../../apis/SimilarityAPI';
-import { setIsFirstSelected, setIsLoading, setIsSecondSelected } from '../../features/compareSlice';
+import { setFirstImageUrl, setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected, setSecondImageUrl, setSelectedFirstImage, setSelectedSecondImage, setSelectedThirdImage, setThirdImageUrl } from '../../features/compareSlice';
 
 
 function CompareOtherRequest() {
@@ -31,6 +30,12 @@ function CompareOtherRequest() {
   const selectedSecondImage = useSelector(state => state.compare.selectedSecondImage);
   const isSecondSelected = useSelector(state => state.compare.isSecondSelected); // isSecondSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
+  /* ScreenTitle 컴포넌트에 화면 타이틀 전달 */ 
+  const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
+  const navigationFrom = route.params?.navigateFrom ?? '';
+  console.log('navigationFrom1 : ', navigationFrom);
+
+
   useEffect(() => {
     if (selectedFirstImage !== initialFormImage) {
       dispatch(setIsFirstSelected(true));
@@ -40,8 +45,23 @@ function CompareOtherRequest() {
     }
   }, [selectedFirstImage, selectedSecondImage]);
 
-  /* ScreenTitle 컴포넌트에 화면 타이틀 전달 */ 
-  const title = route.params?.title ?? 'NavContent 컴포넌트에서 title을 받아오지 못했습니다. 무야호~~~~~~~~~~~~~';
+  useEffect(() => {
+    const focusListener = navigation.addListener('focus', () => {
+        console.log('네비게이션 적용 및 물리적 뒤로가기 터치 실행 후 이미지 업로드 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
+        dispatch(setSelectedFirstImage(initialFormImage));
+        dispatch(setIsFirstSelected(false));
+        dispatch(setSelectedSecondImage(initialFormImage));
+        dispatch(setIsSecondSelected(false));
+        dispatch(setSelectedThirdImage(initialFormImage));
+        dispatch(setIsThirdSelected(false));
+        dispatch(setFirstImageUrl(''));
+        dispatch(setSecondImageUrl(''));
+        dispatch(setThirdImageUrl(''));
+        dispatch(setIsLoading(false));
+    });
+
+    return focusListener;
+  }, [navigation, navigationFrom]);
 
   /* 비동기처리하는 동안 Loading 컴포넌트 화면을 띄우기 위한 state */
   const isLoading = useSelector(state => state.compare.isLoading); // isLoading이 true이면 Loading 컴포넌트를 렌더링 (초기값은 false)
