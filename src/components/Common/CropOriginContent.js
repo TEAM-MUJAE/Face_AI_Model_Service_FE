@@ -46,18 +46,21 @@ function CropOriginContent() {
             {thirdCropImage && <View style={styles.threeCropContainer}>
                 <View style={[styles.resultThreeCropTriangle, styles.firstImage]}>
                     <Image key={firstCropImage} source={{ uri: `data:image/jpg;base64,${firstCropImage}` }} style={styles.resultImage} />
+                    <Text style={styles.descriptionText}>기준 얼굴</Text>
                 </View>
                 <View style={[styles.bxSortLeft, styles.bxSortRotateRight]}>
                     <BxSort width={50} height={50} viewBox="0 0 50 50" />
                 </View>
                 <View style={[styles.resultThreeCropTriangle, styles.secondImage]}>
                     <Image key={secondCropImage} source={{ uri: `data:image/jpg;base64,${secondCropImage}` }} style={styles.resultImage} />
+                    <Text style={styles.descriptionText}>첫번째 인물</Text>
                 </View>
                 <View style={[styles.bxSortRight, styles.bxSortRotateLeft]}>
                     <BxSort width={50} height={50} viewBox="0 0 50 50" />
                 </View>
                 <View style={[styles.resultThreeCropTriangle, styles.thirdImage]}>
                     <Image key={thirdCropImage} source={{ uri: `data:image/jpg;base64,${thirdCropImage}` }} style={styles.resultImage} />
+                    <Text style={styles.descriptionText}>두번째 인물</Text>
                 </View>
             </View>}
             <Text style={styles.descriptionText}>AI가 얼굴을 분석할때 이 부분을 사용했다고 하는군요!</Text>
@@ -127,6 +130,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
         // backgroundColor: 'red',
+    },
+    cropImageText: {
+        fontSize: 10,
+        color: '#6F50F8',
+        fontWeight: 'bold',
     },
     bxSortLeft: {
         position: 'absolute',

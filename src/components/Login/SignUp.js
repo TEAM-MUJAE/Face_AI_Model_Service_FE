@@ -147,7 +147,9 @@ function SignUp() {
     const checkDuplicates = () => {
         // Placeholder: Replace this with your actual duplicate check logic
         console.log('Checking for duplicates:', username);
-        Alert.alert('중복확인', '중복된 아이디가 없습니다.');
+        Alert.alert('중복확인', '중복된 아이디가 없습니다.', [
+            { text: '확인' }
+        ]);
     };
 
     return (
@@ -162,6 +164,7 @@ function SignUp() {
                         value={idText}
                         onChangeText={(text) => dispatch(setSignIdText(text))}
                         placeholder='아이디'
+                        maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
                     <TouchableOpacity style={styles.checkButton} onPress={checkDuplicates}>
@@ -177,6 +180,7 @@ function SignUp() {
                         placeholder='비밀번호'
                         placeholderTextColor={'#9a9a9a'}
                         secureTextEntry={isSecurityEntry}
+                        maxLength={15}
                     />
                 </View>
                 {!passwordTextValid && <Text style={styles.stepTitle}>비밀번호는 필수로 입력해야 합니다.</Text>}
@@ -187,6 +191,7 @@ function SignUp() {
                         onChangeText={(text) => dispatch(setSignPasswordCheckText(text))}
                         placeholder='비밀번호 확인'
                         secureTextEntry={isSecurityEntry}
+                        maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
                     <View style={{ width:60, height:60, alignItems:'center', alignContent:'center', justifyContent:'center' }}>
@@ -200,6 +205,7 @@ function SignUp() {
                         value={nameText}
                         onChangeText={(text) => dispatch(setSignNameText(text))}
                         placeholder='이름'
+                        maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
@@ -210,6 +216,7 @@ function SignUp() {
                         value={emailText}
                         onChangeText={(text) => dispatch(setSignEmailText(text))}
                         placeholder='이메일'
+                        maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
@@ -220,6 +227,7 @@ function SignUp() {
                         value={phoneText}
                         onChangeText={(text) => dispatch(setSignPhoneText(text))}
                         placeholder='휴대폰 번호'
+                        maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
                 </View>

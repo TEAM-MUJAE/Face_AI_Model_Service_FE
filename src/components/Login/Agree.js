@@ -14,7 +14,6 @@ import UsePrivacy from './UsePrivacy';
 import ActivateNextButton from '../../static/Svg/ActivateNextButton';
 
 
-
 function Agree() {
 
     const navigation = useNavigation();

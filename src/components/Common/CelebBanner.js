@@ -3,33 +3,29 @@ import { ScrollView, Text, TouchableOpacity, Image, StyleSheet } from 'react-nat
 
 
 import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedImageIndex, setSelectedSecondImage } from '../../features/compareSlice';
 
 
-import { setSelectedImageIndex } from '../../features/secondCompareSlice';
-import { setSelectedImage } from '../../features/secondCompareSlice';
 
 
 function CelebBanner() {
 
-    const selectedImage = useSelector(state => state.secondCompare.selectedImageIndex);
+    const selectedImageIndex = useSelector(state => state.compare.selectedImageIndex);
     const dispatch = useDispatch();
     
 
     const bannerImages = [
-        'https://i.namu.wiki/i/HLmwkbKN1vCKfz6q5lCRAKUt5x0Ml27BLXkqKNdoQbsAHxkVnN2isT668AQDGXnSPhDTUkdDyB0obrmnis0JURl6sTqJYJW2okgDJmbJ_OSELJnW7gyuBpxAwzALTWzxEzYT0ZdQ7EfX94lCJfVg2g.webp',
-        'https://i.namu.wiki/i/G8RdO4Nq7YIHG5T4xml3CzOMElmUdS1ozzqw309Rtpu7nB-dF_DOIJRo_mGAhRqOXBKMsMH8dD3xGCPkAJ6b2TxoZEBjULkgZNxXXMgIEn7hsH6DOkLGxlH-hhOf5kD_Gr1g9GijmenzC40WB5Y70Q.webp',
-        'https://i.namu.wiki/i/i8DJiIv555NzvusTR0btR5WQfSnPUIoewrKx5YfRqCPJVh8SwHAdIRlLUhiBs9D6ROvBX3RXUS0wxQoTz6YvmXSu4yB9zfSgFQQQDeI3FLu6LJZfrDa9LQTslPaZ4_iJAgkG9nZOy1k6r0ajMrl3bA.webp',
-        'https://i.namu.wiki/i/Cz-ndgkoH6-A-P1qwtSCd9Y-BDSqQfOnIN2yLqL-AoZznAhotKb2oCgQPrfW5EJBYv0H5aszJGLVv_flbED6cUDqp1X_jWAKXohT_fuzNL9cjEIm8ITjuvBZUxs_xlA5mZ8UbkkvWiu2GbDcNn253Q.webp',
-        'https://i.namu.wiki/i/RJPx_6-FRce4F08XNZwxuyYvxVfCYyrlZbcJ3c5vzy23jzr3nwwu_vqRBiVsDX3jboPdM9MPjrqTZpPbA1EAaXlwWzsn-Ec8t9yE3oWqHtBAIrb56mK2sgGAUhvsvujkTwYykiGzNId-HxBnqWTq_A.webp',
-        'https://i.namu.wiki/i/HxA78OKhFljQ9aod50d8gPbjb5b1ybGIL6Kwy1YYInmpl2Ad254RV8BD1qiw7V5T9W2jDXKPJY3lGdiDadGa1cp2iwAJ_fa3nx7Sci_EF23IlUOvsGs1Jg2lRb1Q9m4S9joeqwPc7qMhsIkxnX_aqw.webp'
-
-
+        'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/05/27/2f3e2b6d-6921-4698-aae4-ebfb81a3306c.jpg',
+        'https://img.wowtv.co.kr/wowtv_news/dnrs/20211124/2021112408352909305d3244b4fed58141237161.jpg',
+        'https://dimg.donga.com/wps/NEWS/IMAGE/2023/06/13/119750801.2.jpg',
+        'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/04/06/1f35c18a-a42a-4452-a879-b332fe9345ae.jpg',
+        'https://images.khan.co.kr/article/2022/09/21/news-p.v1.20220921.83f744edba564c94b000edf0bef72380_P1.jpg'
     ]
 
     const imagePressHandler = (image, index) => {
         console.log(`${index+1}번째 image banner clicked!`);
         dispatch(setSelectedImageIndex(index));
-        dispatch(setSelectedImage(image))
+        dispatch(setSelectedSecondImage(image))
     }
 
     return (
@@ -40,7 +36,7 @@ function CelebBanner() {
                     onPress={() => imagePressHandler(image, index)}
                     style={[
                         styles.imageContainer,
-                        selectedImage === index && styles.selectedImageContainer
+                        selectedImageIndex === index && styles.selectedImageContainer
                     ]}
                 >
                     <Image source={{ uri: image }} style={styles.image} />

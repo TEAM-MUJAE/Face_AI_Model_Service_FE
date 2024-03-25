@@ -5,16 +5,11 @@ import {TouchableOpacity, Image, StyleSheet, TextInput, Text, View, Alert,Dimens
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-import ScreenTitle from '../Common/ScreenTitle';
-import LoginWithTextButton from '../../static/Svg/LoginWithTextButton';
-import SignUpWithTextButton from '../../static/Svg/SignUpWithTextButton';
-import ForgotIdButton from '../../static/Svg/ForgotIdButton';
-import ForgotPasswordButton from '../../static/Svg/ForgotPasswordButton';
 import { setIdText, setIsLoading, setPasswordText } from '../../features/loginSlice';
 import { setIsCheckedFullAgree, setIsCheckedPrivacyAgree, setIsCheckedTermsAgree, setSignEmailText, setSignIdText, setSignNameText, setSignPasswordCheckText, setSignPasswordText, setSignPhoneText } from '../../features/signUpSlice';
 import { callPostLoginAPI } from '../../apis/MemberAPI';
 import LogoImage from '../../static/img/logo/logo.png';
+import { err } from 'react-native-svg';
 
 
 function Login() {
@@ -28,11 +23,12 @@ function Login() {
 
     const isLoading = useSelector(state => state.login.isLoading);
     const navigationFrom = route.params?.navigateFrom ?? '';
+    console.log('navigationFrom1 : ', navigationFrom);
 
     /* 회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화 */
     useEffect(() => {
-        console.log('navigationFrom : ', navigationFrom);
-        if (navigationFrom === 'RegistrationResult') {
+        console.log('navigationFrom2 : ', navigationFrom);
+        if (navigationFrom === 'RegistrationResult' || navigationFrom === 'Header') {
             console.log('회원가입 정상 처리 후 로그인 화면으로 돌아왔을 경우 입력 칸 전체 초기화');
             dispatch(setIdText(''));
             dispatch(setPasswordText(''));
@@ -45,38 +41,47 @@ function Login() {
             dispatch(setSignNameText(''));
             dispatch(setSignEmailText(''));
             dispatch(setSignPhoneText(''));
-            
         }
     }, [navigationFrom]);
 
 
     const loginPressHandler = async () => {
 
-        // if (idText === '') {
-        //     Alert.alert('알림', '아이디를 입력해주세요.');
-        //     return;
-        // }
+        if (idText === '') {
+            Alert.alert('알림', '아이디를 입력해주세요.', [
+                { text: '확인' }
+            ]);
+            return;
+        }
 
-        // if (passwordText === '') {
-        //     Alert.alert('알림', '비밀번호를 입력해주세요.');
-        //     return;
-        // }
+        if (passwordText === '') {
+            Alert.alert('알림', '비밀번호를 입력해주세요.', [
+                { text: '확인' }
+            ]);
+            return;
+        }
         
-        // try {
-        //     console.log('idText: ', idText);
-        //     console.log('passwordText: ', passwordText);
-        //     await dispatch(callPostLoginAPI());
-        //     navigation.navigate('Home', {
-        //         title: '메인 화면'
-        //     });
-        // } catch (error) {
-        //     console.log('API 호출 에러 : ', error);
-        // } finally {
-        //     dispatch(setIsLoading(false));
-        // }
-
-        navigation.navigate('Home')
-
+        try {
+            console.log('idText: ', idText);
+            console.log('passwordText: ', passwordText);
+            await dispatch(callPostLoginAPI());
+            navigation.navigate('Home', {
+                title: '메인 화면',
+                navigateFrom: 'Login'
+            });
+        } catch (error) {
+            if(error.response) {
+                Alert.alert('로그인 실패', error.response.data.message, [
+                    { text: '확인' }
+                ]);
+            } else {
+                Alert.alert('로그인 실패', '네트워크 오류가 발생했습니다.', [
+                    { text: '확인' }
+                ]);
+            }
+        } finally {
+            dispatch(setIsLoading(false));
+        }
     };
 
     const SignUpPressHandler = () => {
@@ -85,12 +90,33 @@ function Login() {
         });
     }
 
-    const forgotIdPressHandler = () => {
-        console.log('ForgotId Button clicked!');
-    }   
+    // const forgotIdPressHandler = () => {
+    //     console.log('ForgotId Button clicked!');
+    // }   
 
-    const forgotPassPressHandler = () => {
-        console.log('ForgotPass Button clicked!');
+    // const forgotPassPressHandler = () => {
+    //     console.log('ForgotPass Button clicked!');
+    // }
+
+    const next = () => {
+        navigation.navigate('CompareCelebResponse', {
+            title: '결과,,!',
+            navigateFrom: 'Login'
+        });
+    }
+
+    const next2 = () => {
+        navigation.navigate('CompareOtherResponse', {
+            title: '결과,,!',
+            navigateFrom: 'Login'
+        });
+    }
+
+    const next3 = () => {
+        navigation.navigate('ComparePeopleResponse', {
+            title: '결과,,!',
+            navigateFrom: 'Login'
+        });
     }
 
     
@@ -103,6 +129,7 @@ function Login() {
             onChangeText={ (text) => { dispatch(setIdText(text)) }}   
             value={idText}
             placeholder="아이디"
+            maxLength={15}
             placeholderTextColor={'#9a9a9a'}
         />
         <TextInput
@@ -110,6 +137,7 @@ function Login() {
             onChangeText={ (text) => { dispatch(setPasswordText(text)) }}
             value={passwordText}
             placeholder="비밀번호"
+            maxLength={15}
             placeholderTextColor={'#9a9a9a'}
         />
         <TouchableOpacity onPress={loginPressHandler} style={styles.button}>
@@ -118,10 +146,16 @@ function Login() {
         <TouchableOpacity onPress={SignUpPressHandler} style={styles.button}>
             <Text style={styles.buttonText}>회원가입</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity onPress={forgotIdPressHandler} style={styles.link}>
-            <Text>아이디 찾기</Text>
+        <TouchableOpacity onPress={next} style={styles.button}>
+            <Text style={styles.buttonText}>넘어갈거야~~~celeb</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={forgotPassPressHandler} style={styles.link}>
+        <TouchableOpacity onPress={next2} style={styles.button}>
+            <Text style={styles.buttonText}>넘어갈거야~~~other</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={next3} style={styles.button}>
+            <Text style={styles.buttonText}>넘어갈거야~~~people</Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity onPress={forgotPassPressHandler} style={styles.link}>
             <Text>비밀번호 찾기</Text>
         </TouchableOpacity> */}
     </View>

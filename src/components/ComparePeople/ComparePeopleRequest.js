@@ -13,9 +13,7 @@ import ScreenTitle from '../Common/ScreenTitle';
 import AnalyzeLoading from '../Common/AnalyzeLoading';
 import ExploreButton from '../../static/Svg/ExploreButton';
 import { callGetComparePeopleAPI } from '../../apis/SimilarityAPI';
-import { setIsFirstSelected } from '../../features/firstCompareSlice';
-import { setIsSecondSelected } from '../../features/secondCompareSlice';
-import { setIsLoading, setIsThirdSelected } from '../../features/thirdCompareSlice';
+import { setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected } from '../../features/compareSlice';
 
 
 
@@ -27,16 +25,16 @@ function ComparePeopleRequest() {
 
     /* ==== 이미지가 하나라도 선택되지 않았을 경우 예외처리 === */
   const initialFormImage = require('../../static/img/resource/uploadForm.png');
-  const isLoading = useSelector(state => state.secondCompare.isLoading); // isLoading이 true이면 Loading 컴포넌트를 렌더링 (초기값은 false)
+  const isLoading = useSelector(state => state.compare.isLoading); // isLoading이 true이면 Loading 컴포넌트를 렌더링 (초기값은 false)
 
-  const selectedFirstImage = useSelector(state => state.firstCompare.selectedImage);
-  const isFirstSelected = useSelector(state => state.firstCompare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
+  const selectedFirstImage = useSelector(state => state.compare.selectedFirstImage);
+  const isFirstSelected = useSelector(state => state.compare.isFirstSelected); // isFirstSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
-  const selectedSecondImage = useSelector(state => state.secondCompare.selectedImage);
-  const isSecondSelected = useSelector(state => state.secondCompare.isSecondSelected); // isSecondSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
+  const selectedSecondImage = useSelector(state => state.compare.selectedSecondImage);
+  const isSecondSelected = useSelector(state => state.compare.isSecondSelected); // isSecondSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
-  const selectedThirdImage = useSelector(state => state.thirdCompare.selectedImage);
-  const isThirdSelected = useSelector(state => state.thirdCompare.isThirdSelected); // isThirdSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
+  const selectedThirdImage = useSelector(state => state.compare.selectedThirdImage);
+  const isThirdSelected = useSelector(state => state.compare.isThirdSelected); // isThirdSelected가 false이면 ExploreButton 버튼으로 API 요청 불가 (초기값: false)
 
   useEffect(() => {
     if (selectedFirstImage !== initialFormImage) {
@@ -57,17 +55,23 @@ function ComparePeopleRequest() {
   const exploreToComparePressHandler = async () => {
 
     if (!isFirstSelected) {
-      Alert.alert("알림", `분석할 이미지가 선택되지 않았어요. 첫번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`);
+      Alert.alert("알림", `분석할 이미지가 선택되지 않았어요. 첫번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`, [
+        { text: '확인' }
+      ]);
       return;
     }
 
     if (!isSecondSelected) {
-      Alert.alert("알림", `비교할 이 사람이 없어요. 두번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`);
+      Alert.alert("알림", `비교할 이 사람이 없어요. 두번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`, [
+        { text: '확인' }
+      ]);
       return;
     }
 
     if (!isThirdSelected) {
-        Alert.alert("알림", `비교할 요 사람이 없어요. 세번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`);
+        Alert.alert("알림", `비교할 요 사람이 없어요. 세번째 '터치하여 업로드' 칸을 터치하여 이미지를 선택해주세요!`, [
+          { text: '확인' }
+        ]);
         return;
     }
 
