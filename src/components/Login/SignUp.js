@@ -167,9 +167,6 @@ function SignUp() {
                         maxLength={15}
                         placeholderTextColor={'#9a9a9a'}
                     />
-                    <TouchableOpacity style={styles.checkButton} onPress={checkDuplicates}>
-                        <Text style={styles.checkButtonText}>중복 확인</Text>
-                    </TouchableOpacity>
                 </View>
                 {!idTextValid && <Text style={styles.stepTitle}>아이디는 필수로 입력해야 합니다.</Text>}
                 <View style={passwordTextValid ? styles.inputGroup1 : styles.inputGroup2}>
