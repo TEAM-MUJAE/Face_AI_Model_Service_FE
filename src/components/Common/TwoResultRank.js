@@ -3,9 +3,6 @@ import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 
 import { useSelector } from 'react-redux';
-import Eye from '../../static/img/resource/eye.png';
-import Nose from '../../static/img/resource/nose.png';
-import Mouth from '../../static/img/resource/mouth.png';
 
 
 function TwoResultRank() {
@@ -67,7 +64,7 @@ function TwoResultRank() {
 
     if (totalScore < 0.576) {
         similarText = '어라라.. 혹시 본인 아니신가요..? 오늘도 여전히 눈이 부시네요.';
-    } else if (0.576 < totalScore < 0.656 ) {
+    } else if (0.576 < totalScore < 0.656) {
         similarText = '아주 많이~ 닮았어요! 이 연예인이 평소에 무엇이 잘 어울리는지 얼른 찾아볼까요?';
     } else if (0.656 < totalScore < 0.69) {
         similarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. 조금만 더 노력(?)하면 닮을 수 있을 것 같아요.';
@@ -89,10 +86,13 @@ function TwoResultRank() {
 
     return (
         <View style={styles.twoResultContainer}>
-            <Text>{similarText}</Text>
             <View style={styles.siftResultContainer}>
+            <Text style={styles.descriptionText}>서로 닮았다고 생각하는 부분을 연결해 보았어요</Text>
                 <View style={styles.siftResultImageContainer}>
                     <Image source={{ uri: `data:image/png;base64,${ reformattedLandmarkSift[0].path }` }} style={styles.siftResultImage} />
+                </View>
+                <Text style={styles.descriptionText}>{similarText}</Text>
+                <View style={styles.resultTextContainer}>
                     <Text style={styles.descriptionText}>{`서로의 얼굴 특징에서 가장 닮은 부분은 ${mostSimilarFeature} 부분 이군요!`}</Text>
                 </View>
             </View>
