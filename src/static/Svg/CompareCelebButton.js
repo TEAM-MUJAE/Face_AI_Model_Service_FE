@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Text, View,Image } from 'react-native';
 
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
-import BannerImage from '../../static/img/mainBanner/banner.jpg'; 
+import BannerImage from '../../static/img/categoryBanner/celeb.png'; 
 
 const CompareCelebButton = ({ onPress }) => (
     <TouchableOpacity onPress={ onPress } style={styles.button}>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#6F50F8",
+    backgroundColor: "#FEF2FE",
     borderRadius: 8,
     padding: 10,
     // shadowColor: "#000",
@@ -55,15 +55,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 246, 
-    height: 150, 
+    width: 280, 
+    height: 200, 
     marginBottom: 30,
   },
   title: {
     padding: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: "#FFFFFF",
+    color: "#000",
     marginBottom: 10,
   },
 });
