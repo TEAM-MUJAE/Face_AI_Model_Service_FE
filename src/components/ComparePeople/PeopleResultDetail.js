@@ -26,51 +26,69 @@ function PeopleResultDetail() {
     const firstTotalScore = firstTotalSimilarity.distance
     const secondTotalScore = secondTotalSimilarity.distance
 
-    /* landmarkSift 데이터 */
+    /* landmarkSift 데이터 재구성 */
     const reformattedLandmarkSift = landmarkSift.map(([name, path]) => ({ name, path }));
     const firstLandmarkSiftPath = reformattedLandmarkSift[0].path // 첫번째 사람의 랜드마크 SIFT 인코딩 문자열
     const secondLandmarkSiftPath = reformattedLandmarkSift[1].path // 두번째 사람의 랜드마크 SIFT 인코딩 문자열
 
-    /* eyeSimilarity 데이터를 score 평균 */
-    console.log("leftEyeSimilarity : ", leftEyeSimilarity)
-    console.log("rightEyeSimilarity : ", rightEyeSimilarity)
-    const combinedSimilarity = {};
-    [...leftEyeSimilarity].forEach(([path, leftScore]) => {
-        if (!combinedSimilarity[path]) combinedSimilarity[path] = { leftScore, rightScore: 0, count: 0 };
-    });
-    [...rightEyeSimilarity].forEach(([path, rightScore]) => {
-        if (combinedSimilarity[path]) {
-            combinedSimilarity[path].rightScore = rightScore;
-            combinedSimilarity[path].count = 1; // 경로가 같은 경우 count를 1로 설정
-        }
-    });
-    const averageEyeSimilarity = Object.entries(combinedSimilarity).map(([path, { leftScore, rightScore, count }]) => {
-        if (count === 0) return [path, leftScore];
-        return [path, (leftScore + rightScore) / 2];
-    });
-    const reformattedEyeSimilarity = averageEyeSimilarity.map(([path, score]) => ({ path, score }));
-    const firstEyeScore = reformattedEyeSimilarity[0].score
-    console.log("firstEyeScore : ", firstEyeScore)
-    const secondEyeScore = reformattedEyeSimilarity[1].score
-    console.log("secondEyeScore : ", secondEyeScore)
+    /* eyeSimilarity 데이터 재구성 */
+    const reformattedLeftEyeScore = leftEyeSimilarity.map(item => ({
+        path: item[0][0],
+        score: item[0][1]
+    }));
 
-    /* noseSimilarity 데이터 */
+    const reformattedRightEyeScore = rightEyeSimilarity.map(item => ({
+        path: item[0][0],
+        score: item[0][1]
+    }));
+
+    // 배열 결합 후 평균
+    const combinedScores = [...reformattedLeftEyeScore, ...reformattedRightEyeScore];
+
+    // path를 키로 하여 점수들을 집계
+    const scoreMap = {};
+    combinedScores.forEach(item => {
+    if (!scoreMap[item.path]) {
+        scoreMap[item.path] = { sum: 0, count: 0 };
+    }
+    scoreMap[item.path].sum += item.score;
+    scoreMap[item.path].count += 1;
+    });
+
+    // 평균 점수를 계산하여 새 배열 생성
+    const reformattedAvgEyeScore = Object.keys(scoreMap).map(path => ({
+        path,
+        score: scoreMap[path].sum / scoreMap[path].count
+    }));
+    console.log("reformattedAvgEyeScore : ", reformattedAvgEyeScore);
+    const firstEyeScore = reformattedAvgEyeScore[0].score;
+    const secondEyeScore = reformattedAvgEyeScore[1].score;
+    console.log("firstEyeScore : ", firstEyeScore);
+    console.log("secondEyeScore : ", secondEyeScore);
+
+    /* noseSimilarity 데이터 재구성 */
     console.log("noseSimilarity : ", noseSimilarity)
-    const reformattedNoseSimilarity = noseSimilarity.map(([path, score]) => ({ path, score }));
-    console.log("reformattedNoseSimilarity : ", reformattedNoseSimilarity)
-    const firstNoseScore = reformattedNoseSimilarity[0].score
-    console.log("firstNoseScore : ", firstNoseScore)
-    const secondNoseScore = reformattedNoseSimilarity[1].score
-    console.log("secondNoseScore : ", secondNoseScore)
+    const reformattedNoseScore = noseSimilarity.map(item => ({
+        path: item[0][0],
+        score: item[0][1]
+    }));
+    console.log("reformattedNoseScore : ", reformattedNoseScore);
+    const firstNoseScore = reformattedNoseScore[0].score;
+    const secondNoseScore = reformattedNoseScore[1].score;
+    console.log("firstNoseScore : ", firstNoseScore);
+    console.log("secondNoseScore : ", secondNoseScore);
 
-    /* mouthSimilarity 데이터 */
+    /* mouthSimilarity 데이터 재구성 */
     console.log("mouthSimilarity : ", mouthSimilarity)
-    const reformattedMouthSimilarity = mouthSimilarity.map(([path, score]) => ({ path, score }));
-    console.log("reformattedMouthSimilarity : ", reformattedMouthSimilarity)
-    const firstMouthScore = reformattedMouthSimilarity[0].score
-    console.log("firstMouthScore : ", firstMouthScore)
-    const secondMouthScore = reformattedMouthSimilarity[1].score
-    console.log("secondMouthScore : ", secondMouthScore)
+    const reformattedMouthScore = mouthSimilarity.map(item => ({
+        path: item[0][0],
+        score: item[0][1]
+    }));
+    console.log("reformattedMouthScore : ", reformattedMouthScore);
+    const firstMouthScore = reformattedMouthScore[0].score;
+    const secondMouthScore = reformattedMouthScore[1].score;
+    console.log("firstMouthScore : ", firstMouthScore);
+    console.log("secondMouthScore : ", secondMouthScore);
 
     /* 전체 유사도 스케일링 */
     let firstSimilarText = '';
@@ -78,9 +96,9 @@ function PeopleResultDetail() {
 
     if (firstTotalScore < 0.576) {
         firstSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. \n 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
-    } else if (result.score >= 0.576 && result.score < 0.656) {
+    } else if (firstTotalScore >= 0.576 && firstTotalScore < 0.656) {
         firstSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. \n 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
-    } else if (result.score >= 0.656 && result.score < 0.69) {
+    } else if (firstTotalScore >= 0.656 && firstTotalScore < 0.69) {
         firstSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. \n 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
     } else {
         firstSimilarText = `아쉽게도 닮은 정도가 낮아요. \n 개성이 강한건 곧 매력이랍니다!`;
@@ -88,9 +106,9 @@ function PeopleResultDetail() {
 
     if (secondTotalScore < 0.576) {
         secondSimilarText = '와 ! 도플갱어 수준으로 닮았어요.. \n 두 사람은 전생에 동일인이었을 지도 모르겠군요!';
-    } else if (0.576 < secondTotalScore < 0.656 ) {
+    } else if (secondTotalScore >= 0.576 && secondTotalScore < 0.656) {
         secondSimilarText = '아주아주 많이~ 닮은 사람으로 보여요. \n 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
-    } else if (0.656 < secondTotalScore < 0.69) {
+    } else if (secondTotalScore >= 0.656 && secondTotalScore < 0.69) {
         secondSimilarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. \n 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
     } else {
         secondSimilarText = `아쉽게도 닮은 정도가 낮아요. \n 개성이 강한건 곧 매력이랍니다!`;
@@ -136,11 +154,11 @@ function PeopleResultDetail() {
 
     /* 얼굴 특징 중 매치되는 부분이 없을 경우 */ 
     const mostSimilarPartText = useSelector(state => state.similarityData.mostSimilarPartText);
-    const isUnmatchable = (score) => score === 10000000000 || score === undefined;
+    const isUnmatchable = (score) => score >= 1000 || score === undefined;
 
-    const isAnyFirstUnmatchable = [firstEyeScore, firstNoseScore, firstMouthScore].some(isUnmatchable);
+    const isAnyFirstUnmatchable = [firstEyeScore, firstNoseScore, firstMouthScore].every(isUnmatchable);
     console.log("isAnyFirstUnmatchable : ", isAnyFirstUnmatchable)
-    const isAnySecondUnmatchable = [secondEyeScore, secondNoseScore, secondMouthScore].some(isUnmatchable);
+    const isAnySecondUnmatchable = [secondEyeScore, secondNoseScore, secondMouthScore].every(isUnmatchable);
     console.log("isAnySecondUnmatchable : ", isAnySecondUnmatchable)
 
     useEffect(() => {
@@ -148,14 +166,14 @@ function PeopleResultDetail() {
             dispatch(setMostSimilarPartText
                 (
                     isAnyFirstUnmatchable ? 
-                    '얼굴 특징 중 매치되는 부분이 없어요!' : `서로의 얼굴 특징에서 가장 닮은 부분은 ${mostFirstSimilarFeature} 부분 이군요!`
+                    '얼굴 특징 중 매치되는 부분이 없어요!' : ` ${mostFirstSimilarFeature} 부분 이군요!`
                 )
             );
         } else {
             dispatch(setMostSimilarPartText
                 (
                     isAnySecondUnmatchable ? 
-                    '얼굴 특징 중 매치되는 부분이 없어요!' : `서로의 얼굴 특징에서 가장 닮은 부분은 ${mostSecondSimilarFeature} 부분 이군요!`
+                    '얼굴 특징 중 매치되는 부분이 없어요!' : ` ${mostSecondSimilarFeature} 부분 이군요!`
                 )
             );
         }
@@ -172,26 +190,35 @@ function PeopleResultDetail() {
 
     return (
         <View style={styles.peopleResultContainer}>
-            <Text style={styles.resultText}>{`${imageNumberText} 인물과 더 닮은것 같아요!`}</Text>
-            {!isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
+            <View style={styles.resultFixTitleContainer}>
+                <Text style={styles.resultFixTitle}>{`${imageNumberText} 인물과 더 닮은것 같아요!`}</Text>
+            </View>
+            {/* {!isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>} */}
             {!isLowerScore && <View style={styles.siftResultContainer}>
                 <View style={styles.siftResultImageContainer}>
+                    <Text style={styles.resultPointText1}>{`${someText} 인물과`}</Text>
+                    <Text style={styles.resultText}>닮았다고 생각하는 부분을 연결해 보았어요</Text>
                     <Image source={{ uri: `data:image/png;base64,${ firstLandmarkSiftPath }` }} style={styles.siftResultImage} />
-                </View>
-                <Text style={styles.resultText}>{firstSimilarText}</Text>
-                <View style={styles.resultTextContainer}>
-                    <Text style={styles.resultText}>{mostSimilarPartText}</Text>
+                    <Text style={styles.resultText}>{firstSimilarText}</Text>
+                    <View style={styles.resultTextContainer}>
+                        <Text style={styles.resultText}>서로의 얼굴 특징에서 가장 닮은 부분은...</Text>
+                        <Text style={styles.resultPointText2}>{mostSimilarPartText}</Text>
+                    </View>
                 </View>
             </View>}
-            {isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>}
+            {/* {isLowerScore && <Text style={styles.resultText}>{`${someText} 인물과 닮았다고 생각하는 부분을 연결해 보았어요`}</Text>} */}
             {isLowerScore && <View style={styles.siftResultContainer}>
                 <View style={styles.siftResultImageContainer}>
+                    <Text style={styles.resultPointText1}>{`${someText} 인물과`}</Text>
+                    <Text style={styles.resultText}>닮았다고 생각하는 부분을 연결해 보았어요</Text>
                     <Image source={{ uri: `data:image/png;base64,${ secondLandmarkSiftPath }` }} style={styles.siftResultImage} />
+                    <Text style={styles.resultText}>{secondSimilarText}</Text>
+                    <View style={styles.resultTextContainer}>
+                        <Text style={styles.resultText}>서로의 얼굴 특징에서 가장 닮은 부분은...</Text>
+                        <Text style={styles.resultPointText2}>{mostSimilarPartText}</Text>
+                    </View>
                 </View>
-                <Text style={styles.resultText}>{secondSimilarText}</Text>
-                <View style={styles.resultTextContainer}>
-                    <Text style={styles.resultText}>{mostSimilarPartText}</Text>
-                </View>
+                
             </View>}
             <TouchableOpacity onPress={anotherPressHandler} style={styles.button}>
                 <Text style={styles.buttonText}>다른 인물 결과 보기</Text>
@@ -205,37 +232,64 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     peopleResultContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: '#cccccc',
     },
     siftResultContainer: {
-        width: width * 0.9, // 화면 너비의 90%를 차지하도록 조정
-        height: height * 0.5, // 화면 높이의 50%를 차지하도록 조정
-        // marginTop: 10,
-        // backgroundColor: '#333333',
+        // width: width, // 화면 너비의 90%를 차지하도록 조정
+        // height: height * 0.5, // 화면 높이의 50%를 차지하도록 조정
+        // justifyContent: 'center',
     },
     siftResultImageContainer: {
-        width: '100%', // 컨테이너 너비에 맞춤
-        height: '70%', // 컨테이너 높이의 55%를 차지하도록 조정
-        // alignItems: 'center',
+        // width: width, // 컨테이너 너비에 맞춤
+        // height: height * 0.5, // 컨테이너 높이의 60%를 차지하도록 조정
+        alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: 'red',
     },
     siftResultImage: {
-        width: '100%', // 컨테이너 너비에 맞춤
-        height: '80%', // 컨테이너 높이의 55%를 차지하도록 조정
-        resizeMode: 'contain'
+        width: width * 0.9,
+        height: height * 0.28,
+        justifyContent: 'center',
+        resizeMode: 'contain',
+        // backgroundColor: 'aqua',
     },
     resultTextContainer: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // backgroundColor: 'skyblue',
     },
-    resultText: {
-        fontSize: width * 0.04,
+    resultFixTitleContainer: {
+    },
+    resultFixTitle: {
+        fontSize: width * 0.06,
         color: '#6F50F8', // Slightly lighter text for the description
         textAlign: 'center', // Center align description
         fontWeight: 'bold',
+        marginTop: 5,
         marginBottom: 10,
+        // backgroundColor: 'blue',
+    },
+    resultText: {
+        fontSize: width * 0.038,
+        color: '#6F50F8', // Slightly lighter text for the description
+        textAlign: 'center', // Center align description
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginBottom: 5,
+        // backgroundColor: 'brown',
+    },
+    resultPointText1: {
+        fontSize: 20,
+        color: '#6F50F8', // Slightly lighter text for the description
+        textAlign: 'center', // Center align description
+        fontWeight: 'bold',
+        marginTop: 5,
+        marginBottom: 5,
+    },
+    resultPointText2: {
+        fontSize: 25,
+        color: '#6F50F8', // Slightly lighter text for the description
+        textAlign: 'center', // Center align description
+        fontWeight: 'bold',
+        
     },
     button: {
         width: '100%',

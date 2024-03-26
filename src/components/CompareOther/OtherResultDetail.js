@@ -82,13 +82,14 @@ function OtherResultDetail() {
     return (
         <View style={styles.otherResultContainer}>
             <View style={styles.siftResultContainer}>
-                <Text style={styles.descriptionText}>서로 닮았다고 생각하는 부분을 연결해 보았어요</Text>
                 <View style={styles.siftResultImageContainer}>
+                <Text style={styles.resultText}>서로 닮았다고 생각하는 부분을 연결해 보았어요</Text>
                     <Image source={{ uri: `data:image/png;base64,${ landmarkSiftPath }` }} style={styles.siftResultImage} />
                 </View>
-                <Text style={styles.descriptionText}>{similarText}</Text>
+                <Text style={styles.resultText}>{similarText}</Text>
                 <View style={styles.resultTextContainer}>
-                    <Text style={styles.descriptionText}>{`서로의 얼굴 특징에서 가장 닮은 부분은 \n ${mostSimilarFeature} 부분 이군요!`}</Text>
+                    <Text style={styles.resultText}>서로의 얼굴 특징에서 가장 닮은 부분은...</Text>
+                    <Text style={styles.resultPointText2}>{`${mostSimilarFeature} 부분 이군요!`}</Text>
                 </View>
             </View>
         </View>
@@ -100,68 +101,56 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     otherResultContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'center',
+        // alignItems: 'center',
         // marginTop: 30,
         // backgroundColor: 'red'
     },
     siftResultContainer: {
-        width: width * 0.9, // 화면 너비의 90%를 차지하도록 조정
-        height: height * 0.4, // 화면 높이의 50%를 차지하도록 조정
-        margin: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
+        // width: width * 0.9, // 화면 너비의 90%를 차지하도록 조정
+        // height: height * 0.4, // 화면 높이의 50%를 차지하도록 조정
+        // margin: 10,
+        // justifyContent: 'center',
+        // alignItems: 'center',
         // borderWidth: 1,
         // backgroundColor: '#F4EB64',
     },
     siftResultImageContainer: {
-        width: '100%', // 컨테이너 너비에 맞춤
-        height: '70%', // 컨테이너 높이의 55%를 차지하도록 조정
-        // justifyContent: 'center',
+        // width: '100%', // 컨테이너 너비에 맞춤
+        // height: '70%', // 컨테이너 높이의 55%를 차지하도록 조정
+        justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor: 'black',
     },
     siftResultImage: {
-        width: '100%', // 부모 컨테이너 너비에 맞춤
-        height: '100%', // 부모 컨테이너 높이에 맞춤
+        width: width * 0.9,
+        height: height * 0.28,
+        justifyContent: 'center',
         resizeMode: 'contain'
     },
-    ImageSize: {
-        width: 50,
-        height: 50,
-        resizeMode: 'contain',
-        // backgroundColor: 'green'
-    },
     resultTextContainer: {
-        flex: 1,
-        // justify/Content: 'center',
+        justifyContent: 'center',
         // backgroundColor: 'green',
         // marginBottom: 20,
-        marginTop: 30,
-        alignItems: 'center',
+        // marginTop: 30,
+        // alignItems: 'center',
         // borderWidth: 1,
     },
     resultText: {
-        textAlign: 'center',
-        fontSize: width * 0.04,
-        // backgroundColor: 'puple',
-    },
-    descriptionText: {
-        fontSize: width * 0.04,
+        fontSize: width * 0.038,
         color: '#6F50F8',
         textAlign: 'center',
         fontWeight: 'bold',
-        marginTop: 10,
-        marginBottom: 10,
-        // backgroundColor: 'red',
+        marginTop: 5,
+        marginBottom: 5,
+        // backgroundColor: 'puple',
     },
-    inputGroup: {
-        flexDirection: 'row',
-        width: '100%',
-        // borderWidth: 1,
-        borderRadius: 5,
-        alignItems: 'center',
-        margin: 10,
+    resultPointText2: {
+        fontSize: 25,
+        color: '#6F50F8', // Slightly lighter text for the description
+        textAlign: 'center', // Center align description
+        fontWeight: 'bold',
+        
     },
 })
 

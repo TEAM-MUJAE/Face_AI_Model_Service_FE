@@ -23,7 +23,6 @@ function CropOriginContent() {
     let userCropImage = '';
     if (userCrop) {
         const reformattedCropImage = userCrop.map(([name, path]) => ({ name, path }));
-        console.log("reformattedCropImage : ", reformattedCropImage);
         userCropImage = reformattedCropImage[0].path;
     }
 
@@ -63,8 +62,8 @@ function CropOriginContent() {
                     <Text style={styles.cropImageText}>두번째 인물</Text>
                 </View>
             </View>}
-            <View style={styles.resultTextContainer}>
-            <Text style={styles.descriptionText}>AI가 얼굴을 분석할때 이 부분을 사용했다고 하는군요!</Text>
+            <View style={styles.descriptionTextContainer}>
+                <Text style={styles.descriptionText}>{`위의 사진들은 AI가 얼굴이라고 인식한 부분이에요`}</Text>
             </View>
         </View>
     );
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 10,
-        borderWidth: 1,
+        // borderWidth: 1,
         // backgroundColor: 'blue',
     },
     resultContainer: {
@@ -133,15 +132,30 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         // backgroundColor: 'brown',
     },
+    descriptionTextContainer: {
+        width: '100%',
+        justifyContent: 'center', // Center align description
+        borderRadius: 10,
+        backgroundColor: '#6F50F8', // Light grey background for the description
+        marginTop: 50,
+        marginBottom: 20,
+    },
     descriptionText: {
         fontSize: 15,
-        color: '#6F50F8', // Slightly lighter text for the description
+        color: '#FFF', // Slightly lighter text for the description
         textAlign: 'center', // Center align description
+        justifyContent: 'center',
         fontWeight: 'bold',
-        // marginBottom: 10,
-        // marginTop: 20,
-        // backgroundColor: 'red',
+        padding: 5,
     },
+    // cropImageTextContainer: {
+    //     width: '100%',
+    //     height: height * 0.04,
+    //     justifyContent: 'center',
+    //     borderRadius: 10,
+    //     backgroundColor: '#6F50F8',
+    //     marginTop: 5,
+    // },
     cropImageText: {
         fontSize: 15,
         color: '#6F50F8',

@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     registerResData: null,
-    loginResData: null
-
+    loginResData: null,
+    registerErrorMessages: null,
 };
 
 const memberDataSlice = createSlice({
@@ -15,11 +15,13 @@ const memberDataSlice = createSlice({
         },
         setLoginResData: (state, {payload}) => {
             state.loginResData = payload;
+        },
+        setRegisterErrorMessages: (state, {payload}) => {
+            state.registerErrorMessages = payload;
         }
-
     }
 });
 
-export const { setRegisterResData, setLoginResData } = memberDataSlice.actions;
+export const { setRegisterResData, setLoginResData, setRegisterErrorMessages } = memberDataSlice.actions;
 
 export default memberDataSlice.reducer;

@@ -3,6 +3,7 @@ import { ScrollView, Text, TouchableOpacity, Image, StyleSheet, View } from 'rea
 
 
 import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedImageIndex } from '../../features/compareSlice';
 
 function CelebResultBanner() {
 
@@ -19,13 +20,14 @@ function CelebResultBanner() {
     const sortedTotalSimilarity = [...totalSimilarity].sort((a, b) => a[1] - b[1]);
 
     /* 정렬된 데이터 재구성 */
-    const reformattedTotalSimilarity = sortedTotalSimilarity.map(([path, score]) => ({ path, score }));
-    const totalScoreRank = reformattedTotalSimilarity.map(item => item.score);
-    console.log('totalScoreRank : ', totalScoreRank)
+    const reformattedTotalSimilarity = sortedTotalSimilarity.map(([path, score, celebName]) => ({ path, score, celebName }));
+    // const totalScoreRank = reformattedTotalSimilarity.map(item => item.score);
+    // console.log('totalScoreRank : ', totalScoreRank)
 
 
     const imagePressHandler = (index) => {
         console.log(`${index+1}순위 image banner clicked!`);
+        dispatch(setSelectedImageIndex(index));
     }
 
     return (
@@ -37,26 +39,14 @@ function CelebResultBanner() {
                 {reformattedTotalSimilarity.map((result, index) => {
                     const base64String = result.path;
 
-                    /* score 캘리브레이션 */
-                    let similarText = '';
-
-                    if (result.score < 0.536) {
-                        similarText = '흡사 동일인';
-                    } else if (result.score >= 0.536 && result.score < 0.587) {
-                        similarText = '많이~ 닮음';
-                    } else if (result.score >= 0.587 && result.score < 0.69) {
-                        similarText = '닮을 뻔;';
-                    } else {
-                        similarText = '안 닮음';
-                    }
-
                     return (
                         <TouchableOpacity
                             key={index}
                             onPress={() => imagePressHandler(index)}
+                            style={styles.imageContainer}
                         >
                             <Image source={{ uri: `data:image/png;base64,${ base64String }` }} style={ styles.image } />
-                            <Text>{`${index + 1}위와 닮은정도 : ${similarText} `}</Text>
+                            <Text style={styles.imageText}>{`${index+1}위 : ${result.celebName} `}</Text>
                         </TouchableOpacity>
                     );
                 })}
@@ -67,12 +57,25 @@ function CelebResultBanner() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow',
+        flex: 1,
+        // backgroundColor: 'yellow',
+    },
+    imageContainer: {
+        alignItems: 'center',
+        marginRight: 10,
+        // backgroundColor: 'red',
     },
     image: {
       width: 150,
       height: 150,
-      backgroundColor: 'gray',
+    //   backgroundColor: 'gray',
+    },
+    imageText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#6F50F8',
+        paddingRight: 5,
+        paddingLeft: 5,
     }
   });
 

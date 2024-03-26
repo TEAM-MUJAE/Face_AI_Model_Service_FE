@@ -2,9 +2,7 @@ import { requestImageFromAPI } from './SimilarityCommonAPI';
 import { setSimilarityCelebData, setSimilarityOtherData, setSimilarityPeopleData } from '../features/similarityDataSlice';  
 
 export function callGetCompareCelebAPI() {
-    console.log("왔니?")
     return async (dispatch, getState) => {
-        console.log('callGetCompareCelebAPI 호출됨!');
         try {
             const uploadImage = getState().compare.selectedFirstImage;
             
@@ -16,8 +14,6 @@ export function callGetCompareCelebAPI() {
                 name: uploadImage.fileName
             });
 
-            console.log('이건가? : ', formData);
-
             const response = await requestImageFromAPI('POST', '/upload', formData);
 
             // 스토어에 응답 데이터 저장
@@ -27,13 +23,11 @@ export function callGetCompareCelebAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                // console.error('요청 에러 메시지 :', error.response.data);
-                // console.error('에러 응답 코드 :', error.response.status);
                 throw error;
             } else if (error.request) {
-                console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
+                throw error;
             } else {
-                console.error('요청을 보내지 못함... :', error.message);
+                throw error;
             }
             console.log('설정된 에러 : ', error.config);
         }
@@ -42,7 +36,6 @@ export function callGetCompareCelebAPI() {
 
 export function callGetCompareOtherAPI() {
     return async (dispatch, getState) => {
-        console.log('callGetCompareOtherAPI 호출됨!');
         try {
             const uploadFirstImage = getState().compare.selectedFirstImage;
             const uploadSecondImage = getState().compare.selectedSecondImage;
@@ -61,8 +54,6 @@ export function callGetCompareOtherAPI() {
                 name: uploadSecondImage.fileName
             });
 
-            console.log('이건가? : ', formData);
-
             const response = await requestImageFromAPI('POST', '/other', formData);
 
             // 스토어에 데이터 저장
@@ -72,22 +63,18 @@ export function callGetCompareOtherAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                // console.error('요청 에러 메시지 :', error.response.data);
-                // console.error('에러 응답 코드 :', error.response.status);
                 throw error;
             } else if (error.request) {
-                console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
+                throw error;
             } else {
-                console.error('요청을 보내지 못함... :', error.message);
+                throw error;
             }
-            console.log('설정된 에러 : ', error.config);
         }
     }
 }
 
 export function callGetComparePeopleAPI() {
     return async (dispatch, getState) => {
-        console.log('callGetComparePeopleAPI 호출됨!');
         try {
             const uploadFirstImage = getState().compare.selectedFirstImage;
             const uploadSecondImage = getState().compare.selectedSecondImage;
@@ -111,8 +98,6 @@ export function callGetComparePeopleAPI() {
                 name: uploadThirdImage.fileName
             });
 
-            console.log('이건가? : ', formData);
-
             const response = await requestImageFromAPI('POST', '/people', formData);
 
             // 스토어에 데이터 저장
@@ -122,15 +107,12 @@ export function callGetComparePeopleAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                // console.error('요청 에러 메시지 :', error.response.data);
-                // console.error('에러 응답 코드 :', error.response.status);
                 throw error;
             } else if (error.request) {
-                console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
+                throw error;
             } else {
-                console.error('요청을 보내지 못함... :', error.message);
+                throw error;
             }
-            console.log('설정된 에러 : ', error.config);
         }
     }
 }
