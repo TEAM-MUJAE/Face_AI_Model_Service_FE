@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    selectedImageIndex: null,
+    selectedImageIndex: 0,
     selectedFirstImage: require('../static/img/resource/uploadForm.png'),
     selectedSecondImage: require('../static/img/resource/uploadForm.png'),
     selectedThirdImage: require('../static/img/resource/uploadForm.png'),

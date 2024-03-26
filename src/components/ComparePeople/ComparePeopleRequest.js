@@ -102,7 +102,22 @@ function ComparePeopleRequest() {
       await dispatch(callGetComparePeopleAPI());
       navigation.navigate('ComparePeopleResponse');
     } catch (error) {
-      console.error('API 호출 에러 : ', error);
+      if (error.response) {
+        Alert.alert('분석 실패', '조금 더 정확한 분석을 위해 다른 사진을 업로드 해주세요.' , [
+            { 
+              text: '다시시도',
+              onPress: () => {
+                navigation.navigate('ComparePeopleRequest', {
+                  title: '너와 나는 얼마나 닮았을까?',
+                })
+              }
+            }
+        ]);
+      } else {
+        Alert.alert('분석 실패', '네트워크 오류가 발생했습니다.', [
+          { text: '확인' }
+        ]);
+      }
     } finally {
       dispatch(setIsLoading(false));
     }

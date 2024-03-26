@@ -24,6 +24,7 @@ function RegistrationResult() {
 
     const buttonText = messageKeyCount === 1 ? '로그인 하기' : '돌아가기'
     const resultMessage = registerMessage.message
+    console.log("resultMessage", resultMessage);
 
     const buttonPressHandler = () => {
         if (messageKeyCount === 1) {
@@ -38,7 +39,7 @@ function RegistrationResult() {
 
     return (
         <View style={styles.container}>
-            {registerMessage && <Text style={styles.text}>{`${resultMessage}`}</Text>}
+            {message && <Text style={styles.text}>{`${message}`}</Text>}
             <TouchableOpacity onPress={buttonPressHandler} style={styles.button}>
                 <Text style={styles.buttonText}>{buttonText}</Text>
             </TouchableOpacity>
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
         fontSize: 20, 
         marginBottom: 10, 
         color: '#6F50F8', 
-        fontWeight: 'bold'
-
+        fontWeight: 'bold',
+        justifyContent: 'center',
     },
     button: {
         width: '100%',

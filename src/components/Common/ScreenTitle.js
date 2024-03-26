@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import BackButton from '../../static/Svg/BackButton';
 import { useDispatch } from 'react-redux';
 import { setFirstImageUrl, setIsFirstSelected, setIsLoading, setIsSecondSelected, setIsThirdSelected, setSecondImageUrl, setSelectedFirstImage, setSelectedSecondImage, setSelectedThirdImage, setThirdImageUrl } from '../../features/compareSlice';
+import { setRegisterErrorMessages } from '../../features/memberDataSlice';
+import { setEmailTextValid, setIdTextValid, setNameTextValid, setPasswordCheckTextValid, setPasswordTextValid, setPhoneTextValid, setSignEmailText, setSignIdText, setSignNameText, setSignPasswordCheckText, setSignPasswordText } from '../../features/signUpSlice';
 
 
 function ScreenTitle({ title }) {
@@ -33,6 +35,13 @@ function ScreenTitle({ title }) {
         dispatch(setSecondImageUrl(''));
         dispatch(setThirdImageUrl(''));
         dispatch(setIsLoading(false));
+        dispatch(setRegisterErrorMessages(null));
+        dispatch(setIdTextValid(false));
+        dispatch(setPasswordTextValid(false));
+        dispatch(setPasswordCheckTextValid(false));
+        dispatch(setNameTextValid(false));
+        dispatch(setEmailTextValid(false));
+        dispatch(setPhoneTextValid(false));
 
         navigation.goBack();
     }

@@ -40,6 +40,15 @@ function SignUp() {
     const isValidationEnabled = useSelector(state => state.signup.isValidationEnabled); // 초기값 false
     const isSecurityEntry = useSelector(state => state.signup.isSecurityEntry); // 초기값 true
 
+    /* 중복 체크용 state */
+    const registerErrorMessages = useSelector(state => state.memberData.registerErrorMessages);
+
+    /* 중복 유형 */
+    const emailError = registerErrorMessages?.find(msg => msg.statusReason === 'email');
+    const idError = registerErrorMessages?.find(msg => msg.statusReason === 'id');
+    const phoneError = registerErrorMessages?.find(msg => msg.statusReason === 'phone');
+    
+    /* 상태 초기화용  */
     /* 유효성 체크용 useEffect */
     useEffect(() => {
         if (isValidationEnabled) {
@@ -77,10 +86,6 @@ function SignUp() {
         }
     }, [phoneText, isValidationEnabled]);
 
-    /* 중복체크용 state */
-
-    /* 중복체크용 useEffect */
-
 
     /* 긴 요청 처리용 state */
     const isLoading = useSelector(state => state.signup.isLoading);
@@ -100,13 +105,6 @@ function SignUp() {
         dispatch(setEmailTextValid(emailText !== '')); 
         dispatch(setPhoneTextValid(phoneText !== '')); 
         
-        console.log('idTextValid: ', idTextValid);
-        console.log('passwordTextValid: ', passwordTextValid);
-        console.log('passwordCheckTextValid: ', passwordCheckTextValid);
-        console.log('nameTextValid: ', nameTextValid);
-        console.log('emailTextValid: ', emailTextValid);
-        console.log('phoneTextValid: ', phoneTextValid);
-        
         if (!idTextValid || !passwordTextValid || !passwordCheckTextValid || !nameTextValid || !emailTextValid || !phoneTextValid || isValidationEnabled === false) {
             return;
         }
@@ -116,14 +114,11 @@ function SignUp() {
             await dispatch(callPostJoinAPI());
             navigation.navigate('RegistrationResult');
         } catch (error) {
-            console.log('회원가입 에러 발생: ', error);
+            console.log('error:', error);
         } finally {
             dispatch(setIsLoading(false));
         }
-        // const response = await dispatch(callPostJoinAPI());
-        // if (response.payload) {
-        //     navigation.navigate('RegistrationResult');
-        // }
+
     };
 
     const inVisiblePressHandler = () => {
@@ -144,19 +139,11 @@ function SignUp() {
         );
     }
 
-    const checkDuplicates = () => {
-        // Placeholder: Replace this with your actual duplicate check logic
-        console.log('Checking for duplicates:', username);
-        Alert.alert('중복확인', '중복된 아이디가 없습니다.', [
-            { text: '확인' }
-        ]);
-    };
-
     return (
         <ScrollView>
             <ScreenTitle title={title} />
             <View style={styles.container}>
-                <View style={idTextValid ? styles.inputGroup1 : styles.inputGroup2} >
+                <View style={idTextValid || !idError ? styles.inputGroup1 : styles.inputGroup2} >
                     <TextInput
                         style={
                             styles.input
@@ -169,6 +156,7 @@ function SignUp() {
                     />
                 </View>
                 {!idTextValid && <Text style={styles.stepTitle}>아이디는 필수로 입력해야 합니다.</Text>}
+                {idError && <Text style={styles.stepTitle}>{idError.message}</Text>}
                 <View style={passwordTextValid ? styles.inputGroup1 : styles.inputGroup2}>
                     <TextInput
                         style={styles.input}
@@ -213,11 +201,12 @@ function SignUp() {
                         value={emailText}
                         onChangeText={(text) => dispatch(setSignEmailText(text))}
                         placeholder='이메일'
-                        maxLength={15}
+                        maxLength={30}
                         placeholderTextColor={'#9a9a9a'}
                     />
                 </View>
                 {!emailTextValid && <Text style={styles.stepTitle}>이메일은 필수로 입력해야 합니다.</Text>}
+                {emailError && <Text style={styles.stepTitle}>{emailError.message}</Text>}
                 <View style={emailTextValid ? styles.inputGroup1 : styles.inputGroup2}>
                     <TextInput
                         style={styles.input}
@@ -229,6 +218,7 @@ function SignUp() {
                     />
                 </View>
                 {!phoneTextValid && <Text style={styles.stepTitle}>전화번호는 필수로 입력해야 합니다.</Text>}
+                {phoneError && <Text style={styles.stepTitle}>{phoneError.message}</Text>}
                 <SignUpButton onPress={signUpPressHandler} />
             </View>
         </ScrollView>
