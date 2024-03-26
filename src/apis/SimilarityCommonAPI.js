@@ -22,7 +22,6 @@ export const requestImageFromAPI = async (method, url, data) => {
         });
         return response;
     } catch (error) {
-        console.error('Error requesting API: ', error);
         throw error;
     }
 }

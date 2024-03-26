@@ -56,9 +56,9 @@ function OtherResultDetail() {
 
     if (totalScore < 0.576) {
         similarText = '와 ! 도플갱어 아니세요? \n 두 사람은 전생에 동일인이었을지도...';
-    } else if (result.score >= 0.576 && result.score < 0.656) {
+    } else if (totalScore >= 0.576 && totalScore < 0.656) {
         similarText = '아주아주 많이~ 닮은 사람으로 보여요. \n 평소에 닮았다는 소리 주변에서 자주 듣진 않나요?';
-    } else if (result.score >= 0.656 && result.score < 0.69) {
+    } else if (totalScore >= 0.656 && totalScore < 0.69) {
         similarText = '아차차 ! 닮을 뻔 했는데 살짝 아쉽네요. \n 조금 더 닮을 수 있게 붙어있는 시간을 좀 늘려볼까요? ^^';
     } else {
         similarText = '아쉽게도 닮은 정도가 낮아요. \n 주변 사람에게 서로의 매력을 어필하는게 중요해보이는군요!';

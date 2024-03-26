@@ -27,8 +27,9 @@ export function callGetCompareCelebAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                console.error('요청 에러 메시지 :', error.response.data);
-                console.error('에러 응답 코드 :', error.response.status);
+                // console.error('요청 에러 메시지 :', error.response.data);
+                // console.error('에러 응답 코드 :', error.response.status);
+                throw error;
             } else if (error.request) {
                 console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
             } else {
@@ -71,8 +72,9 @@ export function callGetCompareOtherAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                console.error('요청 에러 메시지 :', error.response.data);
-                console.error('에러 응답 코드 :', error.response.status);
+                // console.error('요청 에러 메시지 :', error.response.data);
+                // console.error('에러 응답 코드 :', error.response.status);
+                throw error;
             } else if (error.request) {
                 console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
             } else {
@@ -120,8 +122,9 @@ export function callGetComparePeopleAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                console.error('요청 에러 메시지 :', error.response.data);
-                console.error('에러 응답 코드 :', error.response.status);
+                // console.error('요청 에러 메시지 :', error.response.data);
+                // console.error('에러 응답 코드 :', error.response.status);
+                throw error;
             } else if (error.request) {
                 console.error('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
             } else {

@@ -33,10 +33,11 @@ export function callPostJoinAPI() {
         } catch (error) {
             if (error.response) {
                 console.log('요청이 이루어졌으며 서버에서 응답을 받았으나 응답의 상태 코드가 2xx 범위가 아닙니다...');
-                console.log('응답 에러 :', error.response);
-                console.log('응답 에러 데이터 :', error.response.data);
+                // console.log('응답 에러 :', error.response);
+                // console.log('응답 에러 데이터 :', error.response.data);
                 const responseData = error.response.data;
                 dispatch(setRegisterResData(responseData));
+                throw error;
             } else if (error.request) {
                 console.log('요청이 이루어졌으나 응답을 받지 못함... :', error.request);
             } else {
