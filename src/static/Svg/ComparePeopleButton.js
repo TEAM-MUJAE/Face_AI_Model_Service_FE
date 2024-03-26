@@ -3,7 +3,8 @@ import { StyleSheet, TouchableOpacity, Text, View,Image } from 'react-native';
 
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
-import BannerImage from '../../static/img/mainBanner/banner.jpg'; 
+import BannerImage from '../../static/img/categoryBanner/people.png'; 
+
 
 
 const ComparePeopleButton = ({ onPress }) => (
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#787667",
+    backgroundColor: "#EE8640",
     borderRadius: 8,
     padding: 10,
     // shadowColor: "#000",
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 246, 
-    height: 150, 
+    width: 280, 
+    height: 200, 
     marginBottom: 30,
   },
   title: {

@@ -6,14 +6,11 @@ import {useNavigation} from '@react-navigation/native';
 import CompareCelebButton from '../../static/Svg/CompareCelebButton';
 import CompareOtherButton from '../../static/Svg/CompareOtherButton';
 import ComparePeopleButton from '../../static/Svg/ComparePeopleButton';
-import BannerImage from '../../static/img/mainBanner/banner.jpg';
+import BannerImage from '../../static/img/mainBanner/banner.png';
 import Carousel from 'react-native-snap-carousel';
 
 function NavContent() {
   const navigation = useNavigation();
-  
-  // Get screen width
-
 
   console.log('screenWidth:', screenWidth);
   console.log('screenHeight:', screenHeight);
@@ -27,7 +24,7 @@ function NavContent() {
         navigation.navigate('CompareCelebRequest', {
           title: '나와 닮은 연예인이 있을까?',
         }),
-      backgroundColor: '#6F50F8',
+      backgroundColor: '#FEF2FE',
     },
     {
       title: '너와 나는 얼마나 닮았을까?',
@@ -36,7 +33,7 @@ function NavContent() {
         navigation.navigate('CompareOtherRequest', {
           title: '너와 나는 얼마나 닮았을까?',
         }),
-      backgroundColor: '#F7E559',
+      backgroundColor: '#E7A67E',
     },
     {
       title: '둘중에 누구와 더 닮았을까?',
@@ -45,7 +42,7 @@ function NavContent() {
         navigation.navigate('ComparePeopleRequest', {
           title: '둘중에 누구와 더 닮았을까?',
         }),
-      backgroundColor: '#787667',
+      backgroundColor: '#EE8640',
     },
   ];
 
@@ -69,7 +66,7 @@ function NavContent() {
         sliderWidth={screenWidth}
         itemWidth={screenWidth - 60}
         containerCustomStyle={styles.carouselContainer}
-        inactiveSlideScale={0.94}
+        inactiveSlideScale={1}
         inactiveSlideOpacity={0.7}
         enableMomentum={true}
         activeSlideAlignment={'center'}
@@ -109,7 +106,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   banner: {
-    height: screenHeight * 0.5,
+    width: screenWidth,
+    height: screenHeight * 0.4,
     marginBottom: 20,
   },
   slideText: {
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
  
   // Adjust the carousel container if needed
   carouselContainer: {
-    marginTop: 20,
+    marginTop: 10,
   },
 });
 
